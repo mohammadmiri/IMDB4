@@ -1,0 +1,395 @@
+{% extends 'movAct_sideBar.html' %}
+{% load url from future %}
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+
+
+
+
+</head>
+<body>
+
+
+
+    {% block content %}
+
+        <div id="movie_info" class="div_longLine">
+            <img src="/media/images/movie/poster.jpg" id="movie_info_mainPoster">
+            <p id="movie_info_name">
+                <dum id="movie_info_name_1">
+                    {{ movie.name }}
+                </dum>
+
+                (
+                <dum id="movie_info_year">
+                    {{ movie.year }}
+                </dum>
+                )
+
+                </br>
+                <dum id="movie_info_time">
+                    {{ movie.time }}
+                    دقیقه
+                    |
+                    {{ movie.type }}
+                </dum>
+            </p>
+
+            <div id="movie_info_point">
+                <div id="movie_info_point_number">
+                    <p>
+                        <dum id="movie_info_point_number_1">
+                            {{ movie.point }}
+                        </dum>
+                        </br>
+                        <dum id="movie_info_point_number_2">
+                            {{ movie.voteNumber }}
+                        </dum>
+                    </p>
+                </div>
+
+                {% for item in circles %}
+                    <img src="{{ item }}" class="movie_info_circles">
+                {% endfor %}
+
+                <div id="movie_info_info2">
+                    <p>
+                        {{ movie.reviewerReview }}
+                        نقد منتقدان
+                        |
+                        {{ movie.userReview }}
+                        نقد کاربران
+                        </br>
+                        نویسنده:
+
+                        <a href="">
+                            {{ movie.writer }}
+                        </a>
+
+                        </br>
+                        کارگردان:
+                        <a href="">
+                            {{ movie.director }}
+                        </a>
+                    </p>
+                </div>
+
+                <div id="movie_info_description">
+                    <p>
+                        {{ movie.description }}
+                    </p>
+                </div>
+
+                <div id="movie_info_images">
+                    {% for item in images %}
+                        <img src="{{ item }}" class="movie_info_images_1">
+                    {% endfor %}
+
+                    <p id="movie_info_seeAll">
+                        <a>
+                            همه عکس ها و ویدیوها>>
+                        </a>
+                    </p>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div id="movie_prize" class="div_longLine">
+            <div id="movie_prize_border">
+                {% if simorgh %}
+                    <p id="movie_prize">
+                    برنده
+                    {{ simorgh }}
+                    سیمرغ بلورین.
+                    </p>
+                {% endif %}
+
+                {% if prize %}
+                    {{ prize }}
+                    جایزه و
+                    {{ candidate }}
+                    نامزدی دیگر
+                {% endif %}
+
+                {% if top100_rank %}
+                    {{ top100_rank }}
+                    <a href="">
+                    ۱۰۰ فیلم برتر
+                    </a>
+                {% endif %}
+
+                <p id="movie_prize_border_seeAll">
+                    <a href="">
+                    مشاهده همه جوایز>>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <div id="movie_mainActors" class="div_longLine">
+
+            <p id="movie_mainActors_title">
+                بازیگران اصلی
+            </p>
+
+            {% for item in movie.mainActors %}
+                <img src="{{ item }}" class="movie_mainActors_images">
+            {% endfor %}
+        </div>
+
+        <div id="movie_fActors" class="div_longLine">
+
+            <p id="movie_fActors_title">
+                عوامل فیلم
+            </p>
+
+            <div id="movie_fActors_fullList_title">
+                <p>
+                    لیست کامل بازیگران
+                </p>
+            </div>
+
+            {% for item in movie.fActors %}
+                <div class="movie_fActors_fullList">
+                    <img src="{{ item.url }}" class="movie_fActors_fullList_image">
+                    <div class="movie_fActors_fullList_name">
+                        <p>
+                            <a href="">
+                                {{ item.name }}
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="movie_fActors_fullList_movieName">
+                        <p>
+                            {{ item.movie_name }}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <p id="movie_fActors_fullList_seeAll">
+                <a href="">
+                    همه عوامل فیلم>>
+                </a>
+            </p>
+
+        </div>
+
+
+        <div id="movie_keywords" class="div_longLine">
+            <p id="movie_keywords_1">
+                کلمات کلیدی:
+
+                {% for item in movie.keywords %}
+                    {% if forloop.counter0 != 0 %}
+                        |
+                    {% endif %}
+                    <a href="">
+                        {{ item }}
+                    </a>
+                {% endfor %}
+            </p>
+        </div>
+
+        <div id="movie_sale" class="div_longLine">
+            <p>
+                فروش:
+                {{ movie.sale }}
+                تومان
+            </p>
+        </div>
+
+        <div id="movie_bestDialogue" class="div_longLine">
+            <div id="movie_bestDialogue_1">
+                <p>
+                    دیالوگ های ماندگار:
+                    {% for item in movie.bestDialogue|slice:":1" %}
+                            {{ item }}
+                            <br/>
+                    {% endfor %}
+
+                    <div id="movie_bestDialogue_2">
+                        <p>
+                            {% for item in movie.bestDialogue %}
+                                {% if forloop.counter0 != 0 %}
+                                    {{ item }}
+                                    <br/>
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                        <p>
+                            <a id="movie_bestDialogue_2_less">
+                            کمتر>>
+                            </a>
+                        </p>
+
+                    </div>
+
+
+                </p>
+            </div>
+
+            <a id="movie_bestDialogue_seeAll">
+                <p>
+                    بیشتر>>
+                </p>
+            </a>
+        </div>
+
+
+        <div id="movie_userReview" class="div_longLine">
+            <div id="movie_userReview_1">
+                <p>
+                    <dum id="movie_userReview_title">
+                    نقدهای کاربران
+                    </dum>
+
+                    <a id="movie_userReview_seeAll">
+                        همه نقد های کاربران>>
+                    </a>
+                </p>
+            </div>
+
+
+            <p>
+                <button id="movie_userReview_write" class="btn-danger">
+                        نوشتن نقد
+                </button>
+            </p>
+
+        </div>
+
+
+        <div id="movie_userPost" class="div_longLine">
+            <p id="movie_userPost_title">
+                پست های کاربران
+            </p>
+
+            <p id="movie_userPost_lastPost_title">
+                آخرین پست ها
+            </p>
+
+            {% for item in posts %}
+                <div class="movie_userPost_lastPost">
+                    <div>
+                        <p>
+                            {{ item.content }}
+                        </p>
+                    </div>
+
+                    <img src="{{ item.url }}" class="movie_userPost_lastPost_image">
+                    <a>
+                        <p>
+                            {{ item.name }}
+                        </p>
+                    </a>
+                </div>
+
+            {% endfor %}
+
+            <a id="movie_userPost_seeAll">
+                <p>
+                    همه پست ها >>
+                </p>
+            </a>
+
+        </div>
+
+        <div id="movie_changeInfo" class="div_longLine">
+            <div>
+                <p id="movie_changeInfo_title">
+                    تغییر اطلاعات
+                    <dum>
+                        (مخصوص کاربران ویژه)
+                    </dum>
+                </p>
+            </div>
+
+            <button id="movie_changeInfo_button">
+                <p>
+                    ایجاد تغییرات
+                </p>
+            </button>
+
+        </div>
+
+    {% endblock %}
+
+    {% block over_content %}
+
+{#        <div id="movie_slider_background">#}
+{##}
+{#        </div>#}
+
+        <div id="movie_slider_background">
+
+
+
+            <div id="movie_slider_div">
+
+                <button type="button" class="movie_slider_close">
+                    <img src="/static/icons/movie/closeSliderButton.png">
+                </button>
+
+
+                <button id="movie_slider_arrowUp" class="movie_slider_arrowButtons ">
+                    <img src="/static/icons/test/arrowUp.png">
+                </button>
+
+
+                <div id="movie_slider_images">
+                    <ul>
+                        {% for image in slider_images %}
+                                <li>
+                                    <button type="button" class="movie_slider_images_button">
+                                        <img src="{{ image }}" class="movie_slider_images_image"
+                                             id="{{ forloop.counter0 }}">
+                                    </button>
+                                </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <button id="movie_slider_arrowDown" class="movie_slider_arrowButtons">
+                    <img src="/static/icons/test/arrowDown.png">
+                </button>
+
+                <div id="movie_slider_mainImage">
+
+                    <div>
+                        <img id="movie_slider_mainImage_image">
+                    </div>
+                    <p class="movie_slider_mainImage_topText"></p>
+                    <p class="movie_slider_mainImage_downText"></p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

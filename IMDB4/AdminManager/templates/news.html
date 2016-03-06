@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+{% block content %}
+
+    <div id="news_title" class="padding_left padding_right padding_top">
+        <p>
+            {{ title }}
+        </p>
+    </div>
+
+    {% for item in news %}
+        <div class="news_item border_bottom_div padding_right padding_left padding_top">
+            <img src="{{ item.imageUrl }}">
+            <p class="news_info">
+                <a href="">
+                    {{ item.title }}
+                </a>
+                {{ item.liveTime }}
+                 قبل/
+                {{ item.source }}
+            </p>
+            <p class="news_content">
+                {{ item.content }}
+                <a href="">
+                    ادامه مطلب»
+                </a>
+            </p>
+        </div>
+    {% endfor %}
+
+
+    {% for number in pageNumbers %}
+        {% if forloop.counter0 == pageIndex  %}
+            <button class="news_pageNumbers news_pageIndex">
+                <p>
+                    {{ number }}
+                </p>
+            </button>
+        {% else %}
+            <button class="news_pageNumbers">
+                <p>
+                    {{ number }}
+                </p>
+            </button>
+        {% endif %}
+    {% endfor %}
+
+
+
+{% endblock %}
+
+</body>
+</html>

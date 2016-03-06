@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+{% block content %}
+
+    <div id="saleTable" class="padding_right padding_top padding_left">
+        <p id="saleTable_mainTitle">
+            جدول فروش
+        </p>
+
+        <div id="saleTable_table">
+            <div id="saleTable_header">
+                <div id="saleTable_header_movieName">
+                    <p>
+                    نام فیلم
+                    </p>
+                </div>
+                <div id="saleTable_header_showTime">
+                    <p>
+                    مدت اکران
+                    </p>
+                </div>
+                <div id="saleTable_header_saleAmount">
+                    <p>
+                    فروش
+                    </p>
+                </div>
+            </div>
+
+            {% for movie in sale_movies %}
+
+                <div class="saleTable_movie">
+                    <img src="{{ movie.image_url }}" class="saleTable_movie_image">
+                    <div class="saleTable_movie_name">
+                        <p>
+                            <a href="">
+                                {{ movie.name }}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="saleTable_movie_point">
+                        <p>
+                            {{ movie.point }}
+                        </p>
+                    </div>
+
+                    <div class="saleTable_movie_showTime">
+                        <p>
+                        {{ movie.show_number_days }}
+                        روز
+                        </p>
+                    </div>
+                    <div class="saleTable_movie_saleAmount">
+                        <p>
+                        {{ movie.sale_amount }}
+                        تومان
+                        </p>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+{% block side_bar %}
+
+
+    {% block side_bar_saleTable %}
+
+        <div id="saleTable_otherSaleTables" class="back_gray">
+            <div id="saleTable_otherSaleTables_header" class="sideBar_titles">
+                <p>
+                دیگر جداول فروش
+                </p>
+            </div>
+            <div id="saleTable_otherSaleTables_content">
+                <p class="sideBar_contents">
+                    <a href="">
+                    جدول فروش کل تاریخ سینمای ایران >>
+                    </a>
+                </p>
+                <p class="sideBar_contents">
+                    <a href="">
+                        جدول فروش کل تاریخ سینمای ایران (با احتساب تورم و رشد جمعیت) >>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+    {% endblock %}
+
+{#    {% block side_bar_commingSoon %}#}
+{##}
+{#    {% endblock %}#}
+
+{% endblock %}
+
+
+</body>
+</html>

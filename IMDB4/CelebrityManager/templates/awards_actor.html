@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+{% block content %}
+
+    <div class="padding_right padding_left padding_top">
+        <div id="awards_actor_info">
+            <img src="{{ imageUrl }}">
+            <div id="awards_actor_info_name">
+                <p>
+                    <a href="">
+                        {{ name }}
+                    </a>
+                </p>
+            </div>
+            <p id="awards_actor_info_awards">
+                جوایز
+            </p>
+            <p id="awards_actor_info_awardsNumber">
+                {% if awardsNumber != 0 %}
+                    {{ awardsNumber }}
+                    جایزه
+                {% endif %}
+                {% if awardsNumber != 0 and nominatedNumber != 0 %}
+                    و
+                {% endif %}
+                {% if nominatedNumber != 0 %}
+                    {{ nominatedNumber }}
+                    نامزدی
+                {% endif %}
+            </p>
+        </div>
+
+        <table class="awards_actor_content_tables awards_actor_content_tables_header">
+            <tr>
+                <td>
+                    <p>
+                        جشنواره فیلم فجر
+                    </p>
+                </td>
+            </tr>
+        </table>
+
+
+        <table class="awards_actor_content_tables awards_actor_content_tables_content">
+            {% for list in filmFajr.awardsList %}
+                {% for award in list.content %}
+                    <tr>
+                        <td class="awards_actor_content_tables_year">
+                            <p>
+                                <a href="">
+                                    {{ award.year }}
+                                </a>
+                            </p>
+                        </td>
+                        <td class="awards_actor_content_tables_cellContent">
+                            <p>
+                                {{ award.title }}
+                                <br/>
+                                <a href="">
+                                    {{ award.movieName }}
+                                </a>
+                            </p>
+                        </td>
+                        {% if forloop.counter0 == 0 %}
+                            <td class="awards_actor_content_tables_cellHeader" rowspan="{{ list.content|length }}">
+                                <p>
+                                    {{ list.header }}
+                                </p>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </table>
+
+
+
+        <table class="awards_actor_content_tables awards_actor_content_tables_header">
+            <tr>
+                <td>
+                    <p>
+                        جشن خانه سینما
+                    </p>
+                </td>
+            </tr>
+        </table>
+
+
+        <table class="awards_actor_content_tables awards_actor_content_tables_content">
+            {% for list in filmFajr.awardsList %}
+                {% for award in list.content %}
+                    <tr>
+                        <td class="awards_actor_content_tables_year">
+                            <p>
+                                <a href="">
+                                    {{ award.year }}
+                                </a>
+                            </p>
+                        </td>
+                        <td class="awards_actor_content_tables_cellContent">
+                            <p>
+                                {{ award.title }}
+                                <br/>
+                                <a href="">
+                                    {{ award.movieName }}
+                                </a>
+                            </p>
+                        </td>
+                        {% if forloop.counter0 == 0 %}
+                            <td class="awards_actor_content_tables_cellHeader" rowspan="{{ list.content|length }}">
+                                <p>
+                                    {{ list.header }}
+                                </p>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </table>
+
+
+
+
+{#        <table class="awards_actor_content_tables awards_actor_content_tables_content">#}
+{#            {% for award in filmFajr.awarded %}#}
+{#                <tr>#}
+{#                    <td class="awards_actor_content_tables_year">#}
+{#                        <p>#}
+{#                            <a href="">#}
+{#                                {{ award.year }}#}
+{#                            </a>#}
+{#                        </p>#}
+{#                    </td>#}
+{#                    <td class="awards_actor_content_tables_cellContent">#}
+{#                        <p>#}
+{#                            {{ award.title }}#}
+{#                            <br/>#}
+{#                            <a href="">#}
+{#                                {{ award.movieName }}#}
+{#                            </a>#}
+{#                        </p>#}
+{#                    </td>#}
+{#                    {% if forloop.counter0 == 0 %}#}
+{#                        <td class="awards_actor_content_tables_cellHeader" rowspan="{{ filmFajr.awarded|length }}">#}
+{#                            <p>#}
+{#                                برنده سیمرغ بلورین#}
+{#                            </p>#}
+{#                        </td>#}
+{#                    {% endif %}#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{##}
+{#            {% for diploma in filmFajr.diploma %}#}
+{#                <tr>#}
+{#                    <td class="awards_actor_content_tables_year">#}
+{#                        <p>#}
+{#                            <a href="">#}
+{#                                {{ diploma.year }}#}
+{#                            </a>#}
+{#                        </p>#}
+{#                    </td>#}
+{#                    <td class="awards_actor_content_tables_cellContent">#}
+{#                        <p>#}
+{#                            {{ diploma.title }}#}
+{#                            <br/>#}
+{#                            <a href="">#}
+{#                                {{ diploma.movieName }}#}
+{#                            </a>#}
+{#                        </p>#}
+{#                    </td>#}
+{#                    {% if forloop.counter0 == 0 %}#}
+{#                        <td class="awards_actor_content_tables_cellHeader" rowspan="{{ filmFajr.diploma|length }}">#}
+{#                            <p>#}
+{#                                دیپلم افتخار#}
+{#                            </p>#}
+{#                        </td>#}
+{#                    {% endif %}#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{##}
+{#            {% for nominated in filmFajr.nominated %}#}
+{#                <tr>#}
+{#                    <td class="awards_actor_content_tables_year">#}
+{#                        <p>#}
+{#                            <a href="">#}
+{#                                {{ nominated.year }}#}
+{#                            </a>#}
+{#                        </p>#}
+{#                    </td>#}
+{#                    <td class="awards_actor_content_tables_cellContent">#}
+{#                        <p>#}
+{#                            {{ nominated.title }}#}
+{#                            <br/>#}
+{#                            <a href="">#}
+{#                                {{ nominated.movieName }}#}
+{#                            </a>#}
+{#                        </p>#}
+{#                    </td>#}
+{#                    {% if forloop.counter0 == 0 %}#}
+{#                        <td class="awards_actor_content_tables_cellHeader" rowspan="{{ filmFajr.nominated|length }}">#}
+{#                            <p>#}
+{#                                نامزد#}
+{#                            </p>#}
+{#                        </td>#}
+{#                    {% endif %}#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{##}
+{#        </table>#}
+
+    </div>
+
+
+
+
+{% endblock %}
+
+
+
+</body>
+</html>
