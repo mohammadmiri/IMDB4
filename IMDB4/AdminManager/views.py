@@ -46,4 +46,8 @@ def show_gallery(request, numOfGallery):
 
 
 
-
+def show_News(request, id):
+    news = News.objects.filter(id=id)
+    time_uploaded_ago = datetime.datetime.now() - news.dateUpload
+    context = {'news':news, 'time_uploaded_ago':time_uploaded_ago}
+    pass

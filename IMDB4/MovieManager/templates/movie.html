@@ -1,4 +1,5 @@
 {% extends 'movAct_sideBar.html' %}
+{% load static %}
 {% load url from future %}
 {% load staticfiles %}
 
@@ -20,7 +21,7 @@
     {% block content %}
 
         <div id="movie_info" class="div_longLine">
-            <img src="/media/images/movie/poster.jpg" id="movie_info_mainPoster">
+            <img src={{ movie.poster.url }} id="movie_info_mainPoster">
             <p id="movie_info_name">
                 <dum id="movie_info_name_1">
                     {{ movie.name }}
@@ -34,10 +35,10 @@
 
                 </br>
                 <dum id="movie_info_time">
-                    {{ movie.time }}
+                    {{ movie.duration }}
                     دقیقه
                     |
-                    {{ movie.type }}
+                    {{ movie.genre.0 }}
                 </dum>
             </p>
 
@@ -45,11 +46,11 @@
                 <div id="movie_info_point_number">
                     <p>
                         <dum id="movie_info_point_number_1">
-                            {{ movie.point }}
+                            {{ movie.rate }}
                         </dum>
                         </br>
                         <dum id="movie_info_point_number_2">
-                            {{ movie.voteNumber }}
+                            {{ movie.numUserRated }}
                         </dum>
                     </p>
                 </div>
@@ -60,29 +61,29 @@
 
                 <div id="movie_info_info2">
                     <p>
-                        {{ movie.reviewerReview }}
+                        {{ movie.reviewer_review_count }}
                         نقد منتقدان
                         |
-                        {{ movie.userReview }}
+                        {{ movie.user_review_count }}
                         نقد کاربران
                         </br>
                         نویسنده:
 
                         <a href="">
-                            {{ movie.writer }}
+                            {{ movie.nevisande.0 }}
                         </a>
 
                         </br>
                         کارگردان:
                         <a href="">
-                            {{ movie.director }}
+                            {{ movie.kargardan.0 }}
                         </a>
                     </p>
                 </div>
 
                 <div id="movie_info_description">
                     <p>
-                        {{ movie.description }}
+                        {{ movie.summary }}
                     </p>
                 </div>
 

@@ -50,3 +50,24 @@ def show_celebrity(request, name):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

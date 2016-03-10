@@ -10,8 +10,8 @@ import datetime
 
 class UserIMDB(models.Model):
 
-    user = models.OneToOneField(User, related_name='userIMDB', verbose_name='', )
-    name = models.CharField(max_length=80, null=True, blank=True, verbose_name='', )
+    user = models.OneToOneField(User, related_name='userIMDB', verbose_name='یوزر', )
+    name = models.CharField(max_length=80, null=True, blank=True, verbose_name='نام', )
     birthday = models.DateField(null=True, verbose_name='تولد', )
     picture = models.ImageField(null=True, upload_to="user/pictures", verbose_name='عکس', )
     profession = models.CharField(max_length=100, null=True, blank=True, verbose_name='حرفه', )

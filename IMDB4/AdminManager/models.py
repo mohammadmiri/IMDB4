@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from MovieManager.models import Movie, CriticCriticism
+from MovieManager.models import Movie, Reviewer_Review
 
 from django.db import models
 
@@ -22,9 +22,16 @@ class News(models.Model):
         ('TV', 'تلویزیون'),
     )
     category = models.CharField(max_length=80, null=True, blank=True, choices=CategoryChoise, verbose_name='نوع خبر', )
+    relate_news = models.ManyToManyField('self', through='tag', symmetrical=False)
 
     def __str__(self):
         return self.firstHeadLine[:20]
+
+
+
+class tag(models.Model):
+    content = models.CharField(max_length=50)
+    news = models.ForeignKey(News, null=True, blank=True)
 
 
 
@@ -33,7 +40,7 @@ class Poll(models.Model):
     text = models.TextField(null=True, verbose_name='متن', )
 
     def __str__(self):
-        return self.content
+        return self.text
 
 
 
@@ -48,7 +55,7 @@ class PollOption(models.Model):
 
 
 class FavouriteCritism(models.Model):
-    critism = models.OneToOneField(CriticCriticism, verbose_name='نقد', )
+    critism = models.OneToOneField(Reviewer_Review, verbose_name='نقد', )
 
     def get_favourite_critism(self):
         return self.critism.critismOfCritic

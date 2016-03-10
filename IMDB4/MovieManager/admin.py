@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from .models import Movie,Genre,KeyWord, Teaser, Post, Act, CriticCriticism, \
-    UserCriticism, Avamel, Award, TypeOfMovie, StatusOfMovie, Movie_Celebrity_Image
+from .models import Movie,Genre,KeyWord, Teaser, Post, Act, Reviewer_Review, \
+    User_Review, Avamel, Award, TypeOfMovie, StatusOfMovie, Movie_Celebrity_Image
 
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
@@ -20,11 +20,11 @@ class ActInline(admin.TabularInline):
     extra = 1
 
 class CriticCriticismInline(admin.TabularInline):
-    model = CriticCriticism
+    model = Reviewer_Review
     extra = 1
 
 class UserCriticismInline(admin.TabularInline):
-    model = UserCriticism
+    model = User_Review
     extra = 1
 
 class AgentInline(admin.TabularInline):
@@ -48,7 +48,7 @@ class TypeOfMovieInline(admin.TabularInline):
     model = TypeOfMovie
 
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ('name','rate', 'year',)
+    list_display = ('id','name','rate', 'year', )
     list_display_links = ('name',)
     # list_filter = (GenreFilter,)
     search_fields = ['name']
@@ -65,6 +65,7 @@ class KeyWordAdmin(admin.ModelAdmin):
 
 
 class MovieCelebrityImageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name',)
     ordering = ('name',)
     search_fields = ['name',]
     raw_id_fields = ('celebrities', 'movies',)

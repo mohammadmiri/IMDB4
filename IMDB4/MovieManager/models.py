@@ -31,7 +31,7 @@ class Movie(models.Model):
     duration = models.IntegerField(null=True, blank=True, verbose_name='مدت زمان', )
     rate = models.FloatField(null=True, blank=True, verbose_name='امتیاز', )
     numUserRated = models.IntegerField(null=True, blank=True, verbose_name='تعداد امتیاز دهندگان', )
-    Summary = RichTextField(null=True, blank=True, verbose_name='خلاصه فیلم', )
+    summary = RichTextField(null=True, blank=True, verbose_name='خلاصه فیلم', )
     sale = models.CharField(max_length=80, null=True, blank=True, verbose_name='فروش', )
     dialogue = models.TextField(null=True, blank=True,verbose_name='دیالوگ', )
     genre = models.ManyToManyField(Genre, blank=True, verbose_name='ژانر', )
@@ -79,8 +79,8 @@ class Movie(models.Model):
 class Movie_Celebrity_Image(models.Model):
     name = models.TextField(null=True, blank=True, verbose_name='نام',)
     description = models.TextField(null=True, blank=True, verbose_name='توضیح',)
-    movies = models.ManyToManyField(Movie, verbose_name='فیلم ها', related_name='images',)
-    celebrities = models.ManyToManyField(Celebrity, verbose_name='', related_name='images')
+    movies = models.ManyToManyField(Movie, verbose_name='فیلم ها', related_name='images', blank=True)
+    celebrities = models.ManyToManyField(Celebrity, verbose_name='بازیگر', related_name='images', blank=True)
     image = models.ImageField(upload_to='MovieImages', verbose_name='عکس', null=True, blank=True,)
     GALLERY_CHOISE = (
         (0,'هیچ کدام'),
@@ -135,6 +135,7 @@ class Award(models.Model):
     FestivalChoices = (
         (0,'جشنواره فجر'),
         (1,'جشن خانه سینما'),
+        (2,'جشن منتقدان سینما'),
     )
     festival = models.IntegerField(choices=FestivalChoices, null=True, blank=True, verbose_name='جشنواره', )
     date = models.DateField(null=True, blank=True, verbose_name='تاریخ', )
@@ -142,6 +143,7 @@ class Award(models.Model):
     GIVEN_CHOICES = (
         (0,'برنده شده'),
         (1,'نامزد شده'),
+        (2, 'دیپلم افتخار')
     )
     candidate_type = models.IntegerField(null=True, blank=True, choices=GIVEN_CHOICES, verbose_name='برنده یا نامزد',)
 
@@ -152,6 +154,7 @@ class Award(models.Model):
     @staticmethod
     def get_award_count(cele, candidate_type):
         Award.objects.filter(celebrity=cele, candidate_type=candidate_type)
+
 
 
 
@@ -193,7 +196,7 @@ class Avamel(models.Model):
         ('tahiey_konande', 'تهیه کننده'),
         ('modir_tolid', 'مدیر تولید'),
         ('mojri_tarh', 'مدیر طرح'),
-        ('Dastyar_aval_kargardan', 'دستیار اول کارگردان'),
+        ('dastyar_aval_kargardan', 'دستیار اول کارگردان'),
         ('barname_riz', 'برنامه ریز'),
         ('modir_film_bardari', 'مدیر فیلم برداری'),
         ('tadvin', 'تدوین'),
@@ -201,7 +204,7 @@ class Avamel(models.Model):
         ('tarrah_chehre_pardazi', 'طراح چهره پردازی'),
         ('ahangsaz', 'آهنگساز'),
         ('seda_bardari', 'صدا بردار'),
-        ('Seda_Gozari_va_mix', 'صدا گذار'),
+        ('seda_Gozari_va_mix', 'صدا گذار'),
         ('akkas', 'عکاس'),
         ('jelvehaye_vije_meydani', 'جلوه های ویژه'),
         ('jelvehaye_vije_basari', 'جلوه های بصری'),
@@ -222,11 +225,12 @@ class Avamel(models.Model):
 
 
 # this class contains all property of ManyToMany relationship between Movies and Users
-class UserCriticism(models.Model):
+class User_Review(models.Model):
     movie = models.ForeignKey(Movie, verbose_name='فیلم', )
     userPro = models.ForeignKey(UserIMDB, null=True, verbose_name='کاربر', )
     content = models.TextField(verbose_name='متن', )
     show_it = models.BooleanField(default=False, verbose_name='نشان داده بشود', )
+    date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return "user '{}' criticize movie '{}'".format(
@@ -235,12 +239,12 @@ class UserCriticism(models.Model):
 
 
 # this class contains all criticisms of all critics about this film
-class CriticCriticism(models.Model):
+class Reviewer_Review(models.Model):
     movie = models.ForeignKey(Movie, verbose_name='فیلم')
     content = models.TextField(null=True, blank=True, verbose_name='متن', )
     nameOfCritic = models.CharField(max_length=80, null=True, blank=True, verbose_name='نام منتقد')
     like = models.FloatField(null=True, blank=True, )
-    show_critic = models.BooleanField(default=False, verbose_name='نشان داده شود', )
+    show_it = models.BooleanField(default=False, verbose_name='نشان داده شود', )
 
     def __str__(self):
         return "critic '{}' criticize movie '{}'".format(
