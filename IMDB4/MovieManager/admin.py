@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from .models import Movie,Genre,KeyWord, Teaser, Post, Act, Reviewer_Review, \
-    User_Review, Avamel, Award, TypeOfMovie, StatusOfMovie, Movie_Celebrity_Image
+    User_Review, Avamel, Award, TypeOfMovie, StatusOfMovie, Movie_Celebrity_Image, RateUserForMovie
 
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
 
-
-
+class RateUserInline(admin.TabularInline):
+    model = RateUserForMovie
+    extra = 1
 
 class postInline(admin.TabularInline):
     model = Post
@@ -53,7 +54,7 @@ class MovieAdmin(admin.ModelAdmin):
     # list_filter = (GenreFilter,)
     search_fields = ['name']
     ordering = ('name',)
-    inlines = [  StatusOfMovieInline, TypeOfMovieInline, TeaserInline, ActInline, AgentInline, AwardInline,
+    inlines = [  RateUserInline, StatusOfMovieInline, TypeOfMovieInline, TeaserInline, ActInline, AgentInline, AwardInline,
                 CriticCriticismInline, UserCriticismInline, postInline , ]
 
 

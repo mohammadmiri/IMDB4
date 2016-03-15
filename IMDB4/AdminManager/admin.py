@@ -8,6 +8,7 @@ class PollOption(admin.TabularInline):
     extra = 1
 
 class PollAdmin(admin.ModelAdmin):
+    list_display = ['id', 'text']
     inlines = [PollOption]
 
 

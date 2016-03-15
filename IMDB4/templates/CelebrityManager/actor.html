@@ -12,7 +12,7 @@
 
     {% block content %}
         <div id="actor_info" class="div_longLine padding_top padding_right">
-            <img src="{{ actor.picture.url }}" id="actor_info_mainImage">
+            <img src="{{ main_image }}" id="actor_info_mainImage">
             <div id="actor_info_top" class="div_longLine">
                 <div id="actor_info_top_name">
                     <p>
@@ -20,7 +20,7 @@
                             {{ actor.name }}
                         </dum>
                         <br/>
-                        {{ actor.workingFields }}
+                        {{ actor.jobs }}
                     </p>
                 </div>
                 <div id="actor_info_top_point">
@@ -32,7 +32,7 @@
             </div>
             <div id="actor_info_biography">
                 <p>
-                    {{ actor.description|safe }}
+                    {{ actor.biography }}
                     <br/>
                     <a href="" id="actor_info_biography_seeAll">
                         <p>
@@ -52,12 +52,12 @@
             </div>
 
             <a href="">
-                <img src="{% static 'CelebrityManager/img/arrow.png' %}" id="actor_info_arrowButton">
+                <img src="/static/icons/actor/arrow.png" id="actor_info_arrowButton">
             </a>
 
             <div id="actor_info_images_div">
-                {% for item in actor_images|slice:":3" %}
-                    <img src="{{ item.image.url }}" class="actor_info_images">
+                {% for item in images|slice:":3" %}
+                    <img src="{{ item }}" class="actor_info_images">
                 {% endfor %}
 
                 <img src="{{ movie_image }}" class="actor_info_images">
@@ -93,8 +93,8 @@
                     آثار مطرح
                 </p>
                 <div>
-                    {% for item in best_products %}
-                        <img src="{{ item.movie.url }}" class="actor_proposedWorks_images">
+                    {% for item in actor.proposedWorks %}
+                        <img src="{{ item }}" class="actor_proposedWorks_images">
                     {% endfor %}
                 </div>
             </div>
@@ -117,24 +117,24 @@
                 <div class="actor_filmography_headers_2">
                     <a id="actor_filmography_actor" class="dropDown">
                         <div>
-                            <img src="{% static 'CelebrityManager/img/triangle.png' %}" class="actor_filmography_buttons">
+                            <img src="/static/icons/actor/triangle.png" class="actor_filmography_buttons">
                         </div>
                     </a>
                 </div>
             </div>
             <div id="actor_filmography_actor_div">
-                {% for key,value in movie_actors.items %}
+                {% for movie in actor.actMovies %}
                     <div class="actor_filmography_bodies">
                         <p>
                             <a href="">
-                                {{ key.name }}
+                                {{ movie.name }}
                             </a>
                             <dum1>
-                                {{ key.year }}
+                                {{ movie.year }}
                             </dum1>
                             <br/>
                             <dum2>
-                                {{ value.alias }}
+                                {{ movie.actorName }}
                             </dum2>
                         </p>
                     </div>
@@ -150,7 +150,7 @@
                 <div class="actor_filmography_headers_2">
                     <a id="actor_filmography_directories" class="dropDown">
                         <div>
-                            <img src="{% static 'CelebrityManager/img/triangle.png'%}" class="actor_filmography_buttons">
+                            <img src="/static/icons/actor/triangle.png" class="actor_filmography_buttons">
                         </div>
                     </a>
                 </div>
@@ -184,7 +184,7 @@
                 <div class="actor_filmography_headers_2">
                     <a id="actor_filmography_editor" class="dropDown">
                         <div>
-                            <img src="{% static 'CelebrityManager/img/triangle.png'%}" class="actor_filmography_buttons">
+                            <img src="/static/icons/actor/triangle.png" class="actor_filmography_buttons">
                         </div>
                     </a>
                 </div>

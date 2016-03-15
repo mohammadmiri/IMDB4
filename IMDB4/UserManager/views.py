@@ -1,4 +1,5 @@
-from .models import UserIMDB
+from .models import UserIMDB, WatchList
+from MovieManager.models import RateUserForMovie
 
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
@@ -39,10 +40,19 @@ def signup_page(request):
 
 
 
-def view_profile(request, name):
-    user = request.user
-    userIMDB = UserIMDB.objects.filter(user=user)
-    return render(request, 'user/profile.html', {'user':userIMDB})
+def view_profile(request, username):
+    print('before all')
+    user = User.objects.get(username=username)
+    print('after getting user')
+    userIMDB = UserIMDB.objects.get(user=user)
+    picture_url = userIMDB.get_picture()
+    print('after getting picture url: '+picture_url)
+    watchList = list(WatchList.objects.filter(user=userIMDB))
+    visited_movie = userIMDB.viewed_movie.all
+    rated_movie = list(RateUserForMovie.objects.filter(user=user))
+    context =  {'user':userIMDB, 'picture_url':picture_url, 'watchList':watchList, 'visited_movie':visited_movie,
+                'rated_movie':rated_movie}
+    return render(request, 'UserManager/myProfile.html', context)
 
 
 

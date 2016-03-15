@@ -1,6 +1,4 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
-
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -22,12 +20,13 @@
         <img src="/media/images/index/Films3/2.jpg"  id="index_movies_movie_2">
     </div>
 
-    <img src="{% static 'Base/img/long-line.png' %}" class="index_long_line">
+    <img src="/static/icons/index/long-line.png" class="index_long_line">
 
     <div id="index_last_news">
         <p id="index_last_title">
             آخرین اخبار
         </p>
+
 
 
         <div id="index_last_buttons" >
@@ -36,15 +35,20 @@
                 {% for news_item in news %}
 
                     {% if forloop.counter0 == 0 %}
-                        <li class="active" id="index_last_buttons_{{ forloop.counter0 }}"><a data-toggle="tab" href="#index_nav_articles_{{ forloop.counter0 }}">
-                            {{ news_item.button_label }}
-                        </a> </li>
+                        <li class="active" id="index_last_buttons_{{ forloop.counter0 }}">
+                            <a data-toggle="tab" href="#index_nav_articles_{{ forloop.counter0 }}">
+                                {{ news_item.button_label }}
+                            </a>
+                        </li>
 
                     {% else %}
-                        <img src="{% static 'Base/img/line2.png' %}" id="index_last_buttons_line_{{ forloop.counter0 }}">
-                        <li id="index_last_buttons_{{ forloop.counter0 }}" ><a data-toggle="tab" href="#index_nav_articles_{{ forloop.counter0 }}">
-                            {{ news_item.button_label }}
-                        </a> </li>
+                        <img src="/static/icons/index/line2.png"
+                             id="index_last_buttons_line_{{ forloop.counter0 }}">
+                        <li id="index_last_buttons_{{ forloop.counter0 }}" >
+                            <a data-toggle="tab" href="#index_nav_articles_{{ forloop.counter0 }}">
+                                {{ news_item.button_label }}
+                            </a>
+                        </li>
                     {% endif %}
 
                 {% endfor %}
@@ -53,11 +57,15 @@
         </div>
 
 
+
         <div class="tab-content" id="index_nav_content">
+
+
             {% for news_item in news %}
+
                 <div id="index_nav_articles_{{ forloop.counter0 }}" class="tab-pane fade index_nav_articles">
                     <div class="index_nav_articles_main">
-                        <img src="{{ BASE_URL }}/media/images/index/LastNews/{{ news_item.image_name }}" class="index-nav-images">
+                        <img src="/media/images/index/LastNews/{{ news_item.image_name }}" class="index-nav-images">
                         <div class="index-nav-main-news">
                             <a href="#">
                                 <p>
@@ -100,7 +108,7 @@
     </div>
 
 
-    <img src="{%  static 'Base/img/long-line.png' %}" class="index_long_line">
+    <img src="/static/icons/index/long-line.png" class="index_long_line">
 
 
     <div id="index_last_images">
@@ -111,27 +119,27 @@
 
 
         <a href="">
-            <img src="{{ BASE_URL }}/media/images/index/LastImages/000.jpg"
+            <img src="/media/images/index/LastImages/000.jpg"
                     id="index_last_images_0">
         </a>
         <div id="index_last_images_1_2">
             <a href="">
-                <img src="{{ BASE_URL }}/media/images/index/LastImages/222.jpg"
+                <img src="/media/images/index/LastImages/222.jpg"
                         id="index_last_images_1">
             </a>
             <a href="">
-                <img src="{{ BASE_URL }}/media/images/index/LastImages/333.jpg"
+                <img src="/media/images/index/LastImages/333.jpg"
                         id="index_last_images_2">
             </a>
         </div>
         <a href="">
-            <img src="{{ BASE_URL }}/media/images/index/LastImages/111.jpg"
+            <img src="/media/images/index/LastImages/111.jpg"
                     id="index_last_images_3">
         </a>
 
     </div>
 
-    <img src="{% static 'Base/img/long-line.png' %}" class="index_long_line">
+    <img src="/static/icons/index/long-line.png" class="index_long_line">
 
     <div id="index_birthday">
         <p id="index_birthday_title">
@@ -142,7 +150,7 @@
         <img src="{{ BASE_URL }}/media/images/index/Birthday/0.jpg" class="index_birthday_images">
     </div>
 
-    <img src="{% static 'Base/img/long-line.png' %}" class="index_long_line">
+    <img src="/static/icons/index/long-line.png" class="index_long_line">
 
 
     <div id="index_poll">

@@ -21,7 +21,7 @@ def show_movie(request, id):
     candidate_cinemaHome_count = Award.objects.filter(movie=movie, festival=1, candidate_type=1).count()
     total_candidate_count = candidate_cinemaHome_count+candidate_simorgh_count
     total_award_count = award_cinemaHome_count+award_simorgh_count
-    images = movie.images
+    images = movie.images.all
     actors = movie.get_actors()
     kargardan = list(Avamel.objects.filter(movie=movie, role='kargardan'))
     nevisande = list(Avamel.objects.filter(movie=movie, role='nevisande'))
@@ -44,7 +44,7 @@ def show_movie(request, id):
     moshaver_film_name = list(Avamel.objects.filter(movie=movie, role='moshaver_film_name'))
     moshaver_honari = list(Avamel.objects.filter(movie=movie, role='moshaver_honari'))
     moshaver = list(Avamel.objects.filter(movie=movie, role='moshaver'))
-    user_review = list(User_Review.objects.filter(movie=movie, show_it=True).order_by(''))
+    user_review = list(User_Review.objects.filter(movie=movie, show_it=True).order_by('date'))
     post = list(Post.objects.filter(movie=movie, show_it=True).order_by('date')[:50])
     context = {'movie':movie, 'reviewer_review_count':reviewer_review_count, 'user_review_count':user_review_count,
                'award_simorgh_count':award_simorgh_count, 'total_award_count':total_award_count
@@ -55,7 +55,7 @@ def show_movie(request, id):
                'akkas':akkas, 'jelvehaye_vije_meydani':jelvehaye_vije_meydani, 'jelvehaye_vije_basari':jelvehaye_vije_basari,
                'monshi_sahne':monshi_sahne, 'moshaver_film_name':moshaver_film_name, 'moshaver_honari':moshaver_honari, 'moshaver':moshaver,
                'user_review':user_review, 'post':post,}
-    return render(request, 'movie.html', context=context)
+    return render(request, 'MovieManager/movie.html', context=context)
 
 
 

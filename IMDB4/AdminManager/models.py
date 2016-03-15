@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from MovieManager.models import Movie, Reviewer_Review
+from UserManager.models import User
 
 from django.db import models
 
@@ -36,21 +37,46 @@ class tag(models.Model):
 
 
 class Poll(models.Model):
-    title = models.TextField(null=True, verbose_name='عنوان', )
-    text = models.TextField(null=True, verbose_name='متن', )
+    title = models.TextField(null=True, blank=True, verbose_name='عنوان', )
+    text = models.TextField(null=True, blank=True, verbose_name='متن', )
+    date = models.DateField(null=True, blank=True, verbose_name='تاریخ', )
+
+    def __str__(self):
+        print('text: '+self.text)
+        return self.text
+
+    def get_percentage_polling(self):
+        result_polling = {}
+        total_vote = 0
+        setOfPollOptions = self.polloption_set.all()
+        for option in setOfPollOptions:
+            total_vote += option.rate
+        for option in setOfPollOptions:
+            if total_vote==0:
+                percentage=0
+            else:
+                percentage = int((option.rate/total_vote)*100)
+            result_polling[option]=percentage
+        return (result_polling, total_vote)
+
+
+
+class PollOption(models.Model):
+    pollNumber = models.IntegerField(null=True, blank=True, verbose_name='شماره گزینه', )
+    poll = models.ForeignKey(Poll, verbose_name='نظر سنجی', )
+    image = models.ImageField(upload_to='admin/PollImages/', verbose_name='عکس گزینه', )
+    text = models.TextField(null=True, blank=True, verbose_name='متن', )
+    rate = models.IntegerField(null=True, verbose_name='رای', )
 
     def __str__(self):
         return self.text
 
 
 
-class PollOption(models.Model):
-    poll = models.ForeignKey(Poll, verbose_name='نظر سنجی', )
-    image = models.ImageField(upload_to='admin/PollImages/', verbose_name='عکس گزینه', )
-    rate = models.IntegerField(null=True, verbose_name='رای', )
-
-    def __str__(self):
-        return self.image.url
+class poll_user_choose(models.Model):
+    poll = models.ForeignKey(Poll, blank=True)
+    user = models.ForeignKey(User, blank=True)
+    number = models.IntegerField()
 
 
 

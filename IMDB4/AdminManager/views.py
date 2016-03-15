@@ -1,8 +1,12 @@
-from .models import  Poll,  News
+from .models import  Poll,  News, poll_user_choose, PollOption
 from CelebrityManager.models import Celebrity
 from MovieManager.models import Movie_Celebrity_Image, Teaser, Movie
 
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
+
 
 import datetime
 
@@ -29,13 +33,41 @@ def HomePage(request):
 
 
 
+@login_required()
+def Polling(request, poll_id):
+    is_voted = False
+    poll = Poll.objects.filter(id=poll_id)[0]
+    result_polling, total_vote = poll.get_percentage_polling()
+    user = request.user
+    option_choose = poll_user_choose.objects.filter(poll=poll, user=user)
+    if option_choose:
+        is_voted = True
+    print('is voted: '+str(is_voted))
+    context = {'poll':poll, 'pollOptions':poll.polloption_set.all(), 'is_voted':is_voted ,
+                'total_vote':total_vote, 'result_polling':result_polling}
+    return render(request, 'AdminManager/polling.html', context)
 
-def Polling(request):
-    if request.method == 'POST':
-        pass
-    poll = list(Poll.objects.all()[0])
-    context = {'poll':poll, 'pollOptions':poll.polloption_set}
-    pass
+
+
+def PollArchive(request):
+    polls = list(Poll.objects.order_by('date'))
+    for poll in polls:
+        print('poll: '+poll.__str__())
+    context = {'polls':polls}
+    return render(request, 'AdminManager/pollArchive.html', context)
+
+
+@login_required()
+def Polling_result(request, pollOption_number, poll_id):
+    print('poll option id: '+str(pollOption_number))
+    poll = Poll.objects.filter(id=poll_id)[0]
+    user = request.user
+    option_choose = poll_user_choose(user=user, poll=poll, number=pollOption_number)
+    option_choose.save()
+    poll_option = PollOption.objects.filter(poll=poll, pollNumber=pollOption_number)[0]
+    poll_option.rate += 1
+    poll_option.save()
+    return redirect(reverse('polling', kwargs={"poll_id":poll_id}))
 
 
 

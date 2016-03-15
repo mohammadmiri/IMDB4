@@ -1,9 +1,8 @@
-{% extends 'movAct_sideBar.html' %}
-{% load url from future %}
+{% extends 'MovieManager/movAct_sideBar.html' %}
 {% load staticfiles %}
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
@@ -15,10 +14,12 @@
 </head>
 <body>
 
+
+
     {% block content %}
 
         <div id="movie_info" class="div_longLine">
-            <img src="{{ movie.poster.url }}" id="movie_info_mainPoster">
+            <img src="/media/images/movie/poster.jpg" id="movie_info_mainPoster">
             <p id="movie_info_name">
                 <dum id="movie_info_name_1">
                     {{ movie.name }}
@@ -32,10 +33,10 @@
 
                 </br>
                 <dum id="movie_info_time">
-                    {{ movie.duration }}
+                    {{ movie.time }}
                     دقیقه
                     |
-                    {{ genre }}
+                    {{ movie.type }}
                 </dum>
             </p>
 
@@ -43,11 +44,11 @@
                 <div id="movie_info_point_number">
                     <p>
                         <dum id="movie_info_point_number_1">
-                            {{ movie.rate }}
+                            {{ movie.point }}
                         </dum>
                         </br>
                         <dum id="movie_info_point_number_2">
-                            {{ movie.numUserRated }}
+                            {{ movie.voteNumber }}
                         </dum>
                     </p>
                 </div>
@@ -58,39 +59,39 @@
 
                 <div id="movie_info_info2">
                     <p>
-                        {{ count_critic_criticism }}
+                        {{ movie.reviewerReview }}
                         نقد منتقدان
                         |
-                        {{ count_user_criticism }}
+                        {{ movie.userReview }}
                         نقد کاربران
                         </br>
                         نویسنده:
 
                         <a href="">
-                            {{ writer }}
+                            {{ movie.writer }}
                         </a>
 
                         </br>
                         کارگردان:
                         <a href="">
-                            {{ director }}
+                            {{ movie.director }}
                         </a>
                     </p>
                 </div>
 
                 <div id="movie_info_description">
                     <p>
-                        {{ movie.Summary }}
+                        {{ movie.description }}
                     </p>
                 </div>
 
                 <div id="movie_info_images">
-                    {% for item in movie_images %}
-                        <img src="{{ item.image.url }}" class="movie_info_images_1">
+                    {% for item in images %}
+                        <img src="{{ item }}" class="movie_info_images_1">
                     {% endfor %}
 
                     <p id="movie_info_seeAll">
-                        <a href="">
+                        <a>
                             همه عکس ها و ویدیوها>>
                         </a>
                     </p>
@@ -140,8 +141,8 @@
                 بازیگران اصلی
             </p>
 
-            {% for item in main_actors %}
-                <img src="{{ item.picture.url }}" class="movie_mainActors_images">
+            {% for item in movie.mainActors %}
+                <img src="{{ item }}" class="movie_mainActors_images">
             {% endfor %}
         </div>
 
@@ -157,20 +158,20 @@
                 </p>
             </div>
 
-            {% for key, value in actors.items %}
+            {% for item in movie.fActors %}
                 <div class="movie_fActors_fullList">
-                    <img src="{{ key.picture.url }}" class="movie_fActors_fullList_image">
+                    <img src="{{ item.url }}" class="movie_fActors_fullList_image">
                     <div class="movie_fActors_fullList_name">
                         <p>
                             <a href="">
-                                {{ key }}
+                                {{ item.name }}
                             </a>
                         </p>
                     </div>
 
                     <div class="movie_fActors_fullList_movieName">
                         <p>
-                            {{ value }}
+                            {{ item.movie_name }}
                         </p>
                     </div>
                 </div>
@@ -189,7 +190,7 @@
             <p id="movie_keywords_1">
                 کلمات کلیدی:
 
-                {% for item in movie.Keywords %}
+                {% for item in movie.keywords.all %}
                     {% if forloop.counter0 != 0 %}
                         |
                     {% endif %}
@@ -322,8 +323,71 @@
 
         </div>
 
+    {% endblock %}
+
+    {% block over_content %}
+
+{#        <div id="movie_slider_background">#}
+{##}
+{#        </div>#}
+
+        <div id="movie_slider_background">
+
+
+
+            <div id="movie_slider_div">
+
+                <button type="button" class="movie_slider_close">
+                    <img src="/static/icons/movie/closeSliderButton.png">
+                </button>
+
+
+                <button id="movie_slider_arrowUp" class="movie_slider_arrowButtons ">
+                    <img src="/static/icons/test/arrowUp.png">
+                </button>
+
+
+                <div id="movie_slider_images">
+                    <ul>
+                        {% for image in slider_images %}
+                                <li>
+                                    <button type="button" class="movie_slider_images_button">
+                                        <img src="{{ image }}" class="movie_slider_images_image"
+                                             id="{{ forloop.counter0 }}">
+                                    </button>
+                                </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <button id="movie_slider_arrowDown" class="movie_slider_arrowButtons">
+                    <img src="/static/icons/test/arrowDown.png">
+                </button>
+
+                <div id="movie_slider_mainImage">
+
+                    <div>
+                        <img id="movie_slider_mainImage_image">
+                    </div>
+                    <p class="movie_slider_mainImage_topText"></p>
+                    <p class="movie_slider_mainImage_downText"></p>
+
+                </div>
+
+            </div>
+
+        </div>
 
     {% endblock %}
+
+
+
+
+
+
+
+
+
 
 
 </body>
