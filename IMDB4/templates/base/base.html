@@ -1,3 +1,4 @@
+{#{% load url from future %}#}
 {% load static %}
 
 <!DOCTYPE html>
@@ -20,15 +21,15 @@
     <meta http-equiv="pragma" content="no-cache" />
 
 
-{#    this css and js files must be load at the end.#}
+{#    these css and js files must be loaded at the end.#}
 
 {#    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>#}
 {#    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>#}
 {#    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">#}
 
 
-    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}" type="text/javascript" language="JavaScript"></script>
+    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+    <script src="{% static "bootstrap/js/bootstrap.min.js" %}" type="text/javascript" language="JavaScript"></script>
     <style type="text/css">
 
       {% block css %}{% endblock %}
@@ -36,10 +37,10 @@
     <link href="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" rel="script">
 
 
-    <script src="{% static 'jquery/jquery.js' %}" type="text/javascript" language="javascript"></script>
-    <link href="{% static 'styleSheets/base.css' %}" rel="stylesheet" type="text/css">
-    <script src="{% static 'scripts/base.js' %}" type="text/javascript" language="JavaScript"></script>
-    <script src="{% static 'scripts/base2.js' %}" type="text/javascript" language="JavaScript"></script>
+    <script src="{% static "jquery/jquery.js" %}" type="text/javascript" language="javascript"></script>
+    <link href="{% static "styleSheets/base.css" %}" rel="stylesheet" type="text/css">
+    <script src="{% static "scripts/base.js" %}" type="text/javascript" language="JavaScript"></script>
+    <script src="{% static "scripts/base2.js" %}" type="text/javascript" language="JavaScript"></script>
 
     {% block load_files %}
 
@@ -52,8 +53,8 @@
 
 <div id="base_main">
 
-   {# header #}
     <div id="base_main_header">
+
         <div id="base_main_header_header">
             <div id="base_main_header_sign">
                 <a href="search_??????????" style="color: #424242">
@@ -64,110 +65,234 @@
                     ثبت نام
                 </a>
             </div>
-            <form method="get" action="search_??????????????????????????">
-                <input type="text" name="query" id="base_main_search_box">
-                <input type="submit" value="" id="base_main_search_box_button">
+            <form>
+                <input type="text" name="query" autocomplete="off" id="base_main_search_box">
+                <button type="button" value="" id="base_main_search_box_button"></button>
+                <div id="main_searchSuggestion">
+
+                </div>
             </form>
-            <img src="{{ BASE_URL }}/static/icons/base/LOGO.jpg" id="base_logo">
+            <img src="{% static "icons/base/LOGO.jpg" %}" id="base_logo">
         </div>
 
         <a href="search_1234??">
-            <img src="{{ BASE_URL }}/static/icons/base/0.png" id="base_main_header_link_0">
+            <img src="{% static 'icons/base/0.png' %}" id="base_main_header_link_0">
         </a>
         <a href="search_139???">
-            <img src="{{ BASE_URL }}/static/icons/base/1.png" id="base_main_header_link_1">
+            <img src="{% static 'icons/base/1.png' %}" id="base_main_header_link_1">
         </a>
         <a href="search_139???">
-            <img src="{{ BASE_URL }}/static/icons/base/2.png" id="base_main_header_link_2">
+            <img src="{% static 'icons/base/2.png' %}" id="base_main_header_link_2">
         </a>
         <a href="search_139???">
-            <img src="{{ BASE_URL }}/static/icons/base/3.png" id="base_main_header_link_3">
+            <img src="{% static 'icons/base/3.png' %}" id="base_main_header_link_3">
         </a>
         <a href="search_139???">
-            <img src="{{ BASE_URL }}/static/icons/base/4.png" id="base_main_header_link_4">
+            <img src="{% static 'icons/base/4.png' %}" id="base_main_header_link_4">
         </a>
         <a href="search_139???">
-            <img src="{{ BASE_URL }}/static/icons/base/5.png" id="base_main_header_link_5">
+            <img src="{% static 'icons/base/5.png' %}" id="base_main_header_link_5">
         </a>
 
+
         <div id="base_main_header_buttons_div">
-            <img src="/static/icons/base/line.png" id="base_main_header_buttons_line_0">
-            <button id="base_main_header_buttons_button_0" class="base_main_header_buttons_buttons dropdown_menu">
+            <img src="{% static 'icons/base/line.png' %}" id="base_main_header_buttons_line_0">
+            <div id="base_main_header_buttons_button_0" class="base_main_header_buttons_buttons dropdown_menu">
                 <p class="base_main_header_buttons_fonts">
                 فیلم ها
                 </p>
-                <span>
-                    <div><a href="">
-                        ایرانی
-                    </a></div>
-                    <div><a href="">
-                        خارجی
-                    </a> </div>
-                    <div><a href="">
-                        همینجوری
-                    </a> </div>
-                </span>
-            </button>
-            <img src="/static/icons/base/line.png" id="base_main_header_buttons_line_1">
-            <button id="base_main_header_buttons_button_1" class="base_main_header_buttons_buttons">
-                <p class="base_main_header_buttons_fonts dropdown_menu">
+                <div>
+                    <div>
+                        <a href="">
+                            <p>
+                                جدول فروش
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                به زودی
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                آخرین تیزرها
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                آخرین عکس ها
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                فیلم های محبوب
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                صد فیلم برتر
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                مقالات
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <img src="{% static 'icons/base/line.png' %}" id="base_main_header_buttons_line_1">
+            <div id="base_main_header_buttons_button_1" class="base_main_header_buttons_buttons dropdown_menu">
+                <p class="base_main_header_buttons_fonts">
                 هنرمندان
                 </p>
-            </button>
-            <img src="/static/icons/base/line.png" id="base_main_header_buttons_line_2">
-            <button id="base_main_header_buttons_button_2" class="base_main_header_buttons_buttons">
+                <div>
+                    <div>
+                        <a href="">
+                            <p>
+                                متولدین امروز
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                هنرمندان محبوب
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                مصاحبه ها
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                آخرین عکس ها
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <img src="{% static 'icons/base/line.png' %}" id="base_main_header_buttons_line_2">
+            <div id="base_main_header_buttons_button_2" class="base_main_header_buttons_buttons dropdown_menu">
                 <p class="base_main_header_buttons_fonts dropdown_menu">
                 اخبار
                 </p>
-            </button>
-            <img src="/static/icons/base/line.png" id="base_main_header_buttons_line_3">
+                <div>
+                    <div>
+                        <a href="">
+                            <p>
+                                سینمای ایران
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                سینمای جهان
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                هنرمندان
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                تلویزیون
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                رویدادها
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                جشنواره ها
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                نظرسنجی ها
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <p>
+                                ویدیوها
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <img src="{% static 'icons/base/line.png' %}" id="base_main_header_buttons_line_3">
         </div>
     </div>
-{# end header #}
 
-{# should be test #}
+
     <div id="base_background_content">
         {% block background_content %}
 
         {% endblock %}
     </div>
-{# end #}
 
-{# container of all elements existing between header and footer #}
+
     <div id="base_main_content" class="clearfix">
 
-        {# container of main content #}
         <div id="base_content">
             {% block content %}
 
             {% endblock %}
         </div>
 
-        {# container of all elements should be over of the main content (e.g. sliders in movie page) #}
         <div id="base_over_content">
             {% block over_content %}
 
             {% endblock %}
         </div>
 
-        {# container of all elements existing in sidebar of some page #}
         <div id="base_side_bar" class="clearfix">
 
-            {# the element of sidebar should be override in body of child #}
             {% block sideBar_arbitrary %}
 
             {% endblock %}
 
-
-            {# sale table #}
             {% block sideBar_saleTable %}
-                <div id="base_side_sale_movie"  class="back_gray">
-                    <div id="base_side_sale_movie_title" class="back_gray_dark font_white sideBar_header">
+                <div class="sideBar_divContainer">
+                    <div class="back_gray_dark font_white sideBar_header">
                         <p>
                             فروش فیلم
                         </p>
                     </div>
-                    <div id="base_side_sale_movie1">
+                    <div class="sideBar_content back_gray_light">
                         {% for item in sale_movie %}
                             <p id="base_side_sale_movie_movies_{{ forloop.counter0 }}">
                                 <div class="base_side_sale_movie_number">
@@ -188,20 +313,18 @@
                     </div>
                 </div>
             {% endblock %}
-            {# end sale table #}
 
-            {# commingSoon #}
             {% block sideBar_commingSoon %}
-                <div id="base_side_coming_soon" class="back_gray">
-                    <div id="base_side_coming_soon_title" class="back_gray_dark font_white sideBar_header">
+                <div class="sideBar_divContainer">
+                    <div class="back_gray_dark font_white sideBar_header">
                         <p>
                         به زودی
                         </p>
                     </div>
-                    <div id="base_side_coming_soon_movies">
+                    <div class="sideBar_content back_gray_light">
                         {% for item in coming_soon %}
                             <p>
-                                <img src="{{ BASE_URL }}/static/icons/base/Play.png" class="base_side_coming_soon_movies_play">
+                                <img src="{% static 'icons/base/Play.png' %}" class="base_side_coming_soon_movies_play">
                                 {{ item.name }}
                                 <hay class="float_left">
                                     {{ item.date }}
@@ -217,38 +340,41 @@
                 </div>
             {% endblock %}
 
-            {# review #}
+
             {% block sideBar_review %}
-                <div id="base_side_criticism" class="back_gray">
-                    <div id="base_side_criticism_title" class="back_gray_dark font_white sideBar_header">
+                <div class="sideBar_divContainer">
+                    <div class="back_gray_dark font_white sideBar_header">
                         <p>
                             نقد برگزیده
                         </p>
                     </div>
-
-                    <img src="{{best_criticism}}" id="base_side_criticism_image">
-
-                    <p id="base_side_criticism_description">
-                        {{ best_criticism_description }}
-                        <a href="" class="float_left">
-                            ادامه مطلب
-                        </a>
-                    </p>
-                </div>
-            {% endblock %}
-
-            {# mostVisited #}
-            {% block sideBar_mostVisited %}
-                <div id="base_side_most_movie" class="back_gray">
-                    <div id="base_side_most_viewed_title" class="back_gray_dark font_white sideBar_header">
+                    <div class="back_gray_light sideBar_content">
+                        <img src="{{best_review}}" id="base_side_criticism_image">
                         <p>
-                            پربازدیدترین ها
+                            {{ best_review_description }}
+                            <a href="" class="float_left">
+                                ادامه مطلب
+                            </a>
                         </p>
                     </div>
                 </div>
             {% endblock %}
 
-            {# relatedNews #}
+
+            {% block sideBar_mostVisited %}
+                <div class="sideBar_divContainer">
+                    <div class="back_gray_dark font_white sideBar_header">
+                        <p>
+                            پربازدیدترین ها
+                        </p>
+                    </div>
+                    <div class="sideBar_content back_gray_light">
+
+                    </div>
+                </div>
+            {% endblock %}
+
+
             {% block sideBar_relatedNews %}
                 <div class="sideBar_divContainer">
                     <div class="back_gray_dark font_white sideBar_header">
@@ -274,7 +400,7 @@
                 </div>
             {% endblock %}
 
-            {# last list created by Users #}
+
             {% block sideBar_lastUserList %}
                 <div class="sideBar_divContainer">
                     <div class="back_gray_dark font_white sideBar_header">
@@ -308,33 +434,30 @@
                     </div>
                 </div>
             {% endblock %}
-
         </div>
-
     </div>
 
 
 
-    {# last list of visited page by users #}
     <div id="base_main_last_viewed" class="clear">
-
         <div id="base_main_last_viewed_1">
             <p id="base_main_last_viewed_title">
                 آخرین بازدیدها
             </p>
         </div>
-
         <a href="">
-            <img src="{{ BASE_URL }}/media/users/LastViewed/1.jpg" class="base_main_last_viewed_images">
+            <div class="base_main_last_viewed_images img_wrapper">
+                <img src="/media/users/LastViewed/1.jpg" class="base_main_last_viewed_images">
+            </div>
         </a>
-
         <a href="">
-            <img src="{{ BASE_URL }}/media/users/LastViewed/0.jpg" class="base_main_last_viewed_images">
+            <div class="base_main_last_viewed_images img_wrapper">
+                <img src="/media/users/LastViewed/0.jpg" class="base_main_last_viewed_images">
+            </div>
         </a>
-
     </div>
 
-    {# footer #}
+
     <div id="base_main_footer">
         <div id="base_main_footer_right">
             <p class="base_main_footer_links">
@@ -348,6 +471,7 @@
                     راهنمای سایت
                 </a>
             </p>
+
             <p class="base_main_footer_links">
                 <a href="" class="base_main_footer_links_single">
                     ۱۰۰فیلم برتر
@@ -359,6 +483,7 @@
                     قوانین سایت
                 </a>
             </p>
+
             <p class="base_main_footer_links">
                 <a href="" class="base_main_footer_links_single">
                     جدول فروش
@@ -370,6 +495,7 @@
                     تبلیغات
                 </a>
             </p>
+
             <p class="base_main_footer_links">
                 <a href="" class="base_main_footer_links_single">
                     به زودی
@@ -383,12 +509,16 @@
             </p>
         </div>
 
+
         <div id="base_main_footer_left">
             <div id="base_main_footer_followus_title">
                 <p>
                     ما را دنبال کنید در:
                 </p>
+
             </div>
+
+
             <a href="">
                 <img src="/static/icons/base/0.png" class="base_main_footer_followus_icons">
             </a>
@@ -403,14 +533,24 @@
             </a><a href="">
                 <img src="/static/icons/base/5.png" class="base_main_footer_followus_icons">
             </a>
+
         </div>
+
         <img src="{{ BASE_URL }}/static/icons/base/FooterLongLine.png" id="base_main_footer_long_line">
+
         <p>
             کلیه حقوق این سایت متعلق به موویکا می باشد.
         </p>
+
     </div>
 
+
+
+
+
 </div>
+
+
 
 </body>
 

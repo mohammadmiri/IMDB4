@@ -1,5 +1,164 @@
 
 
+#content{
+    margin: 0.1cm 0.3cm 0 0.1cm;
+}
+
+#title_1{
+    font-size: 30px;
+}
+
+#title_2{
+    font-size: 15px;
+    position: relative;
+    top: -0.2cm;
+}
+
+#header{
+    background-color: #424242;
+    height: 1cm;
+}
+
+#header>p{
+    color: #ffffff;
+    font-size: 15px;
+    margin: 0.2cm 0.2cm 0 0;
+}
+
+.header_titles{
+    position: relative;
+    top: 0.2cm;
+}
+
+#header_title_1{
+
+}
+
+#header_title_2{
+    left: -8cm;
+}
+
+#header_title_3{
+    left: -9cm;
+}
+
+.movies_items{
+    background-color: #eeeeee;
+    margin: 0.1cm 0 0.1cm 0;
+    height: 2.2cm;
+}
+
+.movies_image{
+    float:right;
+    margin: 0.1cm 0.1cm 0 0;
+    width: 1.5cm;
+    height: 2cm;
+}
+
+.movies_name{
+    position: relative;
+    left: -0.1cm;
+    top: 0.9cm;
+}
+
+.movies_eye{
+    float:right;
+    position: relative;
+    left: -7cm;
+}
+
+.movies_commentNumber{
+    float: right;
+    position: relative;
+    left: -8.7cm;
+}
+
+.movies_point{
+    position: relative;
+    left: 1cm;
+    top: -0.4cm;
+    background-color: #cd2a2f;
+    width: 1cm;
+    height: 1cm;
+}
+
+
+.movies_point_number{
+    direction: ltr;
+    margin: 40% 40% 20% 40%;
+    color: #ffffff;
+}
+
+
+
+.sideBar_mostRate_item{
+    width: 2cm;
+    float: right;
+    margin-right: 0.1cm;
+}
+
+#sideBar_selectYear_button{
+    float: left;
+    padding: 0 0.1cm 0 0.1cm;
+    border-right: 1px solid #aaaaaa;
+}
+
+#sideBar_mostRate_selectYear{
+    overflow: visible;
+    height: 2cm;
+}
+
+#sideBar_selectYear{
+    border: 1px solid #aaaaaa;
+    padding-top: 0.1cm;
+    /*padding-bottom: 0.1cm;*/
+    border-radius: 0.1cm;
+    width: 2cm;
+    background-color: #ffffff;
+    position: relative;
+    left: 2.2cm;
+    top: 0.5cm;
+    overflow: hidden;
+    height: 0.8cm;
+
+}
+
+
+
+#sideBar_selectedYear{
+    margin-right: 0.2cm;
+    position: relative;
+    top: -0.5cm;
+    width: 1cm;
+    float: right;
+}
+
+#sideBar_allYears_hide{
+    background-color: #ffffff;
+    width: 1.5cm;
+    float: right;
+    /*display: none;*/
+    display: block;
+}
+
+.sideBar_year_item{
+    margin: 0.1cm 0.1cm 0 0;
+    float: right;
+    height: 0.5cm;
+    background-color: #0066cc;
+}
+
+.sideBar_year_item:hover{
+    background-color: #eeeeee;
+}
+
+
+
+
+
+
+
+
 
 
 

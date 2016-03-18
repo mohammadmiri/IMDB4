@@ -34,7 +34,7 @@ class UserIMDB(models.Model):
         print('in get_picture:'+self.picture.__str__())
         if not self.picture :
             print('in if')
-            return 'UserManager/img/avatar.jpg'
+            return "{% static 'UserManager/img/avatar.jpg' %}"
         else:
             print('in else')
             return self.picture.url

@@ -7,7 +7,7 @@ from django.conf.urls import url, patterns
 
 
 urlpatterns = [
-    url(r'^show/(?P<name>.*?)/$', views.show_celebrity, name='show_celebrity'),
+    url(r'^show/(?P<id>.*?)/$', views.show_celebrity, name='show_celebrity'),
     ]
 
 

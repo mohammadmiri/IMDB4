@@ -1,6 +1,6 @@
 
 from .models import Movie, Award, Avamel, Reviewer_Review, User_Review, Post, Movie_Celebrity_Image
-
+from CelebrityManager.models import Celebrity
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -10,10 +10,10 @@ from django.http import HttpResponse
 
 # this function render the main page of each movie and show its detail (e.g. actors, director, ...)
 def show_movie(request, id):
-    print('before all')
-    movie = Movie.objects.get(id=id)
+    print('before all'+id)
+    movie = list(Movie.objects.filter(id=id))[0]
     print('after getting movie')
-    reviewer_review_count =Reviewer_Review.objects.filter(movie=movie, show_it=True).count()
+    reviewer_review_count = Reviewer_Review.objects.filter(movie=movie, show_it=True).count()
     user_review_count = User_Review.objects.filter(movie=movie, show_it=True).count()
     award_simorgh_count = Award.objects.filter(movie=movie, festival=0, candidate_type=0 ).count()
     award_cinemaHome_count = Award.objects.filter(movie=movie, festival=1, candidate_type=0).count()
@@ -21,40 +21,28 @@ def show_movie(request, id):
     candidate_cinemaHome_count = Award.objects.filter(movie=movie, festival=1, candidate_type=1).count()
     total_candidate_count = candidate_cinemaHome_count+candidate_simorgh_count
     total_award_count = award_cinemaHome_count+award_simorgh_count
-    images = movie.images.all
+    images = movie.images.all()[:3]
     actors = movie.get_actors()
-    kargardan = list(Avamel.objects.filter(movie=movie, role='kargardan'))
-    nevisande = list(Avamel.objects.filter(movie=movie, role='nevisande'))
-    tahiey_konande = list(Avamel.objects.filter(movie=movie, role='tahiey_konande'))
-    modir_tolid = list(Avamel.objects.filter(movie=movie, role='modir_tolid'))
-    mojri_tarh = list(Avamel.objects.filter(movie=movie, role='mojri_tarh'))
-    dastyar_aval_kargardan = list(Avamel.objects.filter(movie=movie, role='dastyar_aval_kargardan'))
-    barname_riz = list(Avamel.objects.filter(movie=movie, role='barname_riz'))
-    modir_film_bardari = list(Avamel.objects.filter(movie=movie, role='modir_film_bardari'))
-    tadvin = list(Avamel.objects.filter(movie=movie, role='tadvin'))
-    tarrah_sahne_va_lebas = list(Avamel.objects.filter(movie=movie, role='tarrah_sahne_va_lebas'))
-    tarrah_chehre_pardazi = list(Avamel.objects.filter(movie=movie, role='tarrah_chehre_pardazi'))
-    ahangsaz = list(Avamel.objects.filter(movie=movie, role='ahangsaz'))
-    seda_bardari = list(Avamel.objects.filter(movie=movie, role='seda_bardari'))
-    seda_Gozari_va_mix = list(Avamel.objects.filter(movie=movie, role='seda_Gozari_va_mix'))
-    akkas = list(Avamel.objects.filter(movie=movie, role='akkas'))
-    jelvehaye_vije_meydani = list(Avamel.objects.filter(movie=movie, role='jelvehaye_vije_meydani'))
-    jelvehaye_vije_basari = list(Avamel.objects.filter(movie=movie, role='jelvehaye_vije_basari'))
-    monshi_sahne = list(Avamel.objects.filter(movie=movie, role='monshi_sahne'))
-    moshaver_film_name = list(Avamel.objects.filter(movie=movie, role='moshaver_film_name'))
-    moshaver_honari = list(Avamel.objects.filter(movie=movie, role='moshaver_honari'))
-    moshaver = list(Avamel.objects.filter(movie=movie, role='moshaver'))
+    # avamel
+    kargardan = list(Celebrity.objects.filter(agent__movie=movie, agent__role='kargardan'))
+    nevisande = list(Celebrity.objects.filter(agent__movie=movie, agent__role='nevisande'))
+    # review
     user_review = list(User_Review.objects.filter(movie=movie, show_it=True).order_by('date'))
-    post = list(Post.objects.filter(movie=movie, show_it=True).order_by('date')[:50])
+    posts = list(Post.objects.filter(movie=movie, show_it=True).order_by('date')[:50])
+
+
+    # test
+    for person in kargardan:
+        print('person: '+person.name)
+    for image in images:
+        print('image: '+image.image.url)
+
+
+
     context = {'movie':movie, 'reviewer_review_count':reviewer_review_count, 'user_review_count':user_review_count,
                'award_simorgh_count':award_simorgh_count, 'total_award_count':total_award_count
                 ,'total_candidate_count':total_candidate_count, 'actors':actors, 'images':images,'kargardan':kargardan, 'nevisande':nevisande,
-               'tahiey_konande':tahiey_konande, 'modir_tolid':modir_tolid, 'mojri_tarh':mojri_tarh, 'dastyar_aval_kargardan':dastyar_aval_kargardan,
-               'barname_riz':barname_riz, 'modir_film_bardari':modir_film_bardari, 'tadvin':tadvin, 'tarrah_sahne_va_lebas':tarrah_sahne_va_lebas,
-               'tarrah_chehre_pardazi':tarrah_chehre_pardazi, 'ahangsaz':ahangsaz, 'seda_bardari':seda_bardari, 'seda_Gozari_va_mix':seda_Gozari_va_mix,
-               'akkas':akkas, 'jelvehaye_vije_meydani':jelvehaye_vije_meydani, 'jelvehaye_vije_basari':jelvehaye_vije_basari,
-               'monshi_sahne':monshi_sahne, 'moshaver_film_name':moshaver_film_name, 'moshaver_honari':moshaver_honari, 'moshaver':moshaver,
-               'user_review':user_review, 'post':post,}
+               'user_review':user_review, 'posts':posts,}
     return render(request, 'MovieManager/movie.html', context=context)
 
 

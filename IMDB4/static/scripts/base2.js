@@ -76,11 +76,6 @@ function month_right(){
 
 
 
-
-
-
-
-
 function refresh_date(){
 
     var month = document.getElementById("signup_changeDate_month");

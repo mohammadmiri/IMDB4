@@ -33,13 +33,12 @@ class Movie(models.Model):
     numUserRated = models.IntegerField(null=True, blank=True, verbose_name='تعداد امتیاز دهندگان', )
     summary = RichTextField(null=True, blank=True, verbose_name='خلاصه فیلم', )
     sale = models.CharField(max_length=80, null=True, blank=True, verbose_name='فروش', )
-    dialogue = models.TextField(null=True, blank=True,verbose_name='دیالوگ', )
     genre = models.ManyToManyField(Genre, blank=True, verbose_name='ژانر', )
     keywords = models.ManyToManyField(KeyWord,blank=True, verbose_name='کلمات کلیدی', )
 
     avamel = models.ManyToManyField(Celebrity, through="Avamel", related_name="movie_avamel", verbose_name='عوامل', )
     actors = models.ManyToManyField(Celebrity, through="Act", related_name="movie_actors", verbose_name='بازیگران', )
-    posts = models.ManyToManyField(User, through='Post', verbose_name='پست ها', )
+    posts = models.ManyToManyField(UserIMDB, through='Post', verbose_name='پست ها', )
     awards = models.ManyToManyField(Celebrity, through='Award', verbose_name='جوایز', )
 
     def __str__(self):
@@ -74,6 +73,10 @@ class Movie(models.Model):
         return movie_actors
 
 
+class dialogue(models.Model):
+    movie=models.ForeignKey(Movie, blank=True, verbose_name='فیلم', related_name='dialogues')
+    text = models.TextField(null=True, blank=True, verbose_name='متن',)
+
 
 # images of Movie
 class Movie_Celebrity_Image(models.Model):
@@ -92,7 +95,9 @@ class Movie_Celebrity_Image(models.Model):
     galleryNumber = models.IntegerField(default=0, choices=GALLERY_CHOISE, verbose_name='گالری')
     in_homePage = models.BooleanField(default=False, verbose_name='در صفحه اصلی نشان داده شود',)
 
-
+    @staticmethod
+    def get_image_celebrity(celebrity):
+        return celebrity.images
 
 # this class should be used to determine type of movie (e.g. video-film)
 class TypeOfMovie(models.Model):
@@ -105,10 +110,11 @@ class TypeOfMovie(models.Model):
 class StatusOfMovie(models.Model):
     movie = models.OneToOneField(Movie, verbose_name='فیلم', related_name='status')
     StatusChoice = (
-        ('pish_tolid', 'پیش تولید'),
-        ('film_bardari', 'فیلم برداری'),
-        ('pas_tolid', 'پس تولید'),
+        ('پیش تولید', 'پیش تولید'),
+        ('فیلم برداری', 'فیلم برداری'),
+        ('پس تولید', 'پس تولید'),
     )
+    is_red = models.BooleanField(blank=True, verbose_name='قرمز است',)
     status = models.CharField(max_length=50, blank=True, null=True, verbose_name='وضعیت', choices=StatusChoice)
 
 
@@ -149,11 +155,11 @@ class Award(models.Model):
 
     @staticmethod
     def get_festival_award_count(cele, festival, candidate_type):
-        Award.objects.filter(celebrity=cele, festival=festival, candidate_type=candidate_type).count()
+        return Award.objects.filter(celebrity=cele, festival=festival, candidate_type=candidate_type).count()
 
     @staticmethod
     def get_award_count(cele, candidate_type):
-        Award.objects.filter(celebrity=cele, candidate_type=candidate_type)
+        return Award.objects.filter(celebrity=cele, candidate_type=candidate_type).count()
 
 
 
@@ -161,7 +167,7 @@ class Award(models.Model):
 # this class contains all property of ManyToMany relationship between Movies and Posts of users
 class Post(models.Model):
     movie = models.ForeignKey(Movie, verbose_name='پست', )
-    user = models.ForeignKey(User, verbose_name='کاربر', )
+    user = models.ForeignKey(UserIMDB, verbose_name='کاربر', )
     content = models.TextField(blank=True, verbose_name='متن', )
     date = models.DateField( verbose_name='تاریخ', )
     show_it = models.BooleanField(default=False, verbose_name='نشان داده شود', )
@@ -220,7 +226,7 @@ class Avamel(models.Model):
 
     def __str__(self):
         return "person '{}' in movie '{}' as '{}'".format(
-            self.cele.__str__(), self.movie.__str__(), self.ROLE_CHOICE[self.role][1]
+            self.celebrity.name.__str__(), self.movie.name.__str__(), self.role
         )
 
 

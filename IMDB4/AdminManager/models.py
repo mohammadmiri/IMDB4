@@ -37,7 +37,6 @@ class tag(models.Model):
 
 
 class Poll(models.Model):
-    title = models.TextField(null=True, blank=True, verbose_name='عنوان', )
     text = models.TextField(null=True, blank=True, verbose_name='متن', )
     date = models.DateField(null=True, blank=True, verbose_name='تاریخ', )
 

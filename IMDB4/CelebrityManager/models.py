@@ -14,22 +14,19 @@ class Celebrity(models.Model):
     picture = models.ImageField(upload_to='celebrity/pictures', null=True, blank=True, verbose_name='عکس', )
     name = models.CharField(max_length=80, null=True, blank=True, verbose_name='نام', )
     workingFields = models.TextField(null=True, blank=True, verbose_name='حرفه', )
-    description = RichTextField(null=True, blank=True, verbose_name='توضیح', )
+    biography = models.TextField(null=True, blank=True, verbose_name='بیوگرافی', )
     birthday = models.DateField(null=True, blank=True, verbose_name='تاریخ تولد', )
     birthPlace = models.CharField(max_length=80, null=True, blank=True, verbose_name='محل تولد', )
 
     def __str__(self):
         return self.name
 
-    def get_images(self):
-        return self.celebrityimage_set.all()
-
     # is for test and should be moved to celebrity model
     # this function should return the top 4 rated movie related to specific celebrity
     @staticmethod
     def get_most_rated_film(celebrity):
-        movie_actor = celebrity.movie_actors
-        movie_avamel = celebrity.movie_avamel
+        movie_actor = list(celebrity.movie_actors.all())
+        movie_avamel = list(celebrity.movie_avamel.all())
         movies = movie_actor + movie_avamel
         result = []
         for movie in movies:
@@ -54,7 +51,10 @@ class Celebrity(models.Model):
 
 
 
-
+class Video_Celebrity(models.Model):
+    celebrity = models.ForeignKey(Celebrity)
+    link = models.TextField(null=True, blank=True,)
+    image = models.ImageField(upload_to='celebrity/video_images', null=True, blank=True)
 
 
 

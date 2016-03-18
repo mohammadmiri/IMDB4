@@ -9,7 +9,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    url(r'^show/(?P<id>.*?)/$', views.show_movie, name='MovieManager_show_movie'),
+    url(r'^show/(?P<id>[0-9]+)/$', views.show_movie, name='MovieManager_show_movie'),
     ]
 
 

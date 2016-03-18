@@ -9,7 +9,8 @@ class PollOption(admin.TabularInline):
 
 class PollAdmin(admin.ModelAdmin):
     list_display = ['id', 'text']
-    inlines = [PollOption]
+    list_display_links = ['text']
+    inlines = [PollOption,]
 
 
 admin.site.register(News)

@@ -1,6 +1,6 @@
-from .models import Celebrity
+from .models import Celebrity, Video_Celebrity
 from UserManager.models import PostForCelebrity
-
+from MovieManager.models import Award
 
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
@@ -14,6 +14,10 @@ class PostOFUserInline(admin.TabularInline):
     model = PostForCelebrity
     extra = 1
 
+
+class VideoCelebrityInline(admin.TabularInline):
+    model = Video_Celebrity
+    extra = 1
 
 
 class AgeFilter(admin.SimpleListFilter):
@@ -58,11 +62,18 @@ class AgeFilter(admin.SimpleListFilter):
             return Celebrity.objects.filter(birthday__gte=date(2000, 1, 1))
 
 
+class AwardInline(admin.TabularInline):
+    model = Award
+    extra = 1
+
+
 class CelebrityAdmin(admin.ModelAdmin):
+    list_display_links = ('name',)
+    list_display = ('id','name',)
     list_filter = (AgeFilter,)
     ordering = ('name',)
     search_fields = ['name']
-    inlines = [PostOFUserInline]
+    inlines = [AwardInline, PostOFUserInline, VideoCelebrityInline,]
 
 
 
