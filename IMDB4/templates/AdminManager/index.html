@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base/base.html' %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -15,9 +15,9 @@
 {% block content %}
     
     <div id="index_3_first_films">
-        <img src="/media/images/index/Films3/0.jpg"  id="index_movies_movie_0">
-        <img src="/media/images/index/Films3/1.jpg"  id="index_movies_movie_1">
-        <img src="/media/images/index/Films3/2.jpg"  id="index_movies_movie_2">
+        <img src="{{ Teasers.0.image.url }}"  id="index_movies_movie_0">
+        <img src="{{ Teasers.1.image.url }}"  id="index_movies_movie_1">
+        <img src="{{ Teasers.2.image.url }}"  id="index_movies_movie_2">
     </div>
 
     <img src="/static/icons/index/long-line.png" class="index_long_line">

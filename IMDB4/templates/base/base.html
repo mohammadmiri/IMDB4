@@ -1,4 +1,4 @@
-{#{% load url from future %}#}
+{#{% load index %}#}
 {% load static %}
 
 <!DOCTYPE html>
@@ -14,12 +14,6 @@
 
 
 
-    <meta http-equiv="cache-control" content="max-age=0" />
-    <meta http-equiv="cache-control" content="no-cache" />
-    <meta http-equiv="expires" content="0" />
-    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-    <meta http-equiv="pragma" content="no-cache" />
-
 
 {#    these css and js files must be loaded at the end.#}
 
@@ -30,10 +24,9 @@
 
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}" type="text/javascript" language="JavaScript"></script>
-    <style type="text/css">
 
-      {% block css %}{% endblock %}
-    </style>
+
+
     <link href="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" rel="script">
 
 
@@ -41,6 +34,11 @@
     <link href="{% static "styleSheets/base.css" %}" rel="stylesheet" type="text/css">
     <script src="{% static "scripts/base.js" %}" type="text/javascript" language="JavaScript"></script>
     <script src="{% static "scripts/base2.js" %}" type="text/javascript" language="JavaScript"></script>
+
+    {% block css_js %}
+
+    {% endblock %}
+
 
     {% block load_files %}
 
@@ -368,8 +366,32 @@
                             پربازدیدترین ها
                         </p>
                     </div>
-                    <div class="sideBar_content back_gray_light">
-
+                    <div id="sideBar_mostVisited" class="sideBar_content back_gray_light">
+                        <div id="sideBar_mostVisited_control">
+                            <a href="">
+                                <p>
+                                    {{ mostVisited_names.0 }}
+                                </p>
+                            </a>
+                            <div>
+                                <p>
+                                    1
+                                </p>
+                            </div>
+                            <button type="button" id="mostVisited_arrowRight">
+                                <img src="{% static 'icons/base/arrowRight.png' %}" id="mostVisited_arrowRight">
+                            </button>
+                            <button type="button" id="mostVisited_arrowLeft">
+                                <img src="{% static 'icons/base/arrowLeft.png' %}" id="mostVisited_arrowLeft">
+                            </button>
+                        </div>
+                        <div id="sideBar_mostVisited_images">
+                            <div>
+                                {% for image in mostVisited_images %}
+                                    <img src="{{ image }}">
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             {% endblock %}

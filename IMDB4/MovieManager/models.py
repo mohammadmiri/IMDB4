@@ -114,9 +114,13 @@ class StatusOfMovie(models.Model):
         ('فیلم برداری', 'فیلم برداری'),
         ('پس تولید', 'پس تولید'),
     )
-    is_red = models.BooleanField(blank=True, verbose_name='قرمز است',)
     status = models.CharField(max_length=50, blank=True, null=True, verbose_name='وضعیت', choices=StatusChoice)
-
+    ColorChoice = (
+        ('blue','آبی'),
+        ('red','قرمز'),
+        ('black','مشکی'),
+    )
+    color = models.CharField(max_length=20, blank=True, null=True, verbose_name='رنگ', choices=ColorChoice)
 
 
 # Teaser of Movie
@@ -127,8 +131,8 @@ class Teaser(models.Model):
     date_uploaded = models.DateField(null=True, blank=True, verbose_name='تاریخ اپلود', )
 
     def __str__(self):
-        return "teaser '{}' for movie '{}' ".format(
-            self.name.__str__(), self.movie.__str__()
+        return "teaser '{}'".format(
+            self.movie.name
         )
 
 

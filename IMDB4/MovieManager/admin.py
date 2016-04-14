@@ -7,9 +7,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
 
-class RateUserInline(admin.TabularInline):
-    model = RateUserForMovie
-    extra = 1
+
 
 class postInline(admin.TabularInline):
     model = Post
@@ -53,15 +51,18 @@ class DialogueInline(admin.TabularInline):
     extra = 1
 
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ('id','name','rate', 'year', )
+    list_display = ('name','rate', 'year', )
     list_display_links = ('name',)
     # list_filter = (GenreFilter,)
     search_fields = ['name']
     ordering = ('name',)
-    inlines = [  DialogueInline, RateUserInline, StatusOfMovieInline, TypeOfMovieInline, TeaserInline, ActInline,
+    inlines = [  DialogueInline, StatusOfMovieInline, TypeOfMovieInline, TeaserInline, ActInline,
                  AgentInline, AwardInline, CriticCriticismInline, UserCriticismInline, postInline , ]
 
-
+    def get_view_on_site_url(self, obj=None):
+        if obj is not None:
+            return "http://localhost:8000/movie/show/"+str(obj.id)
+        return "http://localhost:8000/"
 
 
 class KeyWordAdmin(admin.ModelAdmin):

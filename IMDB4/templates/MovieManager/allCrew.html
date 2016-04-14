@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    {% block load_files %}
+        <link href="{% static 'styleSheets/allCrew.css' %}" rel="stylesheet">
+    {% endblock %}
+</head>
+<body>
+
+{% block content %}
+    <div class="wrapper float_right padding_right_large padding_top_large padding_left_large padding_bottom_large">
+        <div class="float_right margin_bottom_large">
+            <img src="{{ movie.poster }}" class="float_right" id="info_image">
+            <p id="info_name">
+                <a href="">
+                    {{ movie.name }}
+                </a>
+                ({{ movie.year }})
+            </p>
+            </br>
+            <p id="info_allCrew">
+                تمام عوامل
+            </p>
+        </div>
+
+        {% for item in beforeList %}
+            <div class="role_div margin_bottom_large">
+                <p>
+                    {{ item.jobName }}
+                    {% for person in item.list %}
+                        </br>
+                        <a href="">
+                            {{ person }}
+                        </a>
+                    {% endfor %}
+                </p>
+            </div>
+        {% endfor %}
+
+        <div class="table">
+            <div class="table_header font_white">
+                <p>
+                    لیست کامل بازیگران
+                </p>
+            </div>
+            {% for person in actors %}
+                <div class="table_item">
+                    <img src="{{ person.imageAddress }}">
+                    <div>
+                        <p>
+                            <a href="">
+                                {{ person.name }}
+                            </a>
+                        </p>
+                    </div>
+                    <p>
+                        {{ person.roleName }}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% for item in afterList %}
+            <div class="role_div margin_bottom_large">
+            <p>
+                {{ item.jobName }}
+                {% for person in item.list %}
+                    </br>
+                    <a href="">
+                        {{ person }}
+                    </a>
+                {% endfor %}
+            </p>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}
+
+{% block sideBar_commingSoon %}
+{% endblock %}
+
+{% block sideBar_saleTable %}
+{% endblock %}
+
+{% block sideBar_mostVisited %}
+{% endblock %}
+
+
+</body>
+</html>

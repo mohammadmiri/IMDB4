@@ -6,7 +6,9 @@ $(document).ready(function(){
 
     $('#base_main_search_box').keyup(function () {
         console.log('search box');
-        $.ajax({url:'http://localhost:8000/search_suggestion/',success:function(result){
+        var value=document.getElementById('base_main_search_box').value;
+        console.log(value);
+        $.ajax({url:'http://localhost:8000/search_suggestion/'+value,success:function(result){
             console.log('result:'+result);
             console.log(result.movie_descriptions);
 
@@ -59,55 +61,8 @@ $(document).ready(function(){
                         '</p>' +
                     '</div>' +
                 '</div>');
-
                 console.log(search_item);
-
                 console.log('final: '+addSuggestion.innerHTML);
-
-
-
-                //$(search_item).append('<img src="' + result.movie_images[i] + '" class="base_searchSuggestionItem_image">');
-
-                //console.log('search_item: '+search_item.innerHTML);
-
-                //$(search_item).append('<div class="base_searchSuggestionItem_info">' +
-                //    '<p class="base_searchSuggestionItem_info_name">' +
-                //        '<a href="">' +
-                //            result.movie_names[i] +
-                //        '</a>' +
-                //        '(' +
-                //        result.movie_yearProduction[i] +
-                //        ')' +
-                //    '</p>' +
-                //    '<p class="base_searchSuggestionItem_info_description">' +
-                //        result.movie_descriptions[i] +
-                //    '</p>' +
-                //'</div>');
-
-                //var div_innerHTML='<img src="' + result.movie_images[i] + '" class="base_searchSuggestionItem_image">' +
-                //    '<div class="base_searchSuggestionItem_info">' +
-                //        '<p class="base_searchSuggestionItem_info_name">' +
-                //            '<a href="">' +
-                //                result.movie_names[i] +
-                //            '</a>' +
-                //            '(' +
-                //            result.movie_yearProduction[i] +
-                //            ')' +
-                //        '</p>' +
-                //        '<p class="base_searchSuggestionItem_info_description">' +
-                //            result.movie_descriptions[i] +
-                //        '</p>' +
-                //    '</div>';
-
-
-                //$(search_item).append(div_innerHTML);
-                //$(addSuggestion).append(search_item);
-                //$(search_item).html(
-                //    div_innerHTML
-                //);
-
-                //$(addSuggestion).append(search_item.innerHTML);
-
             }
 
             array=result.celeb_names;

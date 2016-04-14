@@ -14,23 +14,33 @@ import datetime
 def HomePage(request):
     if request.method == "GET":
         teasers = list(Teaser.objects.order_by('date_uploaded')[:3])
+        for teaser in teasers:
+            print("teaser: "+str(teaser.image))
         news_iran_cinema = list(News.objects.filter(category='iran_cinema').order_by('dateUpload')[:5])
         news_world_cinema = list(News.objects.filter(category='world_cinema').order_by('dateUpload')[:5])
         news_honarmandan = list(News.objects.filter(category='honarmandan').order_by('dateUpload')[:5])
         news_TV = list(News.objects.filter(category='TV').order_by('dateUpload')[:5])
-        poll = list(Poll.objects.all())[0]
+        poll = None
+        polloptions = None
+        try:
+            poll = list(Poll.objects.all())[0]
+            polloptions = poll.polloption_set
+        except:
+            pass
         celebrities = Celebrity.get_born_today()
         gallery1 = list(Movie_Celebrity_Image.objects.filter(galleryNumber=1, in_homePage=True)[:5])
         gallery2 = list(Movie_Celebrity_Image.objects.filter(galleryNumber=2, in_homePage=True)[:5])
         gallery3 = list(Movie_Celebrity_Image.objects.filter(galleryNumber=3, in_homePage=True)[:5])
         gallery4 = list(Movie_Celebrity_Image.objects.filter(galleryNumber=4, in_homePage=True)[:5])
         context = {'Teasers':teasers, 'gallery1':gallery1, 'gallery2':gallery2, 'gallery3':gallery3, 'gallery4':gallery4,
-                   'Poll':poll, 'PollOptions':poll.polloption_set, 'Celebrity':celebrities, 'News_Iran_Cinema':news_iran_cinema
+                   'Poll':poll, 'PollOptions':polloptions, 'Celebrity':celebrities, 'News_Iran_Cinema':news_iran_cinema
                     , 'News_World_Cinema':news_world_cinema, 'News_honarmandan':news_honarmandan, 'News_TV':news_TV }
-        return render(request, 'index.html', context)
+        return render(request, 'AdminManager/index.html', context)
 
 
+def get_search_result(request, value):
 
+    pass
 
 
 @login_required()
