@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^pollArchive$', views.PollArchive, name='pollArchive'),
     url(r'^polling/(?P<poll_id>[0-9]+)$', views.Polling, name='polling'),
     url(r'^polling_result/(?P<pollOption_number>[0-9]+)/(?P<poll_id>[0-9]+)', views.Polling_result, name='polling_result'),
-    url(r'^base/search/(?P<value>[.*])', views.get_search_result, name='get_result_base'),
+    url(r'^base/search_suggestion/(?P<value>.*)', views.get_search_result, name='get_result_base'),
     ]
 
 

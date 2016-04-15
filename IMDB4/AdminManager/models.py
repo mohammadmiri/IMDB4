@@ -26,7 +26,7 @@ class News(models.Model):
     relate_news = models.ManyToManyField('self', through='tag', symmetrical=False)
 
     def __str__(self):
-        return self.firstHeadLine[:20]
+        return self.title[:50]
 
 
 

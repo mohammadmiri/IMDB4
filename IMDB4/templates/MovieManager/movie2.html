@@ -18,7 +18,7 @@
 
     {% block content %}
         <div id="info" class="border_bottom_div">
-            <div id="info_mainImage" class="img_wrapper">
+            <div id="info_mainPoster" class="img_wrapper">
                 <img src="{{ movie.poster.url }}" id="info_mainPoster">
             </div>
             <p id="info_name">
@@ -85,7 +85,7 @@
                 </div>
 
                 <div id="info_images">
-                    {% for item in images|slice:':2' %}
+                    {% for item in images|slice:':3' %}
                         <div class="info_images_1 img_wrapper">
                             <img src="{{ item.image.url }}" class="info_images_1">
                         </div>
@@ -104,35 +104,36 @@
         </div>
 
 
-
-        <div id="prize" class="border_bottom_div">
-            <div id="prize_border">
-                {% if award_simorgh_count %}
-                    <p id="prize">
-                    برنده
-                    {{ award_simorgh_count|IntegerToPersian }}
-                    سیمرغ بلورین.
+        {% if award_simorgh_count or total_award_count or top100_rank %}
+            <div id="prize" class="border_bottom_div">
+                <div id="prize_border">
+                    {% if award_simorgh_count %}
+                        <p id="prize">
+                        برنده
+                        {{ award_simorgh_count|IntegerToPersian }}
+                        سیمرغ بلورین.
+                        </p>
+                    {% endif %}
+                    {% if total_award_count %}
+                        {{ total_award_count|IntegerToPersian }}
+                        جایزه و
+                        {{ total_candidate_count|IntegerToPersian }}
+                        نامزدی دیگر
+                    {% endif %}
+                    {% if top100_rank %}
+                        {{ top100_rank }}
+                        <a href="">
+                        ۱۰۰ فیلم برتر
+                        </a>
+                    {% endif %}
+                    <p id="prize_border_seeAll">
+                        <a href="">
+                        مشاهده همه جوایز>>
+                        </a>
                     </p>
-                {% endif %}
-                {% if total_award_count %}
-                    {{ total_award_count|IntegerToPersian }}
-                    جایزه و
-                    {{ total_candidate_count|IntegerToPersian }}
-                    نامزدی دیگر
-                {% endif %}
-                {% if top100_rank %}
-                    {{ top100_rank }}
-                    <a href="">
-                    ۱۰۰ فیلم برتر
-                    </a>
-                {% endif %}
-                <p id="prize_border_seeAll">
-                    <a href="">
-                    مشاهده همه جوایز>>
-                    </a>
-                </p>
+                </div>
             </div>
-        </div>
+        {% endif %}
         <div id="mainActors" class="border_bottom_div">
 
             <p id="mainActors_title">
@@ -166,7 +167,6 @@
                             </a>
                         </p>
                     </div>
-
                     <div class="fActors_fullList_movieName">
                         <p>
                             {{ actName }}

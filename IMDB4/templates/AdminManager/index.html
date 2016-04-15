@@ -1,4 +1,6 @@
 {% extends 'base/base.html' %}
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -7,179 +9,170 @@
         index
     {% endblock %}
 
+    {% block load_files %}
+        <link href="{% static "styleSheets/index.css" %}" type="text/css" rel="stylesheet">
+        <script src="{% static "scripts/index.js" %}" type="text/javascript" language="JavaScript"></script>
+    {% endblock %}
+
 </head>
 <body>
 
 
 
 {% block content %}
-    
-    <div id="index_3_first_films">
-        <img src="{{ Teasers.0.image.url }}"  id="index_movies_movie_0">
-        <img src="{{ Teasers.1.image.url }}"  id="index_movies_movie_1">
-        <img src="{{ Teasers.2.image.url }}"  id="index_movies_movie_2">
+
+    <div class="border_bottom_div overflow_auto">
+        <div id="first_films">
+            <img src="{{ Teasers.0.image.url }}"  id="movies_movie_0">
+            <img src="{{ Teasers.1.image.url }}"  id="movies_movie_1">
+            <img src="{{ Teasers.2.image.url }}"  id="movies_movie_2">
+        </div>
     </div>
 
-    <img src="/static/icons/index/long-line.png" class="index_long_line">
-
-    <div id="index_last_news">
-        <p id="index_last_title">
-            آخرین اخبار
-        </p>
 
 
-
-        <div id="index_last_buttons" >
-            <ul class="nav nav-pills">
-
-                {% for news_item in news %}
-
-                    {% if forloop.counter0 == 0 %}
-                        <li class="active" id="index_last_buttons_{{ forloop.counter0 }}">
-                            <a data-toggle="tab" href="#index_nav_articles_{{ forloop.counter0 }}">
-                                {{ news_item.button_label }}
-                            </a>
-                        </li>
-
-                    {% else %}
-                        <img src="/static/icons/index/line2.png"
-                             id="index_last_buttons_line_{{ forloop.counter0 }}">
-                        <li id="index_last_buttons_{{ forloop.counter0 }}" >
-                            <a data-toggle="tab" href="#index_nav_articles_{{ forloop.counter0 }}">
-                                {{ news_item.button_label }}
-                            </a>
-                        </li>
-                    {% endif %}
-
-                {% endfor %}
-
-            </ul>
-        </div>
-
-
-
-        <div class="tab-content" id="index_nav_content">
-
-
-            {% for news_item in news %}
-
-                <div id="index_nav_articles_{{ forloop.counter0 }}" class="tab-pane fade index_nav_articles">
-                    <div class="index_nav_articles_main">
-                        <img src="/media/images/index/LastNews/{{ news_item.image_name }}" class="index-nav-images">
-                        <div class="index-nav-main-news">
-                            <a href="#">
-                                <p>
-                                    {{ news_item.main_news_title }}
-                                </p>
-                            </a>
-                            <p>
-                                {{ news_item.main_news_article }}
-                                <a href="#">
-                                    ادامه مطلب
+    <div class="border_bottom_div overflow_auto">
+        <div id="last_news">
+            <p id="last_title">
+                آخرین اخبار
+            </p>
+            <div id="last_buttons" >
+                <ul class="nav nav-pills">
+                    {% for news_item in news %}
+                        {% if forloop.counter0 == 0 %}
+                            <li class="active" id="last_buttons_{{ forloop.counter0 }}">
+                                <a data-toggle="tab" href="#nav_articles_{{ forloop.counter0 }}">
+                                    {{ news_item.button_label }}
                                 </a>
-                            </p>
+                            </li>
+                        {% else %}
+                            <img src="/static/icons/index/line2.png"
+                                 id="last_buttons_line_{{ forloop.counter0 }}">
+                            <li id="last_buttons_{{ forloop.counter0 }}" >
+                                <a data-toggle="tab" href="#nav_articles_{{ forloop.counter0 }}">
+                                    {{ news_item.button_label }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+
+
+            <div class="tab-content" id="nav_content">
+                {% for news_item in news %}
+                    <div id="nav_articles_{{ forloop.counter0 }}" class="tab-pane fade nav_articles">
+                        <div class="nav_articles_main">
+                            <img src="/media/images/index/LastNews/{{ news_item.image_name }}" class="nav_images">
+                            <div class="nav_main_news">
+                                <a href="#">
+                                    <p>
+                                        {{ news_item.main_news_title }}
+                                    </p>
+                                </a>
+                                <p>
+                                    {{ news_item.main_news_article }}
+                                    <a href="#">
+                                        ادامه مطلب
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="nav_titles">
+                            {% for item in news_item.item %}
+                                {% if forloop.counter0 < 2 %}
+                                    <div class="nav_title_0">
+                                        <a href="#">
+                                            <p>
+                                                {{ item.news_title }}
+                                            </p>
+                                        </a>
+                                    </div>
+                                {% else %}
+                                    <div class="nav_title_1">
+                                        <a href="#">
+                                            <p>
+                                                {{ item.news_title }}
+                                            </p>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
-
-                    <div class="index_nav_titles">
-                        {% for item in news_item.item %}
-                            {% if forloop.counter0 < 2 %}
-                                <div class="index_nav_title_0">
-                                    <a href="#">
-                                        <p>
-                                            {{ item.news_title }}
-                                        </p>
-                                    </a>
-                                </div>
-                            {% else %}
-                                <div class="index_nav_title_1">
-                                    <a href="#">
-                                        <p>
-                                            {{ item.news_title }}
-                                        </p>
-                                    </a>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 
 
-    <img src="/static/icons/index/long-line.png" class="index_long_line">
 
-
-    <div id="index_last_images">
-        <p id="" class="section_title">
-            آخرین عکس ها
-        </p>
-
-
-
-        <a href="">
-            <img src="/media/images/index/LastImages/000.jpg"
-                    id="index_last_images_0">
-        </a>
-        <div id="index_last_images_1_2">
+    <div class="border_bottom_div overflow_auto">
+        <div id="last_images">
+            <p id="" class="section_title">
+                آخرین عکس ها
+            </p>
             <a href="">
-                <img src="/media/images/index/LastImages/222.jpg"
-                        id="index_last_images_1">
+                <img src="/media/images/index/LastImages/000.jpg"
+                        id="last_images_0">
             </a>
+            <div id="last_images_1_2">
+                <a href="">
+                    <img src="/media/images/index/LastImages/222.jpg"
+                            id="last_images_1">
+                </a>
+                <a href="">
+                    <img src="/media/images/index/LastImages/333.jpg"
+                            id="last_images_2">
+                </a>
+            </div>
             <a href="">
-                <img src="/media/images/index/LastImages/333.jpg"
-                        id="index_last_images_2">
+                <img src="/media/images/index/LastImages/111.jpg"
+                        id="last_images_3">
             </a>
         </div>
-        <a href="">
-            <img src="/media/images/index/LastImages/111.jpg"
-                    id="index_last_images_3">
-        </a>
-
     </div>
 
-    <img src="/static/icons/index/long-line.png" class="index_long_line">
 
-    <div id="index_birthday">
-        <p id="index_birthday_title">
+
+    <div id="birthday" class="border_bottom_div">
+        <p id="birthday_title">
             متولدین امروز
         </p>
-        <img src="{{ BASE_URL }}/media/images/index/Birthday/2.jpg" class="index_birthday_images">
-        <img src="{{ BASE_URL }}/media/images/index/Birthday/1.jpg" class="index_birthday_images">
-        <img src="{{ BASE_URL }}/media/images/index/Birthday/0.jpg" class="index_birthday_images">
+        <img src="{{ BASE_URL }}/media/images/index/Birthday/2.jpg" class="birthday_images">
+        <img src="{{ BASE_URL }}/media/images/index/Birthday/1.jpg" class="birthday_images">
+        <img src="{{ BASE_URL }}/media/images/index/Birthday/0.jpg" class="birthday_images">
     </div>
 
-    <img src="/static/icons/index/long-line.png" class="index_long_line">
 
 
-    <div id="index_poll">
-
+    <div id="poll">
         <p class="section_title">
             نظر سنجی
         </p>
-
-        <p id="index_poll_description">
+        <p id="poll_description">
             ازمیان فیلم های ایران کدامیک را بیشتر می پسندید؟
-            <a href="index_go_poll">
+            <a href="go_poll">
             رای دادن >>
             </a>
         </p>
 
-        <img src="{{ BASE_URL }}/media/images/index/Poll/0.jpg" class="index_poll_images">
-        <img src="{{ BASE_URL }}/media/images/index/Poll/1.jpg" class="index_poll_images">
-        <img src="{{ BASE_URL }}/media/images/index/Poll/2.jpg" class="index_poll_images">
-        <img src="{{ BASE_URL }}/media/images/index/Poll/3.jpg" class="index_poll_images">
-        <img src="{{ BASE_URL }}/media/images/index/Poll/4.jpg" class="index_poll_images">
-
+        {% for address in poll_images %}
+            <img src="{{ address }}" class="poll_images">
+        {% endfor %}
     </div>
-
-
-
-
 
 {% endblock %}
 
+{% block sideBar_arbitrary %}
+{% endblock %}
+
+{% block sideBar_lastUserList %}
+{% endblock %}
+
+{% block sideBar_relatedNews %}
+{% endblock %}
 
 
 

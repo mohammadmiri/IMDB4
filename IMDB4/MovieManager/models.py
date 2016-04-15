@@ -26,7 +26,7 @@ class KeyWord(models.Model):
 
 class Movie(models.Model):
     poster = models.ImageField(upload_to='posters', null=True, blank=True, verbose_name='پوستر', )
-    name = models.TextField( null=True, blank=True, verbose_name='نام', )
+    name = models.CharField(max_length=100, null=True, blank=True, verbose_name='نام', )
     year = models.CharField(max_length=10, null=True, blank=True, verbose_name='سال تولید', )
     duration = models.IntegerField(null=True, blank=True, verbose_name='مدت زمان', )
     rate = models.FloatField(null=True, blank=True, verbose_name='امتیاز', )

@@ -8,13 +8,16 @@
     float: right;
     width: 6cm;
     height: 8cm;
-    margin: 0.2cm 0.2cm 0.2cm 0.2cm;
+    margin: 0 0.2cm 0.2cm 0.2cm;
 
+}
+
+#info_name{
+    margin-top: 0.2cm;
 }
 
 #info_name_1{
     font-size: 22px;
-
 }
 
 #info_year{
@@ -89,6 +92,7 @@
     margin: 0.1cm 0 0 0;
     float: right;
     font-size: 11px;
+    /*clear: both;*/
 }
 
 #prize_border{
@@ -185,6 +189,10 @@
 #fActors_fullList_seeAll{
     font-size: 12px;
     float:left;
+}
+
+.border_radius>img{
+    border-radius: 0.5cm;
 }
 
 #keywords_1{

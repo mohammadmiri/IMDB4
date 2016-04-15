@@ -21,7 +21,7 @@ def show_movie(request, id):
     candidate_cinemaHome_count = Award.objects.filter(movie=movie, festival=1, candidate_type=1).count()
     total_candidate_count = candidate_cinemaHome_count+candidate_simorgh_count
     total_award_count = award_cinemaHome_count+award_simorgh_count
-    images = movie.images.all()[:3]
+    images = movie.images.all()[:4]
     actors = movie.get_actors()
     # avamel
     kargardan = list(Celebrity.objects.filter(agent__movie=movie, agent__role='kargardan'))
@@ -30,20 +30,17 @@ def show_movie(request, id):
     user_review = list(User_Review.objects.filter(movie=movie, show_it=True).order_by('date'))
     posts = list(Post.objects.filter(movie=movie, show_it=True).order_by('date')[:50])
 
-
     # test
     for person in kargardan:
         print('person: '+person.name)
     for image in images:
         print('image: '+image.image.url)
 
-
-
     context = {'movie':movie, 'reviewer_review_count':reviewer_review_count, 'user_review_count':user_review_count,
                'award_simorgh_count':award_simorgh_count, 'total_award_count':total_award_count
                 ,'total_candidate_count':total_candidate_count, 'actors':actors, 'images':images,'kargardan':kargardan, 'nevisande':nevisande,
                'user_review':user_review, 'posts':posts,}
-    return render(request, 'MovieManager/movie.html', context=context)
+    return render(request, 'MovieManager/movie2.html', context=context)
 
 
 

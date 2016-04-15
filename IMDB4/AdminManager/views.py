@@ -6,6 +6,8 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
+from django.http import JsonResponse
+from django.core import serializers
 
 
 import datetime
@@ -39,8 +41,14 @@ def HomePage(request):
 
 
 def get_search_result(request, value):
-
-    pass
+    print('in get_search_result: '+value)
+    # movies = list(Movie.objects.filter(name__startswith=value))
+    movie_serialize = serializers.serialize('json', Movie.objects.filter(name__startswith=value))
+    # for movie in movies:
+    #     print("movie: "+str(movie))
+    celebrity_serialize = serializers.serialize('json',Celebrity.objects.filter(name__startswith=value))
+    print('after all')
+    return JsonResponse({'movies':movie_serialize, 'celebrities':celebrity_serialize})
 
 
 @login_required()

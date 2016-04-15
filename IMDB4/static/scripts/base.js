@@ -8,26 +8,20 @@ $(document).ready(function(){
         console.log('search box');
         var value=document.getElementById('base_main_search_box').value;
         console.log(value);
-        $.ajax({url:'http://localhost:8000/search_suggestion/'+value,success:function(result){
+        $.ajax({url:'http://localhost:8000/home/base/search_suggestion/'+value,success:function(result){
             console.log('result:'+result);
             console.log(result.movie_descriptions);
-
             //removing last search suggestion.
             var addSuggestion=$('#main_searchSuggestion');
             var children=addSuggestion.children();
-
             for(var i=0;i<children.length;i++){
                 addSuggestion.removeChild(children[i]);
             }
-
-
             console.log(addSuggestion);
             console.log('123456789');
-
             //adding new search suggestion.
             var array=result.movie_names;
             for(var i=0;i<array.length;i++){
-
                 var search_item=$('<div class="base_searchSuggestionItem">' +
                     '<img src="' + result.movie_images[i] + '" class="base_searchSuggestionItem_image">' +
                     '<div class="base_searchSuggestionItem_info">' +
