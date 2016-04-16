@@ -76,17 +76,21 @@
 .movies_point{
     position: relative;
     left: 1cm;
-    top: -0.4cm;
+    top: -0.6cm;
     background-color: #cd2a2f;
-    width: 1cm;
-    height: 1cm;
+    width: 1.8cm;
+    height: 1.8cm;
+    overflow: auto;
 }
 
 
-.movies_point_number{
-    direction: ltr;
-    margin: 40% 40% 20% 40%;
+.movies_point>p{
+    /*direction: ltr;*/
     color: #ffffff;
+    text-align: center;
+    font-size: 30px;
+    position: relative;
+    top: 0.3cm;
 }
 
 

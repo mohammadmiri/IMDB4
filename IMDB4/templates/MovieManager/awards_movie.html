@@ -1,57 +1,62 @@
-{% extends 'base.html' %}
+{% extends 'base/base.html' %}
+{% load static %}
+{% load toPersian %}
+
 
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    {% block load_files %}
+        <link href="{% static 'styleSheets/awards_movie.css' %}" rel="stylesheet">
+    {% endblock %}
 </head>
 <body>
 
 {% block content %}
 
     <div class="padding_left padding_right padding_top">
-        <div id="awards_movie_info">
-            <img src="{{ imageUrl }}">
-            <p id="awards_movie_info_name">
+        <div id="info">
+            <img src="{{ movie.poster.url }}">
+            <p id="info_name">
                 <a href="">
-                    {{ movieName }}
+                    {{ movie.name }}
                 </a>
-                ({{ year }})
+                ({{ movie.year }})
             </p>
-            <p id="awards_movie_info_awards">
+            <p id="info_awards">
                 جوایز
             </p>
-            <p id="awards_movie_info_awardsNumber">
-                {% if awardsNumber %}
-                    {{ awardsNumber }}
+            <p id="info_awardsNumber">
+                {% if awarded %}
+                    {{ awarded }}
                     جایزه
                 {% endif %}
-                {% if awardsNumber and nominatedNumber %}
+                {% if awarded and candidates %}
                     و
                 {% endif %}
-                {% if nominatedNumber %}
-                    {{ nominatedNumber }}
+                {% if candidates %}
+                    {{ candidates }}
                     نامزدی
                 {% endif %}
             </p>
         </div>
 
-        <div id="awards_movie_content">
-
+        <div id="content">
 {#            film fajr#}
-            {% if filmFajr %}
-                <table id="awards_movie_content_filmFajr"
-                       class="awards_movie_content_tables awards_movie_content_tables_header">
+            {% if simorgh_awarded or simorgh_diploma or simorgh_candidate %}
+                <table id="content_filmFajr"
+                       class="content_tables content_tables_header">
                     <tr>
-                        <td class="awards_movie_content_header_year">
+                        <td class="content_header_year">
                             <p>
                                 <a href="">
-                                    {{ filmFajr.year }}
+                                    {{ simorgh_date }}
                                 </a>
                             </p>
                         </td>
-                        <td class="awards_movie_content_header_name">
+                        <td class="content_header_name">
                             <p>
                                 جشنواره فیلم فجر
                             </p>
@@ -61,20 +66,20 @@
 
 
 {#                film fajr awarded#}
-                {% if filmFajr.awarded|length > 0 %}
-                    <table class="awards_movie_content_tables awards_movie_content_tables_content">
-                        {% for award in filmFajr.awarded %}
+                {% if simorgh_awarded|length > 0 %}
+                    <table class="content_tables content_tables_content">
+                        {% for award in simorgh_awarded %}
                             <tr>
-                                <td class="awards_movie_content_cellContent">
+                                <td class="content_cellContent">
                                     <p>
-                                        {{ award.name }}
+                                        {{ award.category }}
                                         <a href="">
-                                            {{ award.owner }}
+                                            {{ award.celebrity }}
                                         </a>
                                     </p>
                                 </td>
                                 {% if forloop.counter0 == 0 %}
-                                    <td class="awards_movie_content_cellHeader" rowspan="{{ filmFajr.awarded|length }}">
+                                    <td class="content_cellHeader" rowspan="{{ simorgh_awarded|length }}">
                                         <p>
                                             برنده سیمرغ بلورین
                                         </p>
@@ -88,20 +93,20 @@
 
 
 {#               film fajr diploma#}
-                {% if filmFajr.diploma|length > 0 %}
-                    <table class="awards_movie_content_tables awards_movie_content_tables_content">
-                        {% for diploma in filmFajr.diploma %}
+                {% if simorgh_diploma|length > 0 %}
+                    <table class="content_tables content_tables_content">
+                        {% for diploma in simorgh_diploma %}
                             <tr>
-                                <td class="awards_movie_content_cellContent">
+                                <td class="content_cellContent">
                                     <p>
-                                        {{ diploma.name }}
+                                        {{ diploma.category }}
                                         <a href="">
-                                            {{ diploma.owner }}
+                                            {{ diploma.celebrity }}
                                         </a>
                                     </p>
                                 </td>
                                 {% if forloop.counter0 == 0 %}
-                                    <td class="awards_movie_content_cellHeader" rowspan="{{ filmFajr.diploma|length }}">
+                                    <td class="content_cellHeader" rowspan="{{ simorgh_diploma|length }}">
                                         <p>
                                             دیپلم افتخار
                                         </p>
@@ -114,20 +119,20 @@
 
 
 {#                film fajr nominated#}
-                {% if filmFajr.nominated|length > 0 %}
-                    <table class="awards_movie_content_tables awards_movie_content_tables_content">
-                        {% for nominated in filmFajr.nominated %}
+                {% if simorgh_candidate|length > 0 %}
+                    <table class="content_tables content_tables_content">
+                        {% for candidate in simorgh_candidate %}
                             <tr>
-                                <td class="awards_movie_content_cellContent">
+                                <td class="content_cellContent">
                                     <p>
-                                        {{ nominated.name }}
+                                        {{ candidate.category }}
                                         <a href="">
-                                            {{ nominated.owner }}
+                                            {{ candidate.celebrity }}
                                         </a>
                                     </p>
                                 </td>
                                 {% if forloop.counter0 == 0 %}
-                                    <td class="awards_movie_content_cellHeader" rowspan="{{ filmFajr.nominated|length }}">
+                                    <td class="content_cellHeader" rowspan="{{ simorgh_candidate|length }}">
                                         <p>
                                             نامزد
                                         </p>
@@ -137,21 +142,20 @@
                         {% endfor %}
                     </table>
                 {% endif %}
-
             {% endif %}
 
 
-            {% if khaneCinema %}
-                <table class="awards_movie_content_tables awards_movie_content_tables_header">
+            {% if cinemaHome_awarded or cinemaHome_diploma or cinemaHome_candidate %}
+                <table class="content_tables content_tables_header">
                     <tr>
-                        <td class="awards_movie_content_header_year">
+                        <td class="content_header_year">
                             <p>
                                 <a href="">
-                                    {{ khaneCinema.year }}
+                                    {{ cinemaHome_date }}
                                 </a>
                             </p>
                         </td>
-                        <td class="awards_movie_content_header_name">
+                        <td class="content_header_name">
                             <p>
                                 جشن خانه سینما
                             </p>
@@ -161,20 +165,20 @@
 
 
 {#                khane cinema awarded#}
-                {% if khaneCinema.awarded|length > 0 %}
-                    <table class="awards_movie_content_tables awards_movie_content_tables_content">
-                        {% for award in khaneCinema.awarded %}
+                {% if cinemaHome_awarded|length > 0 %}
+                    <table class="content_tables content_tables_content">
+                        {% for award in cinemaHome_awarded %}
                             <tr>
-                                <td class="awards_movie_content_cellContent">
+                                <td class="content_cellContent">
                                     <p>
-                                        {{ award.name }}
+                                        {{ award.category }}
                                         <a href="">
-                                            {{ award.owner }}
+                                            {{ award.celebrity }}
                                         </a>
                                     </p>
                                 </td>
                                 {% if forloop.counter0 == 0 %}
-                                    <td class="awards_movie_content_cellHeader" rowspan="{{ khaneCinema.awarded|length }}">
+                                    <td class="content_cellHeader" rowspan="{{ cinemaHome_awarded|length }}">
                                         <p>
                                             برنده تندیس جشن خانه سینما
                                         </p>
@@ -186,20 +190,20 @@
                 {% endif %}
 
 {#                khane cinema diploma#}
-                {% if khaneCinema.diploma|length > 0 %}
-                    <table class="awards_movie_content_tables awards_movie_content_tables_content">
-                        {% for diploma in khaneCinema.diploma %}
+                {% if cinemaHome_diploma|length > 0 %}
+                    <table class="content_tables content_tables_content">
+                        {% for diploma in cinemaHome_diploma %}
                             <tr>
-                                <td class="awards_movie_content_cellContent">
+                                <td class="content_cellContent">
                                     <p>
-                                        {{ diploma.name }}
+                                        {{ diploma.category }}
                                         <a href="">
-                                            {{ diploma.owner }}
+                                            {{ diploma.celebrity }}
                                         </a>
                                     </p>
                                 </td>
                                 {% if forloop.counter0 == 0 %}
-                                    <td class="awards_movie_content_cellHeader" rowspan="{{ khaneCinema.diploma|length }}">
+                                    <td class="content_cellHeader" rowspan="{{ cinemaHome_diploma|length }}">
                                         <p>
                                             دیپلم افتخار
                                         </p>
@@ -213,20 +217,20 @@
 
 
 {#                khane cinema nominated#}
-                {% if khaneCinema.nominated|length > 0 %}
-                    <table class="awards_movie_content_tables awards_movie_content_tables_content">
-                        {% for nominated in khaneCinema.nominated %}
+                {% if cinemaHome_candidate|length > 0 %}
+                    <table class="content_tables content_tables_content">
+                        {% for candidate in cinemaHome_candidate %}
                             <tr>
-                                <td class="awards_movie_content_cellContent">
+                                <td class="content_cellContent">
                                     <p>
-                                        {{ nominated.name }}
+                                        {{ candidate.category }}
                                         <a href="">
-                                            {{ nominated.owner }}
+                                            {{ candidate.celebrity }}
                                         </a>
                                     </p>
                                 </td>
                                 {% if forloop.counter0 == 0 %}
-                                    <td class="awards_movie_content_cellHeader" rowspan="{{ khaneCinema.nominated|length }}">
+                                    <td class="content_cellHeader" rowspan="{{ cinemaHome_candidate|length }}">
                                         <p>
                                             نامزد
                                         </p>

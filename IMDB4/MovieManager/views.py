@@ -30,11 +30,7 @@ def show_movie(request, id):
     user_review = list(User_Review.objects.filter(movie=movie, show_it=True).order_by('date'))
     posts = list(Post.objects.filter(movie=movie, show_it=True).order_by('date')[:50])
 
-    # test
-    for person in kargardan:
-        print('person: '+person.name)
-    for image in images:
-        print('image: '+image.image.url)
+
 
     context = {'movie':movie, 'reviewer_review_count':reviewer_review_count, 'user_review_count':user_review_count,
                'award_simorgh_count':award_simorgh_count, 'total_award_count':total_award_count
@@ -56,29 +52,40 @@ def top_100_movies(request):
 
 
 
-def show_award_movie(request, movie_name):
-    movie = Movie.objects.get(name=movie_name)
+def show_award_movie(request, id):
+    movie = Movie.objects.get(id=id)
     simorgh_awarded = list(Award.objects.filter(movie=movie, festival=0, candidate_type=0))
     simorgh_candidate = list(Award.objects.filter(movie=movie, festival=0, candidate_type=1))
     simorgh_diploma = list(Award.objects.filter(movie=movie, festival=0, candidate_type=2 ))
     cinemaHome_awarded = list(Award.objects.filter(movie=movie, festival=1, candidate_type=0))
     cinemaHome_candidate = list(Award.objects.filter(movie=movie, festival=1, candidate_type=1))
     cinemaHome_diploma = list(Award.objects.filter(movie=movie, festival=1, candidate_type=2 ))
-    simorgh_date = simorgh_awarded[0].date.year
-    cinemaHome_date = cinemaHome_awarded[0].date.year
+    simorgh_date = None
+    if len(simorgh_awarded) is not 0:
+        simorgh_date = simorgh_awarded[0].date.year
+    cinemaHome_date = None
+    if len(cinemaHome_awarded) is not 0:
+        cinemaHome_date = cinemaHome_awarded[0].date.year
     candidates = len(simorgh_candidate)+len(cinemaHome_candidate)
     awarded = len(simorgh_awarded)+len(cinemaHome_awarded)
-
     context = {'movie':movie, 'awarded':awarded, 'candidates':candidates, 'simorgh_awarded':simorgh_awarded,
                'simorgh_candidate':simorgh_candidate, 'simorgh_diploma':simorgh_diploma, 'cinemaHome_awarded':cinemaHome_awarded,
                 'cinemaHome_candidate':cinemaHome_candidate, 'cinemaHome_diploma':cinemaHome_diploma, 'simorgh_date':simorgh_date,
                 'cinemaHome_date':cinemaHome_date}
+    return render(request, 'MovieManager/awards_movie.html', context)
+
+
+def get_100_best_movies(request):
+    movies = list(Movie.objects.order_by('-rate')[:100])
+    context = {'movies':movies}
+    return render(request, 'MovieManager/top100.html', context)
+
+
 
 def search_festival_awards(request):
     pass
 
 def search_festivals_awards_json(request, date, festival_type):
-
     pass
 
 

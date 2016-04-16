@@ -1,0 +1,95 @@
+
+
+#info img{
+    float: right;
+    width: 2cm;
+    height: 3cm;
+}
+
+
+#info_name{
+    margin-right: 0.2cm;
+    float: right;
+    width: 80%;
+    /*font-size: 25px;*/
+    /*background-color: #449d44;*/
+}
+
+#info_name a{
+    font-size: 25px;
+}
+
+#info_awards{
+    float: right;
+    font-size: 25px;
+    /*background-color: #31b0d5;*/
+    margin-right: 0.2cm;
+    width: 80%;
+}
+
+#info_awardsNumber{
+    float: right;
+    margin-right: 0.2cm;
+}
+
+.content_tables{
+    float: right;
+    clear: both;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.content_header_name{
+    background-color: #d1282d;
+    color: #ffffff;
+    border: none;
+    font-size: 18px;
+}
+
+.content_header_name p{
+    margin-right: 0.2cm;
+}
+
+.content_header_year{
+    background-color: #eeeeee;
+    width: 1.5cm;
+    text-align: center;
+    font-size: 18px;
+}
+
+.content_tables_header{
+    margin-top: 0.5cm;
+}
+
+.content_tables_content td{
+    border: 1px solid #aaaaaa;
+}
+
+.content_cellHeader{
+    text-align: center;
+    justify-content: space-around;
+    width: 5cm;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.content_cellContent p{
+    margin-right: 0.2cm;
+    font-size: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

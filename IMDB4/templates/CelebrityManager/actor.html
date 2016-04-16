@@ -16,10 +16,10 @@
 
     {% block content %}
         <div id="info" class="border_bottom_div padding_top padding_right">
-            <div id="info_mainImage" class="img_wrapper">
-                <img src="{{ celebrity.picture.url }}" id="info_mainImage">
+            <div class="info_mainImage img_wrapper">
+                <img src="{{ celebrity.picture.url }}" class="info_mainImage">
             </div>
-            <div id="info_top" class="border_bottom_div">
+            <div id="info_top" class="border_bottom_div padding_right">
                 <div id="info_top_name">
                     <p>
                         <dum>
@@ -34,9 +34,8 @@
                         {{ actor.point }}
                     </p>
                 </div>
-
             </div>
-            <div id="info_biography">
+            <div id="info_biography" class="padding_right">
                 <p>
                     {{ celebrity.biography }}
                     <br/>
@@ -48,7 +47,7 @@
                 </p>
             </div>
 
-            <div id="info_birthday">
+            <div id="info_birthday" class="padding_right">
                 <p>
                     تولد:
                     {{ celebrity.birthday }}
@@ -62,17 +61,14 @@
             </a>
 
             <div id="actor_info_images_div">
-
                 {% for item in images|slice:":3" %}
                     <div class="info_images img_wrapper">
                         <img src="{{ item.image.url }}" class="info_images">
                     </div>
                 {% endfor %}
-
                 <div class="info_images img_wrapper">
                     <img src="{{ videos.0.image.url }}" class="info_images">
                 </div>
-
                 <a href="" id="info_images_seeAll">
                     <p>
                         همه عکس ها و ویدیوها>>
@@ -81,38 +77,40 @@
             </div>
         </div>
 
-        <div id="prizes" class="border_bottom_div padding_right padding_left">
-            <div>
-                <p>
-                    {% if simorgh_award_count > 0 %}
-                    <dum>
-                        برنده
-                        {{ simorgh_award_count|IntegerToPersian }}
-                        سیمرغ بلورین
-                    </dum>
-                    {% endif %}
-                    {% if award_count > 0 %}
-                        {{ award_count|IntegerToPersian }}
-                        جایزه
-                    {% endif %}
-                    {% if award_count > 0 and candidate_count > 0 %}
-                         و
-                    {% endif %}
-                    {% if candidate_count > 0 %}
-                        {{ candidate_count|IntegerToPersian }}
-                        نامزدی
-                    {% endif %}
-                    {% if award_count > 0 or candidate_count > 0 %}
-                        دیگر
-                    {% endif %}
+        {% if simorgh_award_count or award_count or candidate_count %}
+            <div id="prizes" class="border_bottom_div padding_right padding_left">
+                <div>
+                    <p>
+                        {% if simorgh_award_count > 0 %}
+                        <dum>
+                            برنده
+                            {{ simorgh_award_count|IntegerToPersian }}
+                            سیمرغ بلورین
+                        </dum>
+                        {% endif %}
+                        {% if award_count > 0 %}
+                            {{ award_count|IntegerToPersian }}
+                            جایزه
+                        {% endif %}
+                        {% if award_count > 0 and candidate_count > 0 %}
+                             و
+                        {% endif %}
+                        {% if candidate_count > 0 %}
+                            {{ candidate_count|IntegerToPersian }}
+                            نامزدی
+                        {% endif %}
+                        {% if award_count > 0 or candidate_count > 0 %}
+                            دیگر
+                        {% endif %}
 
 
-                    <a href="">
-                        مشاهده همه جوایز>>
-                    </a>
-                </p>
+                        <a href="">
+                            مشاهده همه جوایز>>
+                        </a>
+                    </p>
+                </div>
             </div>
-        </div>
+        {% endif %}
 
 
         <div id="proposedWorks" class="border_bottom_div padding_top padding_right">

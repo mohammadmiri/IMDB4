@@ -12,7 +12,7 @@ def show_celebrity(request, id):
     avamels = {}
     celebrity = Celebrity.objects.get(id=id)
     images = list(celebrity.images.all())
-    videos = list(Video_Celebrity.objects.filter(celebrity=celebrity))
+    videos = list(celebrity.video_celebrity_set.all())
     # get count of awards
     simorgh_award_count = Award.get_festival_award_count(cele=celebrity, festival=0, candidate_type=0)
     award_count = Award.get_award_count(cele=celebrity, candidate_type=0)
@@ -46,6 +46,7 @@ def show_celebrity(request, id):
     # getting posts of users
     posts = PostForCelebrity.objects.filter()
 
+    #adding them to one dictionary
     avamels['movie_kargardan']=movie_kargardan
     avamels['movie_nevisande']=movie_nevisande
     avamels['movie_tahiey_konande']=movie_tahiey_konande
@@ -68,20 +69,6 @@ def show_celebrity(request, id):
     avamels['movie_moshaver_honari']=movie_moshaver_honari
     avamels['movie_moshaver']=movie_moshaver
 
-
-    # test
-    for image in images:
-        print("image: "+str(image.image.url))
-    print('simorgh_award_count: '+str(simorgh_award_count))
-    print('award_count: '+str(award_count))
-    print('candidate_type: '+str(candidate_count))
-    for movie in most_rated_product:
-        print('movie: '+movie.name)
-
-    for role,movies in avamels.items():
-        for movie in movies:
-                print('movie: '+movie.name )
-
     context = {'celebrity':celebrity,'images':images, 'movie_actor':movie_actor, 'simorgh_award_count':simorgh_award_count,
                'award_count':award_count, 'candidate_count':candidate_count, 'most_rated_product':most_rated_product,
                'movie_kargardan':movie_kargardan, 'movie_nevisande':movie_nevisande, 'movie_tahiey_konande':movie_tahiey_konande,
@@ -100,6 +87,21 @@ def show_celebrity(request, id):
 
 
 
+
+def get_awards_celebrity(request, id):
+    celebrity = Celebrity.objects.get(id=id)
+    simorgh_awarded = list(Award.objects.filter(celebrity=celebrity, festival=0, candidate_type=0))
+    simorgh_candidate = list(Award.objects.filter(celebrity=celebrity, festival=0, candidate_type=1))
+    simorgh_diploma = list(Award.objects.filter(celebrity=celebrity, festival=0, candidate_type=2 ))
+    cinemaHome_awarded = list(Award.objects.filter(celebrity=celebrity, festival=1, candidate_type=0))
+    cinemaHome_candidate = list(Award.objects.filter(celebrity=celebrity, festival=1, candidate_type=1))
+    cinemaHome_diploma = list(Award.objects.filter(celebrity=celebrity, festival=1, candidate_type=2 ))
+    candidates = len(simorgh_candidate)+len(cinemaHome_candidate)
+    awarded = len(simorgh_awarded)+len(cinemaHome_awarded)
+    context = {'celebrity':celebrity, 'awarded':awarded, 'candidates':candidates, 'simorgh_awarded':simorgh_awarded,
+               'simorgh_candidate':simorgh_candidate, 'simorgh_diploma':simorgh_diploma, 'cinemaHome_awarded':cinemaHome_awarded,
+                'cinemaHome_candidate':cinemaHome_candidate, 'cinemaHome_diploma':cinemaHome_diploma, }
+    return render(request, 'CelebrityManager/awards_actor.html', context)
 
 
 
