@@ -1,9 +1,11 @@
 from .models import UserIMDB, WatchList
-from MovieManager.models import RateUserForMovie
+from MovieManager.models import RateUserForMovie, Movie
+from CelebrityManager.models import Celebrity
 
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 
 
 
@@ -38,15 +40,22 @@ def signup_page(request):
 
 
 
+def show_suggestion_search_film(request, value):
+    films = list(Movie.objects.filter(name__startswith=value).values('name')[0:3])
+    return JsonResponse({'films':films})
+
+
+
+def show_suggestion_search_celebrity(request, value):
+    celebrities = list(Celebrity.objects.filter(name__startswith=value).values('name')[0:3])
+    return JsonResponse({'celebrities':celebrities})
+
 
 
 def view_profile(request, username):
-    print('before all')
     user = User.objects.get(username=username)
-    print('after getting user')
     userIMDB = UserIMDB.objects.get(user=user)
     picture_url = userIMDB.get_picture()
-    print('after getting picture url: '+picture_url)
     watchList = list(WatchList.objects.filter(user=userIMDB))
     visited_movie = userIMDB.viewed_movie.all
     rated_movie = list(RateUserForMovie.objects.filter(user=user))

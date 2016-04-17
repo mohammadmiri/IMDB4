@@ -32,7 +32,11 @@ class UserIMDBForms(forms.Form):
     dram = forms.BooleanField()
     military = forms.BooleanField()
     social = forms.BooleanField()
-
+    # end of favourite genres
+    favourite_movies = forms.TextInput()
+    favourite_actors = forms.TextInput()
+    favourite_directors = forms.TextInput()
+    about_me = forms.Textarea()
 
 
 

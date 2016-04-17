@@ -87,8 +87,6 @@ class FavouriteCritism(models.Model):
 
 
 
-
-
 class Gallery(models.Model):
     name = models.CharField(max_length=100, verbose_name='نام', null=True, blank=True)
     GALLERY_NUMBER_CHOICE = (

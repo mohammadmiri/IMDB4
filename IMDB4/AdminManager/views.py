@@ -41,13 +41,8 @@ def HomePage(request):
 
 
 def get_search_result(request, value):
-    print('in get_search_result: '+value)
-    # movies = list(Movie.objects.filter(name__startswith=value))
     movie_serialize = serializers.serialize('json', Movie.objects.filter(name__startswith=value))
-    # for movie in movies:
-    #     print("movie: "+str(movie))
     celebrity_serialize = serializers.serialize('json',Celebrity.objects.filter(name__startswith=value))
-    print('after all')
     return JsonResponse({'movies':movie_serialize, 'celebrities':celebrity_serialize})
 
 
@@ -64,7 +59,6 @@ def Polling(request, poll_id):
     context = {'poll':poll, 'pollOptions':poll.polloption_set.all(), 'is_voted':is_voted ,
                 'total_vote':total_vote, 'result_polling':result_polling}
     return render(request, 'AdminManager/polling.html', context)
-
 
 
 def PollArchive(request):
@@ -96,8 +90,27 @@ def show_gallery(request, numOfGallery):
 
 
 
+def show_News_list(request, category):
+    news = list(News.objects.filter(category=category).order_by('dateUpload')[0:5])
+    context = {'news':news}
+    return render(request, 'AdminManager/news.html', context)
+
+
+
+def show_news_ajax(request, category, page):
+    news_number = (page-1)*5
+    news = News.objects.filter(category=category).order_by('dateUpload')[news_number:news_number+5]
+    return JsonResponse({'news':news})
+
+
+
 def show_News(request, id):
     news = News.objects.filter(id=id)
-    time_uploaded_ago = datetime.datetime.now() - news.dateUpload
-    context = {'news':news, 'time_uploaded_ago':time_uploaded_ago}
+    context = {'news':news}
     pass
+
+
+
+
+
+
