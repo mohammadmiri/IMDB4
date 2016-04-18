@@ -26,6 +26,11 @@
             <img src="{{ Teasers.0.image.url }}"  id="movies_movie_0">
             <img src="{{ Teasers.1.image.url }}"  id="movies_movie_1">
             <img src="{{ Teasers.2.image.url }}"  id="movies_movie_2">
+            <a href="">
+                <p>
+                    مشاهده همه فیلم ها»
+                </p>
+            </a>
         </div>
     </div>
 
@@ -33,30 +38,109 @@
 
     <div class="border_bottom_div overflow_auto">
         <div id="last_news">
-            <p id="last_title">
-                آخرین اخبار
-            </p>
+            <div id="last_title">
+                <p id="last_title">
+                    آخرین اخبار
+                </p>
+            </div>
             <div id="last_buttons" >
                 <ul class="nav nav-pills">
-                    {% for news_item in news %}
-                        {% if forloop.counter0 == 0 %}
-                            <li class="active" id="last_buttons_{{ forloop.counter0 }}">
-                                <a data-toggle="tab" href="#nav_articles_{{ forloop.counter0 }}">
-                                    {{ news_item.button_label }}
-                                </a>
-                            </li>
-                        {% else %}
-                            <img src="/static/icons/index/line2.png"
-                                 id="last_buttons_line_{{ forloop.counter0 }}">
-                            <li id="last_buttons_{{ forloop.counter0 }}" >
-                                <a data-toggle="tab" href="#nav_articles_{{ forloop.counter0 }}">
-                                    {{ news_item.button_label }}
-                                </a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
+                    <li class="active" id="last_buttons_0">
+                        <a data-toggle="tab" href="#nav_articles_0">
+                            <p>
+                                سینمای ایران
+                            </p>
+                        </a>
+                    </li>
+                    <img src="{% static 'icons/index/line2.png' %}" id="last_buttons_line_1" class="last_buttons_class">
+                    <li id="last_buttons_1">
+                        <a data-toggle="tab" href="#nav_articles_1">
+                            <p>
+                            سینمای جهان
+                            </p>
+                        </a>
+                    </li>
+                    <img src="{% static 'icons/index/line2.png' %}" id="last_buttons_line_2" class="last_buttons_class">
+                    <li id="last_buttons_2">
+                        <a data-toggle="tab" href="#nav_articles_2">
+                            <p>
+                                تلویزیون
+                            </p>
+                        </a>
+                    </li>
+                    <img src="{% static 'icons/index/line2.png' %}" id="last_buttons_line_3" class="last_buttons_class">
+                    <li id="last_buttons_3">
+                        <a data-toggle="tab" href="#nav_articles_3">
+                            <p>
+                                هنرمندان
+                            </p>
+                        </a>
+                    </li>
+
+
+{#                    {% for news_item in news %}#}
+{#                        {% if forloop.counter0 == 0 %}#}
+{#                            <li class="active" id="last_buttons_{{ forloop.counter0 }}">#}
+{#                                <a data-toggle="tab" href="#nav_articles_{{ forloop.counter0 }}">#}
+{#                                    {{ news_item.button_label }}#}
+{#                                </a>#}
+{#                            </li>#}
+{#                        {% else %}#}
+{#                            <img src="/static/icons/index/line2.png"#}
+{#                                 id="last_buttons_line_{{ forloop.counter0 }}">#}
+{#                            <li id="last_buttons_{{ forloop.counter0 }}" >#}
+{#                                <a data-toggle="tab" href="#nav_articles_{{ forloop.counter0 }}">#}
+{#                                    {{ news_item.button_label }}#}
+{#                                </a>#}
+{#                            </li>#}
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
                 </ul>
             </div>
+
+
+            <div id="nav_articles_0" class="last_news_div tab-pane fade nav_articles">
+                <div class="nav_articles_main">
+                    <img src="{{ News_Iran_Cinema }}" class="nav_images">
+                    <div class="nav_main_news">
+                        <a href="#">
+                            <p>
+                                {{ news_item.main_news_title }}
+                            </p>
+                        </a>
+                        <p>
+                            {{ news_item.main_news_article }}
+                            <a href="#">
+                                ادامه مطلب
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="nav_titles">
+                    {% for item in news_item.item %}
+                        {% if forloop.counter0 < 2 %}
+                            <div class="nav_title_0">
+                                <a href="#">
+                                    <p>
+                                        {{ item.news_title }}
+                                    </p>
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="nav_title_1">
+                                <a href="#">
+                                    <p>
+                                        {{ item.news_title }}
+                                    </p>
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+
 
 
             <div class="tab-content" id="nav_content">
@@ -108,30 +192,26 @@
 
 
 
-    <div class="border_bottom_div overflow_auto">
-        <div id="last_images">
-            <p id="" class="section_title">
+    <div id="last_images" class="border_bottom_div padding_right padding_top padding_left">
+        <div id="last_images_title_div">
+            <p class="section_title">
                 آخرین عکس ها
             </p>
+        </div>
+        <a href="">
+            <img src="{{ gallery1.0.image.url }}" id="last_images_0" class="last_images_class">
+        </a>
+        <div id="last_images_1_2">
             <a href="">
-                <img src="/media/images/index/LastImages/000.jpg"
-                        id="last_images_0">
+                <img src="{{ gallery2.0.image.url }}" id="last_images_1" class="last_images_class">
             </a>
-            <div id="last_images_1_2">
-                <a href="">
-                    <img src="/media/images/index/LastImages/222.jpg"
-                            id="last_images_1">
-                </a>
-                <a href="">
-                    <img src="/media/images/index/LastImages/333.jpg"
-                            id="last_images_2">
-                </a>
-            </div>
             <a href="">
-                <img src="/media/images/index/LastImages/111.jpg"
-                        id="last_images_3">
+                <img src="{{ gallery3.0.image.url }}" id="last_images_2" class="last_images_class">
             </a>
         </div>
+        <a href="">
+            <img src="{{ gallery4.0.image.url }}" id="last_images_3" class="last_images_class">
+        </a>
     </div>
 
 
@@ -140,9 +220,9 @@
         <p id="birthday_title">
             متولدین امروز
         </p>
-        <img src="{{ BASE_URL }}/media/images/index/Birthday/2.jpg" class="birthday_images">
-        <img src="{{ BASE_URL }}/media/images/index/Birthday/1.jpg" class="birthday_images">
-        <img src="{{ BASE_URL }}/media/images/index/Birthday/0.jpg" class="birthday_images">
+        {% for item in Celebrity|slice:':3' %}
+            <img src="{{ item.picture.url }}" class="birthday_images">
+        {% endfor %}
     </div>
 
 
@@ -158,8 +238,8 @@
             </a>
         </p>
 
-        {% for address in poll_images %}
-            <img src="{{ address }}" class="poll_images">
+        {% for item in PollOptions %}
+            <img src="{{ item.image.url }}" class="poll_images">
         {% endfor %}
     </div>
 

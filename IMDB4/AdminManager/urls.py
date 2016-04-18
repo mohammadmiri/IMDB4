@@ -12,6 +12,8 @@ urlpatterns = [
     url(r'^base/search_suggestion/(?P<value>.*)', views.get_search_result, name='get_result_base'),
     url(r'^news_list/(?P<category>.+)/$', views.show_News_list, name='show_news_list'),
 
+
+    url('r^test/$',views.test,name='test'),
     url(r'^test_filter/$', views.test_filter, name='test_filter'),
     ]
 

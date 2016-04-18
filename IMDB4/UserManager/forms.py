@@ -1,6 +1,10 @@
 from .models import UserIMDB
+from MovieManager.models import Genre
 
+from django.contrib.auth.models import User
 from django import forms
+
+import datetime
 
 class UserIMDBForms(forms.Form):
 
@@ -38,6 +42,37 @@ class UserIMDBForms(forms.Form):
     favourite_directors = forms.TextInput()
     about_me = forms.Textarea()
 
+    def save(self):
+        user = UserIMDB.objects.create()
+        user.username = self.username
+        user.password = self.password
+        user.email = self.email
+        user.birthday = datetime.date(year=self.birthday_year, month=self.birthday_month, day=self.birthday_day)
+        user.profession = self.profession
+        self.add_favourite_genre(self.action, 'action', user)
+        self.add_favourite_genre(self.animation, 'animation', user)
+        self.add_favourite_genre(self.biography, 'biography', user)
+        self.add_favourite_genre(self.comedy, 'comedy', user)
+        self.add_favourite_genre(self.romantic, 'romantic', user)
+        self.add_favourite_genre(self.science_fiction, 'science_fiction', user)
+        self.add_favourite_genre(self.short, 'short', user)
+        self.add_favourite_genre(self.trailer, 'trailer', user)
+        self.add_favourite_genre(self.fantasy, 'fantasy', user)
+        self.add_favourite_genre(self.historical, 'historical', user)
+        self.add_favourite_genre(self.horror, 'horror', user)
+        self.add_favourite_genre(self.musical, 'musical', user)
+        self.add_favourite_genre(self.criminal, 'criminal', user)
+        self.add_favourite_genre(self.documentary, 'documentary', user)
+        self.add_favourite_genre(self.dram, 'dram', user)
+        self.add_favourite_genre(self.military, 'military', user)
+        self.add_favourite_genre(self.social, 'social', user)
+
+
+
+    def add_favourite_genre(self, genre:bool, name:str, user:UserIMDB):
+        if genre is True:
+            genre = Genre.objects.get(name = name)
+            user.favouriteGenre.add(genre)
 
 
 

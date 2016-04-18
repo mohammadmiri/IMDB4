@@ -1,0 +1,51 @@
+
+#title{
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.item{
+    overflow: auto;
+}
+
+.item img{
+    float: right;
+    margin: 0.1cm 0.3cm 0.3cm 0.3cm;
+    width: 4cm;
+    height: 3cm;
+}
+
+.info{
+    color: #aaaaaa;
+    font-size: 10px;
+}
+
+.info a{
+    font-size: 16px;
+}
+
+.pageNumbers{
+    float: right;
+    position: relative;
+    left: -35%;
+    margin: 0.5cm 0.05cm 0 0.05cm;
+    width: 0.6cm;
+    height: 0.6cm;
+    background-color: #aaaaaa;
+    color: #ffffff;
+    clear: none;
+    text-align: center;
+    border-radius: 0.5cm;
+}
+
+.pageIndex{
+    background-color: #d1282d;
+}
+
+.content{
+    font-size: 12px;
+}
+
+
+
+

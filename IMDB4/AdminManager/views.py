@@ -116,3 +116,26 @@ def show_News(request, id):
 def test_filter(request):
     context = {'date':datetime.date.today()}
     return render(request, 'test.html', context)
+
+
+
+#test function.
+def test(request):
+    celebrity=Celebrity.objects.get(id=2)
+    context={'celebrity':celebrity}
+    return render(request,'Test/test.html',context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

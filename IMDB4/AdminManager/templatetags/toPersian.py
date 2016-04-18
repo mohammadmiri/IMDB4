@@ -104,4 +104,38 @@ def roleToPersian(role):
 
 
 
-
+def GenreToPersian(genre:str):
+    if genre == 'action':
+        return 'حادثه ای'
+    if genre == 'animation':
+        return 'انیمیشن'
+    if genre == 'biography':
+        return 'بیوگرافی'
+    if genre == 'comedy':
+        return 'کمدی'
+    if genre == 'romantic':
+        return 'عاشقانه'
+    if genre == 'science_fiction':
+        return 'علمی تخیلی'
+    if genre == 'short':
+        return 'کوتاه'
+    if genre == 'trailer':
+        return 'تریلر'
+    if genre == 'fantasy':
+        return 'فانتزی'
+    if genre == 'historical':
+        return 'تاریخی'
+    if genre == 'horror':
+        return 'ترسناک'
+    if genre == 'musical':
+        return 'موزیکال'
+    if genre == 'criminal':
+        return 'جنایی'
+    if genre == 'documentary':
+        return 'مستند'
+    if genre == 'dram':
+        return 'درام'
+    if genre == 'military':
+        return 'جنگی'
+    if genre == 'social':
+        return 'اجتماعی'
