@@ -92,7 +92,7 @@ def show_gallery(request, numOfGallery):
 
 def show_News_list(request, category):
     news = list(News.objects.filter(category=category).order_by('dateUpload')[0:5])
-    context = {'news':news}
+    context = {'news':news, 'category':category, 'page_number':1}
     return render(request, 'AdminManager/news.html', context)
 
 
@@ -112,5 +112,7 @@ def show_News(request, id):
 
 
 
-
-
+# this funtion is just used to test some filter and should be remove later
+def test_filter(request):
+    context = {'date':datetime.date.today()}
+    return render(request, 'test.html', context)

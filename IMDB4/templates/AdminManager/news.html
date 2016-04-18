@@ -1,5 +1,5 @@
-{% extends 'base.html' %}
-
+{% extends 'base/base.html' %}
+{% load DateFilters %}
 
 <!DOCTYPE html>
 <html>
@@ -13,23 +13,23 @@
 
     <div id="news_title" class="padding_left padding_right padding_top">
         <p>
-            {{ title }}
+            {{ category }}
         </p>
     </div>
 
     {% for item in news %}
         <div class="news_item border_bottom_div padding_right padding_left padding_top">
-            <img src="{{ item.imageUrl }}">
+            <img src="{{ item.image.url }}">
             <p class="news_info">
                 <a href="">
                     {{ item.title }}
                 </a>
-                {{ item.liveTime }}
+                {{ item.dateUpload|get_diff_date }}
                  قبل/
                 {{ item.source }}
             </p>
             <p class="news_content">
-                {{ item.content }}
+                {{ item.subText }}
                 <a href="">
                     ادامه مطلب»
                 </a>
@@ -42,13 +42,13 @@
         {% if forloop.counter0 == pageIndex  %}
             <button class="news_pageNumbers news_pageIndex">
                 <p>
-                    {{ number }}
+                    {{ page_number }}
                 </p>
             </button>
         {% else %}
             <button class="news_pageNumbers">
                 <p>
-                    {{ number }}
+                    {{ page_number }}
                 </p>
             </button>
         {% endif %}

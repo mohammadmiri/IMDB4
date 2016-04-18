@@ -19,6 +19,18 @@ def IntegerToPersian(number):
     return persian_number
 
 
+
+@register.filter
+def FloatToPersian(number):
+    if (type(number) is int):
+        return IntegerToPersian(number)
+    numbers = str(number).split('.')
+    integer_number = IntegerToPersian(int(numbers[0]))
+    float_number = IntegerToPersian(int(numbers[1]))
+    return integer_number+'.'+float_number
+
+
+
 def toPersianDigit(digit):
     if digit==1:
         return '۱'
