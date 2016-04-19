@@ -1,4 +1,6 @@
 {% extends 'base/base.html' %}
+{% load DateFilters %}
+{% load toPersian %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -23,9 +25,45 @@
 
     <div class="border_bottom_div overflow_auto">
         <div id="first_films">
-            <img src="{{ Teasers.0.image.url }}"  id="movies_movie_0">
-            <img src="{{ Teasers.1.image.url }}"  id="movies_movie_1">
-            <img src="{{ Teasers.2.image.url }}"  id="movies_movie_2">
+            <div id="movies_movie_0" class="movie_image_info_wrapper">
+                <img src="{{ Teasers.0.image.url }}">
+                <button type="button" class="play_movie" id="play_movie_0">
+                    <img src="{% static 'icons/play.png' %}">
+                </button>
+                <div class="movie_image_info">
+                    <p>
+                        {{ Teasers.0.movie.name }}
+                    </br>
+                        hidden
+                    </p>
+                </div>
+            </div>
+            <div id="movies_movie_1" class="movie_image_info_wrapper">
+                <img src="{{ Teasers.1.image.url }}">
+                <button type="button" class="play_movie" id="play_movie_1">
+                    <img src="{% static 'icons/play.png' %}">
+                </button>
+                <div class="movie_image_info">
+                    <p>
+                        {{ Teasers.1.movie.name }}
+                        </br>
+                        manam
+                    </p>
+                </div>
+            </div>
+            <div id="movies_movie_2" class="movie_image_info_wrapper">
+                <img src="{{ Teasers.2.image.url }}">
+                <button type="button" class="play_movie" id="play_movie_2">
+                    <img src="{% static 'icons/play.png' %}">
+                </button>
+                <div class="movie_image_info">
+                    <p>
+                        {{ Teasers.2.movie.name }}
+                        </br>
+                        derakht
+                    </p>
+                </div>
+            </div>
             <a href="">
                 <p>
                     مشاهده همه فیلم ها»
@@ -36,7 +74,7 @@
 
 
 
-    <div class="border_bottom_div overflow_auto">
+    <div id="last_news_wrapper" class="border_bottom_div padding_right padding_left">
         <div id="last_news">
             <div id="last_title">
                 <p id="last_title">
@@ -52,7 +90,7 @@
                             </p>
                         </a>
                     </li>
-                    <img src="{% static 'icons/index/line2.png' %}" id="last_buttons_line_1" class="last_buttons_class">
+                    <img src="{% static 'icons/index/line2.png' %}" id="last_buttons_line_1" class="last_buttons_lines_class">
                     <li id="last_buttons_1">
                         <a data-toggle="tab" href="#nav_articles_1">
                             <p>
@@ -60,7 +98,7 @@
                             </p>
                         </a>
                     </li>
-                    <img src="{% static 'icons/index/line2.png' %}" id="last_buttons_line_2" class="last_buttons_class">
+                    <img src="{% static 'icons/index/line2.png' %}" id="last_buttons_line_2" class="last_buttons_lines_class">
                     <li id="last_buttons_2">
                         <a data-toggle="tab" href="#nav_articles_2">
                             <p>
@@ -68,7 +106,7 @@
                             </p>
                         </a>
                     </li>
-                    <img src="{% static 'icons/index/line2.png' %}" id="last_buttons_line_3" class="last_buttons_class">
+                    <img src="{% static 'icons/index/line2.png' %}" id="last_buttons_line_3" class="last_buttons_lines_class">
                     <li id="last_buttons_3">
                         <a data-toggle="tab" href="#nav_articles_3">
                             <p>
@@ -76,70 +114,266 @@
                             </p>
                         </a>
                     </li>
-
-
-{#                    {% for news_item in news %}#}
-{#                        {% if forloop.counter0 == 0 %}#}
-{#                            <li class="active" id="last_buttons_{{ forloop.counter0 }}">#}
-{#                                <a data-toggle="tab" href="#nav_articles_{{ forloop.counter0 }}">#}
-{#                                    {{ news_item.button_label }}#}
-{#                                </a>#}
-{#                            </li>#}
-{#                        {% else %}#}
-{#                            <img src="/static/icons/index/line2.png"#}
-{#                                 id="last_buttons_line_{{ forloop.counter0 }}">#}
-{#                            <li id="last_buttons_{{ forloop.counter0 }}" >#}
-{#                                <a data-toggle="tab" href="#nav_articles_{{ forloop.counter0 }}">#}
-{#                                    {{ news_item.button_label }}#}
-{#                                </a>#}
-{#                            </li>#}
-{#                        {% endif %}#}
-{#                    {% endfor %}#}
                 </ul>
             </div>
 
 
-            <div id="nav_articles_0" class="last_news_div tab-pane fade nav_articles">
-                <div class="nav_articles_main">
-                    <img src="{{ News_Iran_Cinema }}" class="nav_images">
-                    <div class="nav_main_news">
-                        <a href="#">
-                            <p>
-                                {{ news_item.main_news_title }}
-                            </p>
-                        </a>
-                        <p>
-                            {{ news_item.main_news_article }}
-                            <a href="#">
-                                ادامه مطلب
-                            </a>
-                        </p>
+            <div class="tab-content">
+                <div id="nav_articles_0" class="last_news_div tab-pane fade nav_articles">
+                    {% if News_Iran_Cinema %}
+                        <div class="nav_articles_main">
+                            <img src="{{ News_Iran_Cinema.0.image.url }}" class="nav_images">
+                            <div class="nav_main_news">
+                                <p class="nav_main_news_title">
+                                    <a href="">
+                                        {{ News_Iran_Cinema.0.title }}
+                                    </a>
+                                    <dum>
+                                        {{ News_Iran_Cinema.0.dateUpload|get_diff_date }}
+                                        قبل/
+                                        {{ News_Iran_Cinema.0.source }}
+                                    </dum>
+                                </p>
+                                <p class="nav_main_news_content">
+                                    {{ News_Iran_Cinema.0.text }}
+                                    <a href="#">
+                                        ادامه مطلب
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="nav_titles">
+                        <div class="nav_title_0">
+                            {% for item in News_Iran_Cinema %}
+                                {% if forloop.counter0 == 1 or forloop.counter0 == 2 %}
+                                    <p class="nav_main_news_title">
+                                        <a href="">
+                                            {{ item.title }}
+                                        </a>
+                                        <dum>
+                                            {{ item.dateUpload|get_diff_date }}
+                                            قبل/
+                                            {{ item.source }}
+                                        </dum>
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        <div class="nav_title_1">
+                            {% for item in News_Iran_Cinema %}
+                                {% if forloop.counter0 == 3 or forloop.counter0 == 4 %}
+                                    <p class="nav_main_news_title">
+                                        <a href="">
+                                            {{ item.title }}
+                                        </a>
+                                        <dum>
+                                            {{ item.dateUpload|get_diff_date }}
+                                            قبل/
+                                            {{ item.source }}
+                                        </dum>
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
 
-                <div class="nav_titles">
-                    {% for item in news_item.item %}
-                        {% if forloop.counter0 < 2 %}
-                            <div class="nav_title_0">
-                                <a href="#">
-                                    <p>
-                                        {{ item.news_title }}
-                                    </p>
-                                </a>
-                            </div>
-                        {% else %}
-                            <div class="nav_title_1">
-                                <a href="#">
-                                    <p>
-                                        {{ item.news_title }}
-                                    </p>
-                                </a>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
 
+
+                <div id="nav_articles_1" class="last_news_div tab-pane fade nav_articles">
+                    {% if News_World_Cinema %}
+                        <div class="nav_articles_main">
+                            <img src="{{ News_World_Cinema.0.image.url }}" class="nav_images">
+                            <div class="nav_main_news">
+                                <p class="nav_main_news_title">
+                                    <a href="">
+                                        {{ News_World_Cinema.0.title }}
+                                    </a>
+                                    <dum>
+                                        {{ News_World_Cinema.0.dateUpload|get_diff_date }}
+                                        قبل/
+                                        {{ News_World_Cinema.0.source }}
+                                    </dum>
+                                </p>
+                                <p class="nav_main_news_content">
+                                    {{ News_World_Cinema.0.text }}
+                                    <a href="#">
+                                        ادامه مطلب
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="nav_titles">
+                        <div class="nav_title_0">
+                            {% for item in News_World_Cinema %}
+                                {% if forloop.counter0 == 1 or forloop.counter0 == 2 %}
+                                    <p class="nav_main_news_title">
+                                        <a href="">
+                                            {{ item.title }}
+                                        </a>
+                                        <dum>
+                                            {{ item.dateUpload|get_diff_date }}
+                                            قبل/
+                                            {{ item.source }}
+                                        </dum>
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        <div class="nav_title_1">
+                            {% for item in News_World_Cinema %}
+                                {% if forloop.counter0 == 3 or forloop.counter0 == 4 %}
+                                    <p class="nav_main_news_title">
+                                        <a href="">
+                                            {{ item.title }}
+                                        </a>
+                                        <dum>
+                                            {{ item.dateUpload|get_diff_date }}
+                                            قبل/
+                                            {{ item.source }}
+                                        </dum>
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="nav_articles_1" class="last_news_div tab-pane fade nav_articles">
+                    {% if News_TV %}
+                        <div class="nav_articles_main">
+                            <img src="{{ News_TV.0.image.url }}" class="nav_images">
+                            <div class="nav_main_news">
+                                <p class="nav_main_news_title">
+                                    <a href="">
+                                        {{ News_TV.0.title }}
+                                    </a>
+                                    <dum>
+                                        {{ News_TV.0.dateUpload|get_diff_date }}
+                                        قبل/
+                                        {{ News_TV.0.source }}
+                                    </dum>
+                                </p>
+                                <p class="nav_main_news_content">
+                                    {{ News_TV.0.text }}
+                                    <a href="#">
+                                        ادامه مطلب
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="nav_titles">
+                        <div class="nav_title_0">
+                            {% for item in News_TV %}
+                                {% if forloop.counter0 == 1 or forloop.counter0 == 2 %}
+                                    <p class="nav_main_news_title">
+                                        <a href="">
+                                            {{ item.title }}
+                                        </a>
+                                        <dum>
+                                            {{ item.dateUpload|get_diff_date }}
+                                            قبل/
+                                            {{ item.source }}
+                                        </dum>
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        <div class="nav_title_1">
+                            {% for item in News_TV %}
+                                {% if forloop.counter0 == 3 or forloop.counter0 == 4 %}
+                                    <p class="nav_main_news_title">
+                                        <a href="">
+                                            {{ item.title }}
+                                        </a>
+                                        <dum>
+                                            {{ item.dateUpload|get_diff_date }}
+                                            قبل/
+                                            {{ item.source }}
+                                        </dum>
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div id="nav_articles_1" class="last_news_div tab-pane fade nav_articles">
+                    {% if News_honarmandan %}
+                        <div class="nav_articles_main">
+                            <img src="{{ News_honarmandan.0.image.url }}" class="nav_images">
+                            <div class="nav_main_news">
+                                <p class="nav_main_news_title">
+                                    <a href="">
+                                        {{ News_honarmandan.0.title }}
+                                    </a>
+                                    <dum>
+                                        {{ News_honarmandan.0.dateUpload|get_diff_date }}
+                                        قبل/
+                                        {{ News_honarmandan.0.source }}
+                                    </dum>
+                                </p>
+                                <p class="nav_main_news_content">
+                                    {{ News_honarmandan.0.text }}
+                                    <a href="#">
+                                        ادامه مطلب
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="nav_titles">
+                        <div class="nav_title_0">
+                            {% for item in News_honarmandan %}
+                                {% if forloop.counter0 == 1 or forloop.counter0 == 2 %}
+                                    <p class="nav_main_news_title">
+                                        <a href="">
+                                            {{ item.title }}
+                                        </a>
+                                        <dum>
+                                            {{ item.dateUpload|get_diff_date }}
+                                            قبل/
+                                            {{ item.source }}
+                                        </dum>
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        <div class="nav_title_1">
+                            {% for item in News_honarmandan %}
+                                {% if forloop.counter0 == 3 or forloop.counter0 == 4 %}
+                                    <p class="nav_main_news_title">
+                                        <a href="">
+                                            {{ item.title }}
+                                        </a>
+                                        <dum>
+                                            {{ item.dateUpload|get_diff_date }}
+                                            قبل/
+                                            {{ item.source }}
+                                        </dum>
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
 
 
 
@@ -252,6 +486,21 @@
 {% endblock %}
 
 {% block sideBar_relatedNews %}
+{% endblock %}
+
+{% block over_content %}
+    <div id="frame_movie_background_dark">
+    </div>
+    {% for teaser in Teasers %}
+        <div id="play_movie_{{ forloop.counter0 }}_div" class="frame_movie_wrapper">
+            <button type="button" class="exit_play_movie">
+                <img src="{% static 'icons/index/closeSliderButton.png' %}">
+            </button>
+            <div>
+                {{ teaser.video_link|safe }}
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
 
 

@@ -1,7 +1,6 @@
 from .models import  Poll,  News, poll_user_choose, PollOption
 from CelebrityManager.models import Celebrity
 from MovieManager.models import Movie_Celebrity_Image, Teaser, Movie
-
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
@@ -16,17 +15,15 @@ import datetime
 def HomePage(request):
     if request.method == "GET":
         teasers = list(Teaser.objects.order_by('date_uploaded')[:3])
-        for teaser in teasers:
-            print("teaser: "+str(teaser.image))
-        news_iran_cinema = list(News.objects.filter(category='iran_cinema').order_by('dateUpload')[:5])
-        news_world_cinema = list(News.objects.filter(category='world_cinema').order_by('dateUpload')[:5])
-        news_honarmandan = list(News.objects.filter(category='honarmandan').order_by('dateUpload')[:5])
-        news_TV = list(News.objects.filter(category='TV').order_by('dateUpload')[:5])
+        news_iran_cinema = list(News.objects.filter(category='iran_cinema').order_by('-dateUpload')[:5])
+        news_world_cinema = list(News.objects.filter(category='world_cinema').order_by('-dateUpload')[:5])
+        news_honarmandan = list(News.objects.filter(category='honarmandan').order_by('-dateUpload')[:5])
+        news_TV = list(News.objects.filter(category='TV').order_by('-dateUpload')[:5])
         poll = None
         polloptions = None
         try:
             poll = list(Poll.objects.all())[0]
-            polloptions = poll.polloption_set
+            polloptions = poll.polloption_set.all()
         except:
             pass
         celebrities = Celebrity.get_born_today()

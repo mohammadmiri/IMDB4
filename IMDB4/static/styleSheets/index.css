@@ -1,5 +1,4 @@
 
-
 #first_films{
     margin: 0.2cm 0.2cm 0.2cm 0;
     padding-bottom: 0.2cm;
@@ -24,6 +23,12 @@
     width: 375px;
     height: 120px;
     float: right;
+    overflow: hidden;
+}
+
+#movies_movie_0>img{
+    width:100%;
+    height:100%;
 }
 
 #movies_movie_1{
@@ -33,6 +38,12 @@
     width: 375px;
     height: 120px;
     float: right;
+    overflow: hidden;
+}
+
+#movies_movie_1>img{
+    width:100%;
+    height:100%;
 }
 
 #movies_movie_2{
@@ -43,6 +54,12 @@
     height: 250px;
     float: left;
     clear: left;
+    overflow: hidden;
+}
+
+#movies_movie_2>img{
+    width:100%;
+    height:100%;
 }
 
 /*last news*/
@@ -54,7 +71,12 @@
 
 .last_news_div{
     float: right;
+    height: 8cm;
 
+}
+
+#last_news_wrapper{
+    float: right;
 }
 
 #last_title{
@@ -93,8 +115,9 @@
     float: right;
 }
 
-.last_buttons_class{
+.last_buttons_lines_class{
     height: 1cm;
+    width: 1px;
 }
 
 #last_buttons_line_1{
@@ -117,7 +140,8 @@
     background-color: inherit;
 }
 
-.nav>li>a:hover{
+.nav>li>a:hover,
+.nav>li>a:focus{
     background-color:inherit;
 }
 
@@ -149,7 +173,18 @@
 }
 
 .nav_main_news{
-    width:500px;
+    width: 11cm;
+    float: right;
+    margin-right: 0.1cm;
+}
+
+.nav_main_news_title{
+    font-size: 15px;
+}
+
+.nav_main_news_title>dum{
+    font-size: 10px;
+    color: #aaaaaa;
 }
 
 .nav_images{
@@ -173,20 +208,23 @@
 .nav_articles_main{
     width: 600px;
     height: 150px;
-    /*background: #aaaaaa;*/
 }
 
 .nav_title_0{
     float: right;
     width: 300px;
     height: 20px;
-    clear: both;
+    clear: right;
+    /*background: #2aabd2;*/
 }
 
 .nav_title_1{
+    float: left;
     width: 300px;
     height: 20px;
     clear: left;
+    margin-top: 0.1cm;
+    /*background: #ffff00;*/
 }
 
 /*last images******************************/
@@ -241,7 +279,7 @@
 
 /*start birthday*/
 #birthday{
-    margin: 0.1cm 0cm 0.1cm 0cm;
+    margin: 0.1cm 0 0.1cm 0;
 }
 
 #birthday_title{
@@ -258,10 +296,52 @@
 
 .poll_images{
     width: 3cm;
+    height: 4cm;
     margin: 0 0 0 0.1cm;
 }
 
 #poll_description{
     margin: 0.5cm 0.5cm 0.5cm 0;
 }
+
+#frame_movie_background_dark{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width:100%;
+    height: 100%;
+    background: #000000;
+    opacity: 0.5;
+    display: none;
+    z-index: 10;
+}
+
+.frame_movie_wrapper{
+    position: fixed;
+    left: 10cm;
+    top: 5cm;
+    width: 17cm;
+    height: 10.5cm;
+    background: #aaaaaa;
+    display: none;
+    z-index: 11;
+}
+
+.frame_movie_wrapper>button{
+    float: right;
+    margin: 0.2cm;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 

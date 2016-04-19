@@ -5,20 +5,14 @@ $(document).ready(function(){
 
 
     $('#base_main_search_box').keyup(function () {
-        console.log('search box');
         var value=document.getElementById('base_main_search_box').value;
-        console.log(value);
         $.ajax({url:'http://localhost:8000/home/base/search_suggestion/'+value,success:function(result){
-            console.log('result:'+result);
-            console.log(result.movie_descriptions);
             //removing last search suggestion.
             var addSuggestion=$('#main_searchSuggestion');
             var children=addSuggestion.children();
             for(var i=0;i<children.length;i++){
                 addSuggestion.removeChild(children[i]);
             }
-            console.log(addSuggestion);
-            console.log('123456789');
             //adding new search suggestion.
             var array=result.movie_names;
             for(var i=0;i<array.length;i++){
@@ -55,8 +49,6 @@ $(document).ready(function(){
                         '</p>' +
                     '</div>' +
                 '</div>');
-                console.log(search_item);
-                console.log('final: '+addSuggestion.innerHTML);
             }
 
             array=result.celeb_names;
@@ -74,27 +66,20 @@ $(document).ready(function(){
                             result.movie_descriptions[i] +
                         '</p>' +
                     '</div>' +
-                '</div>')
+                '</div>');
 
                 var temp=addSuggestion.innerHTML;
                 temp+=search_item;
                 $(addSuggestion).html(temp);
             }
-
-
+            
             var more_div=document.createElement('div');
             $(more_div).html('<p id="base_searchSuggestion_more">' +
             'بیشتر' +
             '</p>');
-
-
-
-
-
-
+            
         }});
-
-
+        
     });
 
 
@@ -135,7 +120,6 @@ $(document).ready(function(){
 
 
     $('.signup_suggestion').on('click', '.signup_oneSuggestion', function(event) {
-        console.log(event.target.className);
         var string=event.target.innerHTML;
         var div=document.createElement("div");
         div.innerHTML='<p class="signup_element_text">'+string+'</p>';

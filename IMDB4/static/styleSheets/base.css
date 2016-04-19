@@ -53,12 +53,38 @@ p{
     -o-transform:scale(1.1); /* Opera */
 }
 
-.clear:after{
-    display: block;
-    content: ".";
-    visibility: hidden;
-    clear: both;
-    line-height: 0;
+.play_movie>img{
+    width: 1cm;
+    height: 1cm;
+    opacity:0.5;
+    position: absolute;
+    left: 40%;
+    top: 40%;
+    z-index: 1;
+}
+
+.play_movie:hover>img{
+    opacity: 1;
+}
+
+.movie_image_info{
+    background: rgba(200,200,200,0.5);
+    position: relative;
+    top: -1.1cm;
+    z-index: 1;
+    width:100%;
+    overflow: auto;
+    transform: translate3d(0px, 0px, 0px);
+    transition: transform .2s ease-in-out;
+}
+
+.movie_image_info>p{
+    color: white;
+    margin-right: 0.2cm;
+}
+
+.movie_image_info_wrapper:hover>.movie_image_info{
+    transform: translate3d(0px, -20px, 0px);
 }
 
 .color_blue_light{
@@ -153,7 +179,7 @@ body {
     width: 9.2cm;
     height: 1cm;
     border:solid;
-    border-width: 0px;
+    border-width: 0;
     autocomplete: off;
 }
 
@@ -327,7 +353,7 @@ body {
     width: 2.7cm;
     position: relative;
     background-color: #eeeeee;
-    z-index: 1;
+    z-index: 2;
 }
 
 .dropdown_menu>div>div>a{

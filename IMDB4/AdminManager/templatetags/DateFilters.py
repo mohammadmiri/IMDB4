@@ -47,19 +47,16 @@ def get_diff_date(date:datetime.datetime):
     if diff_day == 0:
         diff_hour = datetime.datetime.now().hour - date.hour
         if diff_hour < 0:
-            print('1: '+toPersian.IntegerToPersian(diff_hour+24))
-            return ' ساعت '+toPersian.IntegerToPersian(diff_hour+24)
+            return toPersian.IntegerToPersian(diff_hour+24)+' ساعت '
         if diff_hour > 0:
-            print('2: '+toPersian.IntegerToPersian(diff_hour))
-            return ' ساعت '+toPersian.IntegerToPersian(diff_hour)
+            return toPersian.IntegerToPersian(diff_hour)+' ساعت '
         if diff_hour == 0:
             diff_minute = datetime.datetime.now().minute - date.minute
             if diff_minute < 0:
-                return ' دقیقه '+toPersian.IntegerToPersian(diff_minute+60)
+                return toPersian.IntegerToPersian(diff_minute+60)+' دقیقه '
             else:
-                return 'دقیقه '+toPersian.IntegerToPersian(diff_minute)
+                return toPersian.IntegerToPersian(diff_minute)+'دقیقه '
     else:
-        print('3: '+toPersian.IntegerToPersian(diff_day)+' number '+str(type(diff_day)))
         return toPersian.IntegerToPersian(diff_day) + ' روز '
 
 

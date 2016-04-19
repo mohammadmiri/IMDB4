@@ -69,7 +69,7 @@
                 <div class="info_images img_wrapper">
                     <img src="{{ videos.0.image.url }}" class="info_images">
                 </div>
-                <a href="" id="info_images_seeAll">
+                <a id="info_images_seeAll">
                     <p>
                         همه عکس ها و ویدیوها>>
                     </p>
@@ -356,6 +356,57 @@
     {% block sideBar_mostVisited %}
     {% endblock %}
 
+
+{#    slider#}
+    {% block over_content %}
+
+        <div id="slider_background_dark">
+        </div>
+
+        <div id="slider_background">
+            <div id="slider_div">
+                <button type="button" class="slider_close">
+                    <img src="{% static 'icons/actor/closeSliderButton.png' %}">
+                </button>
+
+
+                <button id="slider_arrowUp" class="slider_arrowButtons ">
+                    <img src="{% static 'icons/actor/arrowUp.png' %}">
+                </button>
+
+
+                <div id="slider_images">
+                    <ul>
+                        {% for image in slider_images %}
+                                <li>
+                                    <button type="button" class="slider_images_button">
+                                        <img src="{{ image }}" class="slider_images_image"
+                                             id="{{ forloop.counter0 }}">
+                                    </button>
+                                </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <button id="slider_arrowDown" class="slider_arrowButtons">
+                    <img src="{% static 'icons/actor/arrowDown.png' %}">
+                </button>
+
+                <div id="slider_mainImage">
+
+                    <div>
+                        <img id="slider_mainImage_image">
+                    </div>
+                    <p class="slider_mainImage_topText"></p>
+                    <p class="slider_mainImage_downText"></p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    {% endblock %}
 
 
 

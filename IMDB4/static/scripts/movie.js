@@ -58,7 +58,7 @@ $(document).ready(function () {
         slider_background.css({display:'block'});
         var slider_background_dark=$('#slider_background_dark');
         slider_background_dark.css({display:'block'});
-        refresh_slider(0);
+        // refresh_slider(0);
     });
 
 
