@@ -10,34 +10,34 @@ import datetime
 
 class UserIMDBForms(forms.Form):
 
-    username = forms.CharField(max_length=50)
-    password = forms.CharField(max_length=30, widget=forms.PasswordInput)
-    re_password = forms.CharField(max_length=30, widget=forms.PasswordInput)
-    email = forms.EmailField()
-    first_name = forms.CharField(max_length=50)
-    last_name = forms.CharField(max_length=50)
-    birthday_year = forms.IntegerField()
-    birthday_month = forms.IntegerField()
-    birthday_day = forms.IntegerField()
-    profession = forms.CharField(max_length=100)
+    username = forms.CharField(max_length=50, label='نام کاربری', )
+    password = forms.CharField(max_length=30, widget=forms.PasswordInput, label='رمز', )
+    re_password = forms.CharField(max_length=30, widget=forms.PasswordInput, label='تکرار رمز', )
+    email = forms.EmailField(label='ایمیل', )
+    first_name = forms.CharField(max_length=50, label='نام', )
+    last_name = forms.CharField(max_length=50, label='نام خانودگی', )
+    birthday_year = forms.IntegerField(label='سال', required=False)
+    birthday_month = forms.IntegerField(label='ماه', required=False)
+    birthday_day = forms.IntegerField(label='روز', required=False)
+    profession = forms.CharField(max_length=100, label='حرفه', required=False)
     # favourite genres
-    action = forms.BooleanField()
-    animation = forms.BooleanField()
-    biography =forms.BooleanField()
-    comedy = forms.BooleanField()
-    romantic = forms.BooleanField()
-    science_fiction = forms.BooleanField()
-    short = forms.BooleanField()
-    trailer = forms.BooleanField()
-    fantasy = forms.BooleanField()
-    historical = forms.BooleanField()
-    horror = forms.BooleanField()
-    musical = forms.BooleanField()
-    criminal = forms.BooleanField()
-    documentary = forms.BooleanField()
-    dram = forms.BooleanField()
-    military = forms.BooleanField()
-    social = forms.BooleanField()
+    action = forms.BooleanField(label='اکشن', initial=False, required=False)
+    animation = forms.BooleanField(label='انیمیشن', initial=False, required=False)
+    biography =forms.BooleanField(label='بیوگرافی', initial=False, required=False)
+    comedy = forms.BooleanField(label='کمدی', initial=False, required=False)
+    romantic = forms.BooleanField(label='عاشقانه', initial=False, required=False)
+    science_fiction = forms.BooleanField(label='علمی و تخیلی', initial=False, required=False)
+    short = forms.BooleanField(label='کوتاه', initial=False, required=False)
+    trailer = forms.BooleanField(label='تریلر', initial=False, required=False)
+    fantasy = forms.BooleanField(label='فانتزی', initial=False, required=False)
+    historical = forms.BooleanField(label='تاریخی', initial=False, required=False)
+    horror = forms.BooleanField(label='ترسناک', initial=False, required=False)
+    musical = forms.BooleanField(label='موزیکال', initial=False, required=False)
+    criminal = forms.BooleanField(label='جنایی', initial=False, required=False)
+    documentary = forms.BooleanField(label='مستند', initial=False, required=False)
+    dram = forms.BooleanField(label='درام', initial=False, required=False)
+    military = forms.BooleanField(label='جنگی',  initial=False, required=False)
+    social = forms.BooleanField(label='اجتماعی', initial=False, required=False)
     # end of favourite genres
     favourite_movies = forms.TextInput()
     favourite_actors = forms.TextInput()
@@ -45,29 +45,31 @@ class UserIMDBForms(forms.Form):
     about_me = forms.Textarea()
 
     def save(self):
+        djangoUser = User()
         user = UserIMDB.objects.create()
-        user.username = self.username
-        user.password = self.password
-        user.email = self.email
-        user.birthday = datetime.date(year=self.birthday_year, month=self.birthday_month, day=self.birthday_day)
-        user.profession = self.profession
-        self.add_favourite_genre(self.action, 'action', user)
-        self.add_favourite_genre(self.animation, 'animation', user)
-        self.add_favourite_genre(self.biography, 'biography', user)
-        self.add_favourite_genre(self.comedy, 'comedy', user)
-        self.add_favourite_genre(self.romantic, 'romantic', user)
-        self.add_favourite_genre(self.science_fiction, 'science_fiction', user)
-        self.add_favourite_genre(self.short, 'short', user)
-        self.add_favourite_genre(self.trailer, 'trailer', user)
-        self.add_favourite_genre(self.fantasy, 'fantasy', user)
-        self.add_favourite_genre(self.historical, 'historical', user)
-        self.add_favourite_genre(self.horror, 'horror', user)
-        self.add_favourite_genre(self.musical, 'musical', user)
-        self.add_favourite_genre(self.criminal, 'criminal', user)
-        self.add_favourite_genre(self.documentary, 'documentary', user)
-        self.add_favourite_genre(self.dram, 'dram', user)
-        self.add_favourite_genre(self.military, 'military', user)
-        self.add_favourite_genre(self.social, 'social', user)
+        djangoUser.username = self.cleaned_data['username']
+        djangoUser.password = self.cleaned_data['password']
+        djangoUser.email = self.cleaned_data['email']
+        user.user = djangoUser
+        user.birthday = datetime.date(year=self.cleaned_data['birthday_year'], month=self.cleaned_data['birthday_month'], day=self.cleaned_data['birthday_day'])
+        user.profession = self.cleaned_data['profession']
+        self.add_favourite_genre(self.cleaned_data['action'], 'action', user)
+        self.add_favourite_genre(self.cleaned_data['animation'], 'animation', user)
+        self.add_favourite_genre(self.cleaned_data['biography'], 'biography', user)
+        self.add_favourite_genre(self.cleaned_data['comedy'], 'comedy', user)
+        self.add_favourite_genre(self.cleaned_data['romantic'], 'romantic', user)
+        self.add_favourite_genre(self.cleaned_data['science_fiction'], 'science_fiction', user)
+        self.add_favourite_genre(self.cleaned_data['short'], 'short', user)
+        self.add_favourite_genre(self.cleaned_data['trailer'], 'trailer', user)
+        self.add_favourite_genre(self.cleaned_data['fantasy'], 'fantasy', user)
+        self.add_favourite_genre(self.cleaned_data['historical'], 'historical', user)
+        self.add_favourite_genre(self.cleaned_data['horror'], 'horror', user)
+        self.add_favourite_genre(self.cleaned_data['musical'], 'musical', user)
+        self.add_favourite_genre(self.cleaned_data['criminal'], 'criminal', user)
+        self.add_favourite_genre(self.cleaned_data['documentary'], 'documentary', user)
+        self.add_favourite_genre(self.cleaned_data['dram'], 'dram', user)
+        self.add_favourite_genre(self.cleaned_data['military'], 'military', user)
+        self.add_favourite_genre(self.cleaned_data['social'], 'social', user)
         self.splitter_adder_movie(self.favourite_movies, user)
         self.splitter_adder_actor(self.favourite_actors, user)
         self.splitter_adder_director(self.favourite_directors, user)
@@ -78,11 +80,16 @@ class UserIMDBForms(forms.Form):
 
 
     def add_favourite_genre(self, genre:bool, name:str, user:UserIMDB):
+        print('genre:'+str(genre))
         if genre is True:
-            genre = Genre.objects.get(name = name)
-            user.favouriteGenre.add(genre)
+            try:
+                genre = Genre.objects.get(name = name)
+                user.favouriteGenre.add(genre)
+            except:
+                pass
 
-    def splitter_adder_movie(self,string:str, user:UserIMDB):
+    def splitter_adder_movie(self,string, user:UserIMDB):
+        print('movies: '+str(string))
         movie_names = string.split('-')
         for name in movie_names:
             try:

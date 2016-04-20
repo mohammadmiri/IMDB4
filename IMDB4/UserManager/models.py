@@ -8,8 +8,9 @@ from django.contrib.auth.models import User
 import datetime
 
 
-class UserIMDB(User):
+class UserIMDB(models.Model):
 
+    user = models.OneToOneField(User, blank=True, null=True)
     name = models.CharField(max_length=80, null=True, blank=True, verbose_name='نام', )
     birthday = models.DateField(null=True, verbose_name='تولد', )
     picture = models.ImageField(null=True, blank=True, upload_to="user/pictures", verbose_name='عکس', )

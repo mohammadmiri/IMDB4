@@ -3,6 +3,7 @@ from MovieManager.models import RateUserForMovie, Movie
 from CelebrityManager.models import Celebrity
 from .forms import UserIMDBForms
 
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
@@ -27,16 +28,22 @@ def login_page(request):
 
 def signup_page(request):
     errors=""
+    print('before all')
     if request.method == "POST":
+        print('after post')
         form = UserIMDBForms(request.POST)
+        print('after form: '+form.__str__())
         if form.is_valid():
+            print('if valid'+str(request.POST))
             form.save()
+            print('after save')
         else:
+            print('errors: '+str(form.errors))
             errors = ''
     else:
         form = UserIMDBForms()
     context = {'form':form}
-    return render(request, "UserManager/signup.html", form)
+    return render(request, "UserManager/signup.html", context)
 
 
 
@@ -69,5 +76,8 @@ def reset_password(request):
     return
 
 
+def search_celebrity_sugggestion(request, value):
+    celebrities = list(Celebrity.objects.filter(name__startswith=value).values('name')[0:3])
+    return JsonResponse({'celebrities':celebrities})
 
 

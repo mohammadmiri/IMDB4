@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load toPersian %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+{% block content %}
+
+<div class="padding_left padding_right padding_top">
+    <div id="header_div">
+        <div>
+            <p>
+                {{ festival_name }}
+            </p>
+        </div>
+        <p>
+            {{ festival_year }}
+        </p>
+    </div>
+    <div id="content_tables">
+        {% for item in awards %}
+            <div class="type_div">
+                <p>
+                    {{ item.0 }}{# سودای سیمرغ#}
+                </p>
+            </div>
+            {% for table in item.1 %}
+                <div class="table_name">
+                    {{ table.0 }}{# بهترین فیلم و بهترین کارگردانی #}
+                </div>
+                <table>
+                    {% for award in table.1 %}
+                        {% for award_item in award.1 %}
+                            {% if forloop.counter0 == 0 %}
+
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </table>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
+
+</body>
+</html>

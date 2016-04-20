@@ -1,5 +1,5 @@
 
-from .models import Movie, Award, Avamel, Reviewer_Review, User_Review, Post, Movie_Celebrity_Image
+from .models import Movie, Award, Avamel, Reviewer_Review, User_Review, Post, Movie_Celebrity_Image, Act
 from CelebrityManager.models import Celebrity
 
 from django.shortcuts import render
@@ -135,8 +135,58 @@ def all_crew(request, id):
     avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='moshaver_film_name')))
     avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='moshaver_honari')))
     avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='moshaver')))
-    context = {'movie':movie, 'avamel':avamel}
+    acts = Act.objects.filter(movie=movie)
+    context = {'movie':movie, 'avamel':avamel, 'acts':acts}
     return render(request, 'MovieManager/allCrew.html', context)
+
+
+
+def festival_awards(request,festival):
+    awards=[]
+    soda_best_movie=[]
+    soda_best_movie_awarded=list(Award.objects.filter(festival=festival, candidate_type=0))
+    soda_best_movie_diploma=list(Award.objects.filter(festival=festival, candidate_type=1))
+    soda_best_movie_candidate=list(Award.objects.filter(festival=festival, candidate_type=2))
+    soda_best_movie.append(('برنده بهترین سیمرغ بلورین',soda_best_movie_awarded))
+    soda_best_movie.append(('دیپلم افتخار',soda_best_movie_diploma))
+    soda_best_movie.append(('نامزد',soda_best_movie_candidate))
+
+    soda_best_director = []
+    soda_best_director_awarded = list(Award.objects.filter(festival=festival, candidate_type=0))
+    soda_best_director_diploma = list(Award.objects.filter(festival=festival, candidate_type=1))
+    soda_best_director_candidate = list(Award.objects.filter(festival=festival, candidate_type=2))
+    soda_best_director.append(('برنده بهترین سیمرغ بلورین', soda_best_director_awarded))
+    soda_best_director.append(('دیپلم افتخار', soda_best_director_diploma))
+    soda_best_director.append(('نامزد', soda_best_director_candidate))
+
+    soda=[]
+    soda.append(('بهترین فیلم',soda_best_movie))
+    soda.append(('بهترین کارگردانی',soda_best_director))
+
+    awards.append(('سودای سیمرغ',soda))
+
+    context={'festival_name':'جشنواره فیلم فجر', 'festival_year':'دوره سی و سوم. ۱۳۹۳', 'awards':awards}
+    return render(request,'MovieManager/festival_awards.html',context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
