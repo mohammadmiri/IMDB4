@@ -30,14 +30,14 @@
             </p>
             <p id="info_awardsNumber">
                 {% if awarded %}
-                    {{ awarded }}
+                    {{ awarded|IntegerToPersian }}
                     جایزه
                 {% endif %}
                 {% if awarded and candidates %}
                     و
                 {% endif %}
                 {% if candidates %}
-                    {{ candidates }}
+                    {{ candidates|IntegerToPersian }}
                     نامزدی
                 {% endif %}
             </p>
@@ -52,7 +52,7 @@
                         <td class="content_header_year">
                             <p>
                                 <a href="">
-                                    {{ simorgh_date }}
+                                    {{ simorgh_date|IntegerToPersian }}
                                 </a>
                             </p>
                         </td>
@@ -151,7 +151,7 @@
                         <td class="content_header_year">
                             <p>
                                 <a href="">
-                                    {{ cinemaHome_date }}
+                                    {{ cinemaHome_date|IntegerToPersian }}
                                 </a>
                             </p>
                         </td>

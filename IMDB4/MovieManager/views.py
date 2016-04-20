@@ -36,18 +36,7 @@ def show_movie(request, id):
                'award_simorgh_count':award_simorgh_count, 'total_award_count':total_award_count
                 ,'total_candidate_count':total_candidate_count, 'actors':actors, 'images':images,'kargardan':kargardan, 'nevisande':nevisande,
                'user_review':user_review, 'posts':posts,}
-    return render(request, 'MovieManager/movie2.html', context=context)
-
-
-
-
-
-
-# this function is used to serve top 100 movie page the site
-def top_100_movies(request):
-    movies = Movie.objects.order_by('rate')[:100]
-    context = {'Movies': movies,}
-    return render(request, 'top100.html', context)
+    return render(request, 'MovieManager/movie.html', context=context)
 
 
 
@@ -83,7 +72,30 @@ def get_100_best_movies(request):
 
 
 def search_festival_awards(request):
-    pass
+    list=[]
+    years0=[]
+    years1=[]
+    years2=[]
+
+    years0.append('دوره سی و سوم (۱۳۹۳)')
+    years0.append('دوره سی و دوم (۱۳۹۲)')
+
+    years1.append('دوره هفدهم (۱۳۹۴)')
+    years1.append('دوره شانزدهم (۱۳۹۳)')
+    years1.append('دوره پانزدهم (۱۳۹۲)')
+
+    years2.append('دوره نهم (۱۳۹۴)')
+    years2.append('دوره هشتم (۱۳۹۳)')
+    years2.append('دوره هفتم (۱۳۹۲)')
+    years2.append('دوره ششم (۱۳۹۱)')
+
+    list.append(('جشنواره فیلم فجر',years0))
+    list.append(('جشن خانه سینما',years1))
+    list.append(('جشن منتقدان سینما',years2))
+
+    context={'list':list}
+    return render(request,'MovieManager/festivals.html',context)
+
 
 def search_festivals_awards_json(request, date, festival_type):
     pass
@@ -92,7 +104,39 @@ def search_festivals_awards_json(request, date, festival_type):
 
 
 
+def sale_table(request):
+    movies=list(Movie.objects.order_by('-sale')[:10])
+    context={'movies':movies}
+    return  render(request,'MovieManager/sale_table.html',context)
 
+
+
+def all_crew(request, id):
+    movie = Movie.objects.get(id=id)
+    avamel = []
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='kargardan')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='nevisande')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='tahiey_konande')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='modir_tolid')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='mojri_tarh')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='dastyar_aval_kargardan')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='barname_riz')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='modir_film_bardari')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='tadvin')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='tarrah_sahne_va_lebas')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='tarrah_chehre_pardazi')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='ahangsaz')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='seda_bardari')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='seda_Gozari_va_mix')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='akkas')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='jelvehaye_vije_meydani')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='jelvehaye_vije_basari')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='monshi_sahne')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='moshaver_film_name')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='moshaver_honari')))
+    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='moshaver')))
+    context = {'movie':movie, 'avamel':avamel}
+    return render(request, 'MovieManager/allCrew.html', context)
 
 
 

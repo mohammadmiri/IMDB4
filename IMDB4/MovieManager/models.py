@@ -32,7 +32,7 @@ class Movie(models.Model):
     rate = models.FloatField(null=True, blank=True, verbose_name='امتیاز', )
     numUserRated = models.IntegerField(null=True, blank=True, verbose_name='تعداد امتیاز دهندگان', )
     summary = RichTextField(null=True, blank=True, verbose_name='خلاصه فیلم', )
-    sale = models.CharField(max_length=80, null=True, blank=True, verbose_name='فروش', )
+    sale = models.IntegerField( null=True, blank=True, verbose_name='فروش', )
     genre = models.ManyToManyField(Genre, blank=True, verbose_name='ژانر', )
     keywords = models.ManyToManyField(KeyWord,blank=True, verbose_name='کلمات کلیدی', )
 

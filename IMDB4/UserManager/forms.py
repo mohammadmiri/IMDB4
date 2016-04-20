@@ -1,8 +1,10 @@
 from .models import UserIMDB
-from MovieManager.models import Genre
+from MovieManager.models import Genre, Movie
+from CelebrityManager.models import Celebrity
 
 from django.contrib.auth.models import User
 from django import forms
+from django.db.models import Model
 
 import datetime
 
@@ -66,6 +68,12 @@ class UserIMDBForms(forms.Form):
         self.add_favourite_genre(self.dram, 'dram', user)
         self.add_favourite_genre(self.military, 'military', user)
         self.add_favourite_genre(self.social, 'social', user)
+        self.splitter_adder_movie(self.favourite_movies, user)
+        self.splitter_adder_actor(self.favourite_actors, user)
+        self.splitter_adder_director(self.favourite_directors, user)
+        user.aboutMe = self.about_me
+        # saving
+        user.save()
 
 
 
@@ -74,10 +82,38 @@ class UserIMDBForms(forms.Form):
             genre = Genre.objects.get(name = name)
             user.favouriteGenre.add(genre)
 
+    def splitter_adder_movie(self,string:str, user:UserIMDB):
+        movie_names = string.split('-')
+        for name in movie_names:
+            try:
+                movie = Movie.objects.get(name=name)
+                user.favouriteMovie.add(movie)
+            except Model.DoesNotExist:
+                pass
+            except Model.MultipleObjectsReturned:
+                pass
 
+    def splitter_adder_actor(self, string:str, user:UserIMDB):
+        celebrity_names = string.split('-')
+        for name in celebrity_names:
+            try:
+                celebrity = Celebrity.objects.get(name=name)
+                user.favouriteActor.add(celebrity)
+            except Model.DoesNotExist:
+                pass
+            except Model.MultipleObjectsReturned:
+                pass
 
-
-
+    def splitter_adder_director(self, string:str, user:UserIMDB):
+        celebrity_names = string.split('-')
+        for name in celebrity_names:
+            try:
+                celebrity = Celebrity.objects.get(name=name)
+                user.favouriteDirector.add(celebrity)
+            except Model.DoesNotExist:
+                pass
+            except Model.MultipleObjectsReturned:
+                pass
 
 
 

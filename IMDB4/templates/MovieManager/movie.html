@@ -18,7 +18,9 @@
 
     {% block content %}
         <div id="info" class="border_bottom_div">
-            <img src="{{ movie.poster.url }}" id="info_mainPoster">
+            <div id="info_mainPoster" class="img_wrapper">
+                <img src="{{ movie.poster.url }}" id="info_mainPoster">
+            </div>
             <p id="info_name">
                 <dum id="info_name_1">
                     {{ movie.name }}
@@ -83,9 +85,15 @@
                 </div>
 
                 <div id="info_images">
-                    {% for item in images %}
-                        <img src="{{ item.image.url }}" class="info_images_1">
+                    {% for item in images|slice:':3' %}
+                        <div class="info_images_1 img_wrapper">
+                            <img src="{{ item.image.url }}" class="info_images_1">
+                        </div>
                     {% endfor %}
+                    <div class="info_images_1 img_wrapper">
+                        <img src="{{ images.3.image.url }}" class="info_images_1">
+                    </div>
+
                     <p id="info_seeAll">
                         <a>
                             همه عکس ها و ویدیوها>>
@@ -96,35 +104,36 @@
         </div>
 
 
-
-        <div id="prize" class="border_bottom_div">
-            <div id="prize_border">
-                {% if award_simorgh_count %}
-                    <p id="prize">
-                    برنده
-                    {{ award_simorgh_count|IntegerToPersian }}
-                    سیمرغ بلورین.
+        {% if award_simorgh_count or total_award_count or top100_rank %}
+            <div id="prize" class="border_bottom_div">
+                <div id="prize_border">
+                    {% if award_simorgh_count %}
+                        <p id="prize">
+                        برنده
+                        {{ award_simorgh_count|IntegerToPersian }}
+                        سیمرغ بلورین.
+                        </p>
+                    {% endif %}
+                    {% if total_award_count %}
+                        {{ total_award_count|IntegerToPersian }}
+                        جایزه و
+                        {{ total_candidate_count|IntegerToPersian }}
+                        نامزدی دیگر
+                    {% endif %}
+                    {% if top100_rank %}
+                        {{ top100_rank }}
+                        <a href="">
+                        ۱۰۰ فیلم برتر
+                        </a>
+                    {% endif %}
+                    <p id="prize_border_seeAll">
+                        <a href="">
+                        مشاهده همه جوایز>>
+                        </a>
                     </p>
-                {% endif %}
-                {% if total_award_count %}
-                    {{ total_award_count|IntegerToPersian }}
-                    جایزه و
-                    {{ total_candidate_count|IntegerToPersian }}
-                    نامزدی دیگر
-                {% endif %}
-                {% if top100_rank %}
-                    {{ top100_rank }}
-                    <a href="">
-                    ۱۰۰ فیلم برتر
-                    </a>
-                {% endif %}
-                <p id="prize_border_seeAll">
-                    <a href="">
-                    مشاهده همه جوایز>>
-                    </a>
-                </p>
+                </div>
             </div>
-        </div>
+        {% endif %}
         <div id="mainActors" class="border_bottom_div">
 
             <p id="mainActors_title">
@@ -132,7 +141,9 @@
             </p>
 
             {% for actor, actName in actors.items|slice:":3" %}
-                <img src="{{ actor.picture.url }}" class="mainActors_images">
+                <div class="mainActors_images img_wrapper">
+                    <img src="{{ actor.picture.url }}" class="mainActors_images">
+                </div>
             {% endfor %}
         </div>
         <div id="fActors" class="border_bottom_div">
@@ -146,7 +157,9 @@
             </div>
             {% for actor, actName in actors.items %}
                 <div class="fActors_fullList">
-                    <img src="{{ actor.picture.url }}" class="fActors_fullList_image">
+                    <div class="fActors_fullList_image border_radius">
+                        <img src="{{ actor.picture.url }}" class="fActors_fullList_image">
+                    </div>
                     <div class="fActors_fullList_name">
                         <p>
                             <a href="">
@@ -154,7 +167,6 @@
                             </a>
                         </p>
                     </div>
-
                     <div class="fActors_fullList_movieName">
                         <p>
                             {{ actName }}
@@ -257,7 +269,11 @@
                 آخرین پست ها
             </p>
             {% for item in posts %}
-                <div class="userPost_lastPost">
+                {% if forloop.counter0 < 3 %}
+                    <div class="userPost_lastPost">
+                {% else %}
+                    <div class="userPost_lastPost img_wrapper">
+                {% endif %}
                     <div>
                         <p>
                             {{ item.content }}

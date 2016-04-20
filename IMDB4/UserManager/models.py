@@ -30,12 +30,9 @@ class UserIMDB(User):
             self.expireTimeToAccountPro = now + datetime.timedelta(days=365)
 
     def get_picture(self):
-        print('in get_picture:'+self.picture.__str__())
         if not self.picture :
-            print('in if')
             return "{% static 'UserManager/img/avatar.jpg' %}"
         else:
-            print('in else')
             return self.picture.url
 
     def __str__(self):
@@ -47,7 +44,6 @@ class UserIMDB(User):
 class ResetPassToken(models.Model):
     user = models.OneToOneField(User)
     token = models.BigIntegerField(User)
-
 
 
 class PostForCelebrity(models.Model):
