@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^sale_table/$',views.sale_table,name='MovieManager_sale_table'),
     url(r'^search_festivals/$',views.search_festival_awards,name='MovieManager_search_festival'),
     url(r'^all_crew/(?P<id>[0-9]+)/$', views.all_crew, name='MovieManager_all_crew'),
-    url(r'^festival_awards/$',views.festival_awards,name='MovieManager_festival_awards'),
+    # url(r'^festival_awards/$',views.festival_awards,name='MovieManager_festival_awards'),
     ]
 
 

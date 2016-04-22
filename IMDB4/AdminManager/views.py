@@ -1,14 +1,12 @@
 from .models import  Poll,  News, poll_user_choose, PollOption
 from CelebrityManager.models import Celebrity
-from MovieManager.models import Movie_Celebrity_Image, Teaser, Movie
+from MovieManager.models import Movie_Celebrity_Image, Teaser, Movie, Avamel
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.http import JsonResponse
-from django.core import serializers
-
-
 import datetime
 
 
@@ -31,16 +29,48 @@ def HomePage(request):
         gallery2 = list(Movie_Celebrity_Image.objects.filter(galleryNumber=2, in_homePage=True)[:5])
         gallery3 = list(Movie_Celebrity_Image.objects.filter(galleryNumber=3, in_homePage=True)[:5])
         gallery4 = list(Movie_Celebrity_Image.objects.filter(galleryNumber=4, in_homePage=True)[:5])
+        top_sale_movies = list(Movie.objects.order_by('-sale')[0:5])
+        top_rated_movies = list(Movie.objects.order_by('-rate')[0:5])
         context = {'Teasers':teasers, 'gallery1':gallery1, 'gallery2':gallery2, 'gallery3':gallery3, 'gallery4':gallery4,
                    'Poll':poll, 'PollOptions':polloptions, 'Celebrity':celebrities, 'News_Iran_Cinema':news_iran_cinema
-                    , 'News_World_Cinema':news_world_cinema, 'News_honarmandan':news_honarmandan, 'News_TV':news_TV }
+                    , 'News_World_Cinema':news_world_cinema, 'News_honarmandan':news_honarmandan, 'News_TV':news_TV
+                   , 'top_sale_movies':top_sale_movies, 'top_rated_movies':top_rated_movies }
         return render(request, 'AdminManager/index.html', context)
 
 
 def get_search_result(request, value):
-    movie_serialize = serializers.serialize('json', Movie.objects.filter(name__startswith=value))
-    celebrity_serialize = serializers.serialize('json',Celebrity.objects.filter(name__startswith=value))
-    return JsonResponse({'movies':movie_serialize, 'celebrities':celebrity_serialize})
+    # movie_serialize = serializers.serialize('json', Movie.objects.filter(name__startswith=value)[0:3])
+    # celebrity_serialize = serializers.serialize('json',Celebrity.objects.filter(name__startswith=value)[0:3])
+    celebrities = list(Celebrity.objects.filter(name__startswith=value)[0:3])
+    movies = list(Movie.objects.filter(name__startswith=value)[0:3])
+
+    name_celebrity = []
+    id_celebrity = []
+    picture_celebrity = []
+    profession_celebrity = []
+    for celebrity in celebrities:
+        name_celebrity.append(celebrity.name)
+        id_celebrity.append(celebrity.id)
+        picture_celebrity.append(celebrity.picture.url)
+        profession_celebrity.append(celebrity.workingFields)
+    name_movie = []
+    id_movie = []
+    poster_movie = []
+    year_movie = []
+    director_movie=[]
+    for movie in movies:
+        name_movie.append(movie.name)
+        id_movie.append(movie.id)
+        poster_movie.append(movie.poster.url)
+        year_movie.append(movie.year)
+        directors = list(Celebrity.objects.filter(agent__movie=movie, agent__role='kargardan'))
+        print('len: '+str(len(directors)))
+        for amel in directors:
+            director_movie.append(amel.name)
+    return JsonResponse({'name_celebrity':name_celebrity,'id_celebrity':id_celebrity,'picture_celebrity':picture_celebrity,
+                        'profession_celerity':profession_celebrity,
+                         'name_movie':name_movie,'id_movie':id_movie,'poster_movie':poster_movie,'year_movie':year_movie,
+                         'director_movie':director_movie})
 
 
 @login_required()
@@ -52,7 +82,6 @@ def Polling(request, poll_id):
     option_choose = poll_user_choose.objects.filter(poll=poll, user=user)
     if option_choose:
         is_voted = True
-    print('is voted: '+str(is_voted))
     context = {'poll':poll, 'pollOptions':poll.polloption_set.all(), 'is_voted':is_voted ,
                 'total_vote':total_vote, 'result_polling':result_polling}
     return render(request, 'AdminManager/polling.html', context)

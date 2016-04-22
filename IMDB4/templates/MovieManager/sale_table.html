@@ -46,7 +46,7 @@
                     <img src="{{ movie.poster.url }}" class="movie_image">
                     <div class="movie_name">
                         <p>
-                            <a href="">
+                            <a href="{% url 'MovieManager_show_movie' movie.id %}">
                                 {{ movie.name }}
                             </a>
                         </p>

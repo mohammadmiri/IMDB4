@@ -61,7 +61,8 @@ class MovieAdmin(admin.ModelAdmin):
 
     def get_view_on_site_url(self, obj=None):
         if obj is not None:
-            return "http://localhost:8000/movie/show/"+str(obj.id)
+            return
+            # return "http://localhost:8000/movie/show/"+str(obj.id)
         return "http://localhost:8000/"
 
 

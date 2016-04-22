@@ -1,5 +1,6 @@
 {#{% load index %}#}
 {% load static %}
+{% load toPersian %}
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
@@ -17,7 +18,7 @@
 
 {#    these css and js files must be loaded at the end.#}
 
-{#    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>#}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 {#    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>#}
 {#    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">#}
 
@@ -33,7 +34,6 @@
     <script src="{% static "jquery/jquery.js" %}" type="text/javascript" language="javascript"></script>
     <link href="{% static "styleSheets/base.css" %}" rel="stylesheet" type="text/css">
     <script src="{% static "scripts/base.js" %}" type="text/javascript" language="JavaScript"></script>
-    <script src="{% static "scripts/signup_birthday.js" %}" type="text/javascript" language="JavaScript"></script>
 
     {% block css_js %}
 
@@ -101,7 +101,7 @@
                 </p>
                 <div>
                     <div>
-                        <a href="">
+                        <a href="{% url 'MovieManager_sale_table' %}">
                             <p>
                                 جدول فروش
                             </p>
@@ -136,7 +136,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="">
+                        <a href="{% url 'MovieManager_top_100' %}">
                             <p>
                                 صد فیلم برتر
                             </p>
@@ -291,17 +291,25 @@
                         </p>
                     </div>
                     <div class="sideBar_content back_gray_light">
-                        {% for item in sale_movie %}
-                            <p id="base_side_sale_movie_movies_{{ forloop.counter0 }}">
+                        {% for movie in top_sale_movies %}
+                            <div class="base_side_sale_movie_wrapper">
                                 <div class="base_side_sale_movie_number">
-                                    {{ item.rate }}
+                                    <p>
+                                        {{ movie.rate|FloatToPersian }}
+                                    </p>
                                 </div>
-                                {{ item.name }}
-                                <hay class="float_left">
-                                    {{ item.sale_amount }}
+                                <a href="">
+                                    <p>
+                                    {{ movie.name }}
+                                    </p>
+                                </a>
+                                <div class="float_left">
+                                    <p>
+                                    {{ movie.sale|IntegerToPersian }}
                                     تومان
-                                </hay>
-                            </p>
+                                    </p>
+                                </div>
+                            </div>
                         {% endfor %}
                         <a href="">
                             <p class="base_side_sale_movie_seeall float_left">
@@ -368,10 +376,17 @@
                     </div>
                     <div id="sideBar_mostVisited" class="sideBar_content back_gray_light">
                         <div id="sideBar_mostVisited_control">
-                            <a href="">
+                            <a href="{% url 'MovieManager_show_movie' top_rated_movies.0.id %}">
                                 <p>
-                                    {{ mostVisited_names.0 }}
+                                    {{ top_rated_movies.0 }}
                                 </p>
+                                <div id="sideBar_mostVisited_names_hidden" style="display: none;">
+                                    {% for movie in top_rated_movies %}
+                                        <p id="{{ movie.id }}">
+                                            {{ movie.name }}
+                                        </p>
+                                    {% endfor %}
+                                </div>
                             </a>
                             <div>
                                 <p>
@@ -387,8 +402,8 @@
                         </div>
                         <div id="sideBar_mostVisited_images">
                             <div>
-                                {% for image in mostVisited_images %}
-                                    <img src="{{ image }}">
+                                {% for movie in top_rated_movies %}
+                                    <img src="{{ movie.poster.url }}">
                                 {% endfor %}
                             </div>
                         </div>

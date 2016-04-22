@@ -172,7 +172,7 @@
                         </p>
                     </div>
                     <div class="signup_text signup_input signup_search_parent" id="signup_flavorMovie">
-                        <input type="text" name="signup_flavorMovie" id="signup_flavorMovie_inputText"
+                        <input type="text" name="{{ form.favourite_movies.name }}" id="signup_flavorMovie_inputText"
                                class="signup_searchType">
                         <div class="signup_suggestion">
 {#                            <div class="signup_oneSuggestion">#}
@@ -193,7 +193,7 @@
                         </p>
                     </div>
                     <div class="signup_text signup_input signup_search_parent" id="signup_flavorActor">
-                        <input type="text" class="signup_searchType">
+                        <input name="{{ form.favourite_actors.name }}" type="text" class="signup_searchType">
                         <div class="signup_suggestion">
 
                         </div>
@@ -213,7 +213,7 @@
                         </p>
                     </div>
                     <div class="signup_text signup_input signup_search_parent" id="signup_flavorDirector">
-                        <input type="text" class="signup_searchType">
+                        <input name="{{ form.favourite_directors.name }}" type="text" class="signup_searchType">
                         <div class="signup_suggestion">
 
                         </div>

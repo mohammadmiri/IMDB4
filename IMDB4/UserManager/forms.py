@@ -39,10 +39,10 @@ class UserIMDBForms(forms.Form):
     military = forms.BooleanField(label='جنگی',  initial=False, required=False)
     social = forms.BooleanField(label='اجتماعی', initial=False, required=False)
     # end of favourite genres
-    favourite_movies = forms.TextInput()
-    favourite_actors = forms.TextInput()
-    favourite_directors = forms.TextInput()
-    about_me = forms.Textarea()
+    favourite_movies = forms.CharField(max_length=200, required=False)
+    favourite_actors = forms.CharField(max_length=200, required=False)
+    favourite_directors = forms.CharField(max_length=200, required=False)
+    about_me = forms.CharField(max_length=200, required=False)
 
     def save(self):
         djangoUser = User()
@@ -70,10 +70,10 @@ class UserIMDBForms(forms.Form):
         self.add_favourite_genre(self.cleaned_data['dram'], 'dram', user)
         self.add_favourite_genre(self.cleaned_data['military'], 'military', user)
         self.add_favourite_genre(self.cleaned_data['social'], 'social', user)
-        self.splitter_adder_movie(self.favourite_movies, user)
-        self.splitter_adder_actor(self.favourite_actors, user)
-        self.splitter_adder_director(self.favourite_directors, user)
-        user.aboutMe = self.about_me
+        self.splitter_adder_movie(self.cleaned_data['favourite_movies'], user)
+        self.splitter_adder_actor(self.cleaned_data['favourite_actors'], user)
+        self.splitter_adder_director(self.cleaned_data['favourite_directors'], user)
+        user.aboutMe = self.cleaned_data['about_me']
         # saving
         user.save()
 

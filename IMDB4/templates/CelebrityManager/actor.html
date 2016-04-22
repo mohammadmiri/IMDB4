@@ -11,6 +11,7 @@
         <link href="{% static "styleSheets/actor.css" %}" rel="stylesheet">
         <script src="{% static "scripts/actor.js" %}" language="JavaScript"></script>
     {% endblock %}
+
 </head>
 <body>
 
@@ -29,11 +30,11 @@
                         {{ celebrity.workingFields }}
                     </p>
                 </div>
-                <div id="info_top_point">
-                    <p>
-                        {{ actor.point }}
-                    </p>
-                </div>
+{#                <div id="info_top_point">#}
+{#                    <p>#}
+{#                        {{ actor.point }}#}
+{#                    </p>#}
+{#                </div>#}
             </div>
             <div id="info_biography" class="padding_right">
                 <p>
@@ -66,14 +67,19 @@
                         <img src="{{ item.image.url }}" class="info_images">
                     </div>
                 {% endfor %}
-                <div class="info_images img_wrapper">
+                <div class="info_images img_wrapper play_movie">
                     <img src="{{ videos.0.image.url }}" class="info_images">
+                    <button type="button">
+                        <img src="{% static 'icons/play.png' %}">
+                    </button>
                 </div>
-                <a id="info_images_seeAll">
-                    <p>
-                        همه عکس ها و ویدیوها>>
-                    </p>
-                </a>
+                {% if images|length > 3 %}
+                    <a id="info_images_seeAll">
+                        <p>
+                            همه عکس ها و ویدیوها>>
+                        </p>
+                    </a>
+                {% endif %}
             </div>
         </div>
 
@@ -104,7 +110,7 @@
                         {% endif %}
 
 
-                        <a href="">
+                        <a href="{% url 'CelebrityManager_show_celebrity_awards'  celebrity.id  %}">
                             مشاهده همه جوایز>>
                         </a>
                     </p>
@@ -120,8 +126,17 @@
                 </p>
                 <div>
                     {% for item in most_rated_product %}
-                        <div class="proposedWorks_images img_wrapper">
-                            <img src="{{ item.poster.url }}" class="proposedWorks_images">
+                        <div class="proposedWorks_images img_wrapper movie_image_info_wrapper">
+                            <a href="{% url 'MovieManager_show_movie' item.id %}">
+                                <img src="{{ item.poster.url }}" class="proposedWorks_images">
+                            </a>
+                            <div class="movie_image_info">
+                                <p>
+                                    {{ item.name }}
+                                    </br>
+                                    {{ item.year }}
+                                </p>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>
@@ -156,7 +171,7 @@
                     {% for movie in movie_actor %}
                         <div class="filmography_bodies">
                             <p>
-                                <a href="">
+                                <a href="{% url 'MovieManager_show_movie' movie.id %}">
                                     {{ movie.name }}
                                 </a>
                                 <dum1>
@@ -192,7 +207,7 @@
                         {% for item in movies %}
                             <div class="filmography_bodies">
                                 <p>
-                                    <a href="">
+                                    <a href="{% url 'MovieManager_show_movie' item.id %}">
                                         {{ item.name }}
                                     </a>
                                     {% if item.type.type %}
@@ -214,8 +229,6 @@
                     </div>
                 {% endif %}
             {% endfor %}
-
-
         </div>
 
         <div id="userPost" class="border_bottom_div padding_right padding_left">
@@ -309,35 +322,35 @@
             <div class="sideBar_content back_gray_light">
                 <div class="sideBar_fastAccess_div">
                     <p>
-                        <a href="#actor_info">
+                        <a href="#info">
                             بیوگرافی
                         </a>
                     </p>
                 </div>
                 <div class="sideBar_fastAccess_div">
                     <p>
-                        <a href="#actor_info">
+                        <a href="#info">
                             عکس ها و ویدیو ها
                         </a>
                     </p>
                 </div>
                 <div class="sideBar_fastAccess_div">
                     <p>
-                        <a href="#actor_filmography">
+                        <a href="#filmography">
                             فیلموگرافی
                         </a>
                     </p>
                 </div>
                 <div class="sideBar_fastAccess_div">
                     <p>
-                        <a href="#actor_userPost">
+                        <a href="#userPost">
                             پست های کاربران
                         </a>
                     </p>
                 </div>
                 <div class="sideBar_fastAccess_div">
                     <p>
-                        <a href="#actor_prizes">
+                        <a href="#prizes">
                             جوایز
                         </a>
                     </p>
@@ -360,6 +373,20 @@
 {#    slider#}
     {% block over_content %}
 
+        <div id="frame_movie_background_dark">
+        </div>
+        <div id="play_movie_frame" class="frame_movie_wrapper">
+            <button type="button" class="exit_play_movie">
+                <img src="{% static 'icons/index/closeSliderButton.png' %}">
+            </button>
+            <div>
+                {{ videos.0.link|safe }}
+            </div>
+        </div>
+
+
+
+
         <div id="slider_background_dark">
         </div>
 
@@ -377,10 +404,10 @@
 
                 <div id="slider_images">
                     <ul>
-                        {% for image in slider_images %}
+                        {% for image in images %}
                                 <li>
                                     <button type="button" class="slider_images_button">
-                                        <img src="{{ image }}" class="slider_images_image"
+                                        <img src="{{ image.image.url }}" class="slider_images_image"
                                              id="{{ forloop.counter0 }}">
                                     </button>
                                 </li>
@@ -393,17 +420,29 @@
                 </button>
 
                 <div id="slider_mainImage">
-
                     <div>
                         <img id="slider_mainImage_image">
                     </div>
                     <p class="slider_mainImage_topText"></p>
                     <p class="slider_mainImage_downText"></p>
-
                 </div>
 
             </div>
 
+        </div>
+
+        <div style="display: none;">
+            {% for image in images %}
+                <div class="images_url_hidden">
+                    {{ image.image.url }}
+                </div>
+                <div class="images_description_hidden">
+                    {{ image.description }}
+                </div>
+                <div class="images_name_hidden">
+                    {{ image.name }}
+                </div>
+            {% endfor %}
         </div>
 
     {% endblock %}

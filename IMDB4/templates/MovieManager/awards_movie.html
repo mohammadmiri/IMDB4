@@ -20,7 +20,7 @@
         <div id="info">
             <img src="{{ movie.poster.url }}">
             <p id="info_name">
-                <a href="">
+                <a href="{% url 'MovieManager_show_movie' movie.id %}">
                     {{ movie.name }}
                 </a>
                 ({{ movie.year }})
@@ -73,7 +73,7 @@
                                 <td class="content_cellContent">
                                     <p>
                                         {{ award.category }}
-                                        <a href="">
+                                        <a href="{% url 'CelebrityManager_show_celebrity' award.celebrity.id %}">
                                             {{ award.celebrity }}
                                         </a>
                                     </p>
@@ -100,7 +100,7 @@
                                 <td class="content_cellContent">
                                     <p>
                                         {{ diploma.category }}
-                                        <a href="">
+                                        <a href="{% url 'CelebrityManager_show_celebrity' diploma.celebrity.id %}">
                                             {{ diploma.celebrity }}
                                         </a>
                                     </p>
@@ -126,7 +126,7 @@
                                 <td class="content_cellContent">
                                     <p>
                                         {{ candidate.category }}
-                                        <a href="">
+                                        <a href="{% url 'CelebrityManager_show_celebrity' candidate.celebrity.id %}">
                                             {{ candidate.celebrity }}
                                         </a>
                                     </p>
@@ -172,7 +172,7 @@
                                 <td class="content_cellContent">
                                     <p>
                                         {{ award.category }}
-                                        <a href="">
+                                        <a href="{% url 'CelebrityManager_show_celebrity' award.celebrity.id %}">
                                             {{ award.celebrity }}
                                         </a>
                                     </p>
@@ -197,7 +197,7 @@
                                 <td class="content_cellContent">
                                     <p>
                                         {{ diploma.category }}
-                                        <a href="">
+                                        <a href="{% url 'CelebrityManager_show_celebrity' diploma.celebrity.id %}">
                                             {{ diploma.celebrity }}
                                         </a>
                                     </p>
@@ -224,7 +224,7 @@
                                 <td class="content_cellContent">
                                     <p>
                                         {{ candidate.category }}
-                                        <a href="">
+                                        <a href="{% url 'CelebrityManager_show_celebrity' candidate.celebrity.id %}">
                                             {{ candidate.celebrity }}
                                         </a>
                                     </p>

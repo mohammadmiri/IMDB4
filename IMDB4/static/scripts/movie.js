@@ -5,6 +5,8 @@
 
 $(document).ready(function () {
 
+    var play_movie_innerHTML;
+
     var images=Array();
     var descriptions=Array();
     var celebrities=Array();
@@ -33,7 +35,7 @@ $(document).ready(function () {
     });
 
     $('.slider_images_button').click(function(event){
-        var imageIndex=$(event.target).children()[0].id;
+        var imageIndex=event.target.id;
         var parentElement=event.target.parentElement;
         var image=parentElement.innerHTML;
         var className=$('#slider_mainImage div img').attr('class');
@@ -53,7 +55,6 @@ $(document).ready(function () {
     });
 
     $('#info_seeAll a').click(function(event){
-        console.log('movie_info_seeAll a');
         var slider_background=$('#slider_background');
         slider_background.css({display:'block'});
         var slider_background_dark=$('#slider_background_dark');
@@ -77,21 +78,66 @@ $(document).ready(function () {
 
 
 
+    $('.play_movie').click(function(event){
+        console.log(play_movie_innerHTML);
+        $('#frame_movie_background_dark').css({'display':'block'});
+        $('.frame_movie_wrapper').css({'display':'block'});
+        $('#play_movie_frame div').html(play_movie_innerHTML);
+    });
+
+
+    $('.exit_play_movie').click(function(){
+        $('#play_movie_frame div').html('');
+        $('#frame_movie_background_dark').css({'display':'none'});
+        $('.frame_movie_wrapper').css({'display':'none'});
+    });
+
+
+
+
+
     /**
      * loads data of slider.
      */
     jQuery(window).load(function(){
-        console.log('finish');
-        $.ajax({url:"/highQualitySlider/",success:function(result){
-            console.log('success');
-            console.log(result.image_urls);
-            console.log(result.descriptions);
-            console.log(result.celebrities);
-            images=result.image_urls;
-            descriptions=result.descriptions;
-            celebrities=result.celebrities;
-        }});
+        var array=$('.images_url_hidden');
+        for(var i=0;i<array.length;i++){
+            images[i]=$(array[i]).html();
+            console.log(images[i]);
+        }
+        array=$('.images_description_hidden');
+        for(var i=0;i<array.length;i++){
+            descriptions[i]=$(array[i]).html();
+        }
+        array=$('.images_name_hidden');
+        for(var i=0;i<array.length;i++){
+            celebrities[i]=$(array[i]).html();
+        }
     });
+
+
+
+
+    /**
+     * remove play movie inner html from its div permanently.
+     * this code must be added to its div when user clicks on play video button.
+     */
+    jQuery(window).load(function(){
+        var movie_element=$('.frame_movie_wrapper div')[0];
+        play_movie_innerHTML=$(movie_element).html();
+        $(movie_element).html('');
+    });
+
+
+
+
+
+
+
+
+
+
+
 
 });
 

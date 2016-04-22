@@ -32,11 +32,11 @@ def convert_to_miladi(value):
 def get_month(date):
     return date['month']
 
-
+@register.filter()
 def get_year(date):
     return date['year']
 
-
+@register.filter()
 def get_day(date):
     return date['day']
 

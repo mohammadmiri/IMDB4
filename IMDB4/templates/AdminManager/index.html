@@ -25,42 +25,42 @@
 
     <div class="border_bottom_div overflow_auto">
         <div id="first_films">
-            <div id="movies_movie_0" class="movie_image_info_wrapper">
+            <div id="movies_movie_0" class="movie_image_info_wrapper play_movie">
                 <img src="{{ Teasers.0.image.url }}">
-                <button type="button" class="play_movie" id="play_movie_0">
+                <button type="button" id="play_movie_0">
                     <img src="{% static 'icons/play.png' %}">
                 </button>
                 <div class="movie_image_info">
                     <p>
                         {{ Teasers.0.movie.name }}
                     </br>
-                        hidden
+                        {{ Teasers.0.date_uploaded|convert_to_shamsi|get_year|IntegerToPersian }}
                     </p>
                 </div>
             </div>
-            <div id="movies_movie_1" class="movie_image_info_wrapper">
+            <div id="movies_movie_1" class="movie_image_info_wrapper play_movie">
                 <img src="{{ Teasers.1.image.url }}">
-                <button type="button" class="play_movie" id="play_movie_1">
+                <button type="button" id="play_movie_1">
                     <img src="{% static 'icons/play.png' %}">
                 </button>
                 <div class="movie_image_info">
                     <p>
                         {{ Teasers.1.movie.name }}
                         </br>
-                        manam
+                        {{ Teasers.1.date_uploaded|convert_to_shamsi|get_year|IntegerToPersian }}
                     </p>
                 </div>
             </div>
-            <div id="movies_movie_2" class="movie_image_info_wrapper">
+            <div id="movies_movie_2" class="movie_image_info_wrapper play_movie">
                 <img src="{{ Teasers.2.image.url }}">
-                <button type="button" class="play_movie" id="play_movie_2">
+                <button type="button" id="play_movie_2">
                     <img src="{% static 'icons/play.png' %}">
                 </button>
                 <div class="movie_image_info">
                     <p>
                         {{ Teasers.2.movie.name }}
                         </br>
-                        derakht
+                        {{ Teasers.2.date_uploaded|convert_to_shamsi|get_year|IntegerToPersian }}
                     </p>
                 </div>
             </div>
@@ -372,7 +372,6 @@
                     </div>
                 </div>
 
-
             </div>
 
 
@@ -433,18 +432,26 @@
             </p>
         </div>
         <a href="">
-            <img src="{{ gallery1.0.image.url }}" id="last_images_0" class="last_images_class">
+            <div id="last_images_0" class="last_images_class">
+                <img src="{{ gallery1.0.image.url }}">
+            </div>
         </a>
         <div id="last_images_1_2">
             <a href="">
-                <img src="{{ gallery2.0.image.url }}" id="last_images_1" class="last_images_class">
+                <div id="last_images_1" class="last_images_class">
+                    <img src="{{ gallery2.0.image.url }}">
+                </div>
             </a>
             <a href="">
-                <img src="{{ gallery3.0.image.url }}" id="last_images_2" class="last_images_class">
+                <div id="last_images_2" class="last_images_class">
+                    <img src="{{ gallery3.0.image.url }}">
+                </div>
             </a>
         </div>
         <a href="">
-            <img src="{{ gallery4.0.image.url }}" id="last_images_3" class="last_images_class">
+            <div id="last_images_3" class="last_images_class">
+                <img src="{{ gallery4.0.image.url }}" >
+            </div>
         </a>
     </div>
 
@@ -455,7 +462,9 @@
             متولدین امروز
         </p>
         {% for item in Celebrity|slice:':3' %}
-            <img src="{{ item.picture.url }}" class="birthday_images">
+            <a href="{% url 'CelebrityManager_show_celebrity' item.id  %}">
+                <img src="{{ item.picture.url }}" class="birthday_images">
+            </a>
         {% endfor %}
     </div>
 

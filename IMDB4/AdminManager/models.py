@@ -97,6 +97,7 @@ class Gallery(models.Model):
     )
     galleryNumber = models.IntegerField(null=True, blank=True, verbose_name='شماره گالری', )
 
-
+    def __str__(self):
+        return self.name
 
 

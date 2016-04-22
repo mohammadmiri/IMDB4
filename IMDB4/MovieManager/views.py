@@ -10,9 +10,7 @@ from django.http import HttpResponse
 
 # this function render the main page of each movie and show its detail (e.g. actors, director, ...)
 def show_movie(request, id):
-    print('before all'+id)
     movie = list(Movie.objects.filter(id=id))[0]
-    print('after getting movie')
     reviewer_review_count = Reviewer_Review.objects.filter(movie=movie, show_it=True).count()
     user_review_count = User_Review.objects.filter(movie=movie, show_it=True).count()
     award_simorgh_count = Award.objects.filter(movie=movie, festival=0, candidate_type=0 ).count()
@@ -21,7 +19,7 @@ def show_movie(request, id):
     candidate_cinemaHome_count = Award.objects.filter(movie=movie, festival=1, candidate_type=1).count()
     total_candidate_count = candidate_cinemaHome_count+candidate_simorgh_count
     total_award_count = award_cinemaHome_count+award_simorgh_count
-    images = movie.images.all()[:4]
+    images = movie.images.all()
     actors = movie.get_actors()
     # avamel
     kargardan = list(Celebrity.objects.filter(agent__movie=movie, agent__role='kargardan'))
@@ -141,32 +139,32 @@ def all_crew(request, id):
 
 
 
-def festival_awards(request,festival):
-    awards=[]
-    soda_best_movie=[]
-    soda_best_movie_awarded=list(Award.objects.filter(festival=festival, candidate_type=0))
-    soda_best_movie_diploma=list(Award.objects.filter(festival=festival, candidate_type=1))
-    soda_best_movie_candidate=list(Award.objects.filter(festival=festival, candidate_type=2))
-    soda_best_movie.append(('برنده بهترین سیمرغ بلورین',soda_best_movie_awarded))
-    soda_best_movie.append(('دیپلم افتخار',soda_best_movie_diploma))
-    soda_best_movie.append(('نامزد',soda_best_movie_candidate))
-
-    soda_best_director = []
-    soda_best_director_awarded = list(Award.objects.filter(festival=festival, candidate_type=0))
-    soda_best_director_diploma = list(Award.objects.filter(festival=festival, candidate_type=1))
-    soda_best_director_candidate = list(Award.objects.filter(festival=festival, candidate_type=2))
-    soda_best_director.append(('برنده بهترین سیمرغ بلورین', soda_best_director_awarded))
-    soda_best_director.append(('دیپلم افتخار', soda_best_director_diploma))
-    soda_best_director.append(('نامزد', soda_best_director_candidate))
-
-    soda=[]
-    soda.append(('بهترین فیلم',soda_best_movie))
-    soda.append(('بهترین کارگردانی',soda_best_director))
-
-    awards.append(('سودای سیمرغ',soda))
-
-    context={'festival_name':'جشنواره فیلم فجر', 'festival_year':'دوره سی و سوم. ۱۳۹۳', 'awards':awards}
-    return render(request,'MovieManager/festival_awards.html',context)
+# def festival_awards(request,festival):
+#     awards=[]
+#     soda_best_movie=[]
+#     soda_best_movie_awarded=list(Award.objects.filter(festival=festival, candidate_type=0))
+#     soda_best_movie_diploma=list(Award.objects.filter(festival=festival, candidate_type=1))
+#     soda_best_movie_candidate=list(Award.objects.filter(festival=festival, candidate_type=2))
+#     soda_best_movie.append(('برنده بهترین سیمرغ بلورین',soda_best_movie_awarded))
+#     soda_best_movie.append(('دیپلم افتخار',soda_best_movie_diploma))
+#     soda_best_movie.append(('نامزد',soda_best_movie_candidate))
+#
+#     soda_best_director = []
+#     soda_best_director_awarded = list(Award.objects.filter(festival=festival, candidate_type=0))
+#     soda_best_director_diploma = list(Award.objects.filter(festival=festival, candidate_type=1))
+#     soda_best_director_candidate = list(Award.objects.filter(festival=festival, candidate_type=2))
+#     soda_best_director.append(('برنده بهترین سیمرغ بلورین', soda_best_director_awarded))
+#     soda_best_director.append(('دیپلم افتخار', soda_best_director_diploma))
+#     soda_best_director.append(('نامزد', soda_best_director_candidate))
+#
+#     soda=[]
+#     soda.append(('بهترین فیلم',soda_best_movie))
+#     soda.append(('بهترین کارگردانی',soda_best_director))
+#
+#     awards.append(('سودای سیمرغ',soda))
+#
+#     context={'festival_name':'جشنواره فیلم فجر', 'festival_year':'دوره سی و سوم. ۱۳۹۳', 'awards':awards}
+#     return render(request,'MovieManager/festival_awards.html',context)
 
 
 

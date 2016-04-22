@@ -230,7 +230,7 @@ class Avamel(models.Model):
 
     def __str__(self):
         return "person '{}' in movie '{}' as '{}'".format(
-            self.celebrity.name.__str__(), self.movie.name.__str__(), self.role
+            self.celebrity.name.__str__(), self.movie.name.__str__(), self.role.__str__()
         )
 
 

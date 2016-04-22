@@ -50,7 +50,7 @@
                     <img src="{{ item.poster.url }}" class="movies_image">
                     <p class="movies_name">
                         {{ forloop.counter }}-
-                        <a href="">
+                        <a href="{% url 'MovieManager_show_movie' item.id %}">
                             {{ item.name }}
                         </a>
                         ({{ item.year }})
@@ -88,7 +88,7 @@
             {% for item in sideBar_mostPoints %}
                 <div class="sideBar_mostRate_item">
                     <p>
-                        <a href="{{ item.url }}">
+                        <a href="">
                             {{ item.name }}
                         </a>
                     </p>

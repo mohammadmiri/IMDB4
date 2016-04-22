@@ -32,7 +32,7 @@
                 )
                 </br>
                 <dum id="info_time">
-                    {{ movie.duration }}
+                    {{ movie.duration|IntegerToPersian }}
                     دقیقه
                     |
                     {% for genre in movie.genre.all %}
@@ -45,7 +45,7 @@
                 <div id="info_point_number">
                     <p>
                         <dum id="info_point_number_1">
-                            {{ movie.rate }}
+                            {{ movie.rate|FloatToPersian }}
                         </dum>
                         </br>
                         <dum id="info_point_number_2">
@@ -72,7 +72,7 @@
                         </a>
                         </br>
                         کارگردان:
-                        <a href="">
+                        <a href="{% url 'CelebrityManager_show_celebrity' kargardan.0.id %}">
                             {{ kargardan.0.name }}
                         </a>
                     </p>
@@ -87,18 +87,23 @@
                 <div id="info_images">
                     {% for item in images|slice:':3' %}
                         <div class="info_images_1 img_wrapper">
-                            <img src="{{ item.image.url }}" class="info_images_1">
+                            <img src="{{ item.image.url }}">
                         </div>
                     {% endfor %}
-                    <div class="info_images_1 img_wrapper">
-                        <img src="{{ images.3.image.url }}" class="info_images_1">
+                    <div class="info_images_1 play_movie">
+                        <img src="{{ images.3.image.url }}">
+                        <button type="button">
+                            <img src="{% static 'icons/play.png' %}">
+                        </button>
                     </div>
 
-                    <p id="info_seeAll">
-                        <a>
-                            همه عکس ها و ویدیوها>>
-                        </a>
-                    </p>
+                    {% if images|length > 3 %}
+                        <p id="info_seeAll">
+                            <a>
+                                همه عکس ها و ویدیوها>>
+                            </a>
+                        </p>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -108,26 +113,28 @@
             <div id="prize" class="border_bottom_div">
                 <div id="prize_border">
                     {% if award_simorgh_count %}
-                        <p id="prize">
-                        برنده
-                        {{ award_simorgh_count|IntegerToPersian }}
-                        سیمرغ بلورین.
-                        </p>
-                    {% endif %}
-                    {% if total_award_count %}
-                        {{ total_award_count|IntegerToPersian }}
-                        جایزه و
-                        {{ total_candidate_count|IntegerToPersian }}
-                        نامزدی دیگر
+                        <div>
+                            <p id="prize">
+                            برنده
+                            {{ award_simorgh_count|IntegerToPersian }}
+                            سیمرغ بلورین.
+                        {% endif %}
+                        {% if total_award_count %}
+                            {{ total_award_count|IntegerToPersian }}
+                            جایزه و
+                            {{ total_candidate_count|IntegerToPersian }}
+                            نامزدی دیگر
+                            </p>
+                        </div>
                     {% endif %}
                     {% if top100_rank %}
                         {{ top100_rank }}
-                        <a href="">
+                        <a href="{% url 'MovieManager_top_100' %}">
                         ۱۰۰ فیلم برتر
                         </a>
                     {% endif %}
                     <p id="prize_border_seeAll">
-                        <a href="">
+                        <a href="{% url 'MovieManager_show_awards' movie.id %}">
                         مشاهده همه جوایز>>
                         </a>
                     </p>
@@ -141,8 +148,15 @@
             </p>
 
             {% for actor, actName in actors.items|slice:":3" %}
-                <div class="mainActors_images img_wrapper">
-                    <img src="{{ actor.picture.url }}" class="mainActors_images">
+                <div class="mainActors_images img_wrapper movie_image_info_wrapper">
+                    <img src="{{ actor.picture.url }}">
+                    <div class="movie_image_info">
+                        <p>
+                            {{ actor.name }}
+                        </br>
+                            {{ actName }}
+                        </p>
+                    </div>
                 </div>
             {% endfor %}
         </div>
@@ -162,7 +176,7 @@
                     </div>
                     <div class="fActors_fullList_name">
                         <p>
-                            <a href="">
+                            <a href="{% url 'CelebrityManager_show_celebrity' actor.id %}">
                                 {{ actor.name }}
                             </a>
                         </p>
@@ -175,7 +189,7 @@
                 </div>
             {% endfor %}
             <p id="fActors_fullList_seeAll">
-                <a href="">
+                <a href="{% url 'MovieManager_show_movie' movie.id %}">
                     همه عوامل فیلم>>
                 </a>
             </p>
@@ -315,6 +329,8 @@
     {% endblock %}
 
 
+
+
     {% block sideBar_arbitrary %}
         <div class="sideBar_divContainer">
             <div class="back_gray_dark font_white sideBar_header">
@@ -388,6 +404,21 @@
 {#    slider#}
     {% block over_content %}
 
+
+        <div id="frame_movie_background_dark">
+        </div>
+        <div id="play_movie_frame" class="frame_movie_wrapper">
+            <button type="button" class="exit_play_movie">
+                <img src="{% static 'icons/index/closeSliderButton.png' %}">
+            </button>
+            <div>
+                {{ movie.teaser.video_link|safe }}
+            </div>
+        </div>
+
+
+
+
         <div id="slider_background_dark">
         </div>
 
@@ -405,10 +436,10 @@
 
                 <div id="slider_images">
                     <ul>
-                        {% for image in slider_images %}
+                        {% for image in images %}
                                 <li>
                                     <button type="button" class="slider_images_button">
-                                        <img src="{{ image }}" class="slider_images_image"
+                                        <img src="{{ image.image.url }}" class="slider_images_image"
                                              id="{{ forloop.counter0 }}">
                                     </button>
                                 </li>
@@ -433,6 +464,23 @@
             </div>
 
         </div>
+
+
+        <div style="display: none;">
+            {% for image in images %}
+                <div class="images_url_hidden">
+                    {{ image.image.url }}
+                </div>
+                <div class="images_description_hidden">
+                    {{ image.description }}
+                </div>
+                <div class="images_name_hidden">
+                    {{ image.name }}
+                </div>
+            {% endfor %}
+        </div>
+
+
 
     {% endblock %}
 

@@ -18,8 +18,8 @@ class Celebrity(models.Model):
     birthday = models.DateField(null=True, blank=True, verbose_name='تاریخ تولد', )
     birthPlace = models.CharField(max_length=80, null=True, blank=True, verbose_name='محل تولد', )
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
     # is for test and should be moved to celebrity model
     # this function should return the top 4 rated movie related to specific celebrity
