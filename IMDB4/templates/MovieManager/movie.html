@@ -59,6 +59,14 @@
                 {% endfor %}
 
                 <div id="info_info2">
+                    <div id="info_info2_circles">
+                        {% for item in user_rate_list %}
+                            <img src="{% static 'icons/movie/redCircle.png' %}" class="info_circles">
+                        {% endfor %}
+                        {% for item in user_sub_rate_list %}
+                            <img src="{% static 'icons/movie/whiteCircle.png' %}" class="info_circles">
+                        {% endfor %}
+                    </div>
                     <p>
                         {{ reviewer_review_count|IntegerToPersian }}
                         نقد منتقدان
@@ -189,7 +197,7 @@
                 </div>
             {% endfor %}
             <p id="fActors_fullList_seeAll">
-                <a href="{% url 'MovieManager_show_movie' movie.id %}">
+                <a href="{% url 'MovieManager_all_crew' movie.id %}">
                     همه عوامل فیلم>>
                 </a>
             </p>

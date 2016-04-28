@@ -12,7 +12,7 @@ class Genre(models.Model):
     name = models.CharField(max_length=80)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 
@@ -20,7 +20,7 @@ class KeyWord(models.Model):
     word = models.CharField(max_length=80)
 
     def __str__(self):
-        return self.word
+        return str(self.word)
 
 
 
@@ -42,7 +42,7 @@ class Movie(models.Model):
     awards = models.ManyToManyField(Celebrity, through='Award', verbose_name='جوایز', )
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     # this function set the rate number
     def set_rate_value(self):
@@ -132,7 +132,7 @@ class Teaser(models.Model):
 
     def __str__(self):
         return "teaser '{}'".format(
-            self.movie.name
+            str(self.movie.name)
         )
 
 
@@ -178,7 +178,7 @@ class Post(models.Model):
 
     def __str__(self):
         return "user '{}' posted for movie '{}'".format(
-            self.user.__str__(), self.movie.__str__()
+            str(self.user), str(self.movie)
         )
 
 
@@ -192,7 +192,7 @@ class Act(models.Model):
 
     def __str__(self):
         return "person '{}' acts in movie '{}' as '{}'".format(
-            self.celebrity.__str__(), self.movie.__str__(), self.alias.__str__()
+            str(self.celebrity), str(self.movie), str(self.alias)
         )
 
 
@@ -230,7 +230,7 @@ class Avamel(models.Model):
 
     def __str__(self):
         return "person '{}' in movie '{}' as '{}'".format(
-            self.celebrity.name.__str__(), self.movie.name.__str__(), self.role.__str__()
+            str(self.celebrity.name), str(self.movie.name), str(self.role)
         )
 
 
@@ -244,7 +244,7 @@ class User_Review(models.Model):
 
     def __str__(self):
         return "user '{}' criticize movie '{}'".format(
-            self.userPro.__str__(), self.movie.__str__()
+            str(self.userPro), str(self.movie)
         )
 
 
@@ -258,7 +258,7 @@ class Reviewer_Review(models.Model):
 
     def __str__(self):
         return "critic '{}' criticize movie '{}'".format(
-            self.nameOfCritic.__str__(), self.movie.__str__()
+            str(self.nameOfCritic), str(self.movie)
         )
 
 
@@ -270,7 +270,7 @@ class RateUserForMovie(models.Model):
 
     def __str__(self):
         return "user '{}' rated '{}' to movie '{}'".format(
-            self.user.__str__(), self.rate.__str__(), self.movie.__str__()
+            str(self.user), str(self.rate), str(self.movie)
         )
 
 

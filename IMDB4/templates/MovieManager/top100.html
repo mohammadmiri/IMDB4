@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load toPersian %}
 
 <!DOCTYPE html>
 <html>
@@ -49,7 +50,7 @@
                 <div class="movies_items">
                     <img src="{{ item.poster.url }}" class="movies_image">
                     <p class="movies_name">
-                        {{ forloop.counter }}-
+                        {{ forloop.counter|IntegerToPersian }}-
                         <a href="{% url 'MovieManager_show_movie' item.id %}">
                             {{ item.name }}
                         </a>
@@ -59,11 +60,11 @@
                         <img src="{% static 'icons/100film/eye.png' %}" class="movies_eye">
                     </a>
                     <dum class="movies_commentNumber">
-                        {{ item.numUserRated }}
+                        {{ item.numUserRated|IntegerToPersian }}
                     </dum>
                     <div class="movies_point">
                         <p>
-                            {{ item.rate }}
+                            {{ item.rate|FloatToPersian }}
                         </p>
                     </div>
                 </div>

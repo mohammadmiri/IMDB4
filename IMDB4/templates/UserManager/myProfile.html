@@ -8,10 +8,8 @@
     <meta charset="UTF-8">
     <title></title>
     {% block load_files %}
-
         <link rel="stylesheet" type="text/css" href="{% static 'UserManager/css/myProfile_styleSheet.css' %}">
         <script rel="script" src="{% static 'UserManager/js/myProfile_JS.js' %}" language="JavaScript"></script>
-
     {% endblock %}
 </head>
 <body>
@@ -20,11 +18,11 @@
 
     <div id="user_information" class="">
         <div class="test">
-            <img src="{% static  picture_url %}">
+            <img src="{{ picture_url }}">
         </div>
         <div class="">
             <p id="user_information_username">
-                {{ user.user.username }}
+                {{ user.name }}
             </p>
             <p id="user_information_details">
                 {% if user.hasProAccount  %}
@@ -57,7 +55,6 @@
                 <div class="testClass">
                     <img src={{ movie.movie.poster.url }}>
                     <div class="red_background_rate">
-                        gtguubu
                         {{ user.movie.rate }}
                     </div>
                 </div>

@@ -22,9 +22,9 @@ from django.contrib import admin
 from django.conf.urls.static import static
 
 urlpatterns = [
+    url(r'^user/', include("UserManager.urls")),
     url(r'^movie/', include("MovieManager.urls")),
     url(r'^home/', include("AdminManager.urls")),
-    url(r'^user/', include("UserManager.urls")),
     url(r'^celebrity/', include("CelebrityManager.urls")),
     url(r'^admin/', admin.site.urls),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

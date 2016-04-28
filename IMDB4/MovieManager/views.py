@@ -1,9 +1,9 @@
 
-from .models import Movie, Award, Avamel, Reviewer_Review, User_Review, Post, Movie_Celebrity_Image, Act
+from .models import Movie, Award, Avamel, Reviewer_Review, User_Review, Post, Movie_Celebrity_Image, Act, RateUserForMovie
 from CelebrityManager.models import Celebrity
 
+
 from django.shortcuts import render
-from django.http import HttpResponse
 
 
 
@@ -27,13 +27,13 @@ def show_movie(request, id):
     # review
     user_review = list(User_Review.objects.filter(movie=movie, show_it=True).order_by('date'))
     posts = list(Post.objects.filter(movie=movie, show_it=True).order_by('date')[:50])
-
-
+    #rate
+    # user_rate_num=RateUserForMovie.objects.filter(movie=movie, user=request.user)
 
     context = {'movie':movie, 'reviewer_review_count':reviewer_review_count, 'user_review_count':user_review_count,
                'award_simorgh_count':award_simorgh_count, 'total_award_count':total_award_count
                 ,'total_candidate_count':total_candidate_count, 'actors':actors, 'images':images,'kargardan':kargardan, 'nevisande':nevisande,
-               'user_review':user_review, 'posts':posts,}
+               'user_review':user_review, 'posts':posts}
     return render(request, 'MovieManager/movie.html', context=context)
 
 
@@ -112,27 +112,27 @@ def sale_table(request):
 def all_crew(request, id):
     movie = Movie.objects.get(id=id)
     avamel = []
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='kargardan')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='nevisande')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='tahiey_konande')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='modir_tolid')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='mojri_tarh')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='dastyar_aval_kargardan')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='barname_riz')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='modir_film_bardari')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='tadvin')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='tarrah_sahne_va_lebas')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='tarrah_chehre_pardazi')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='ahangsaz')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='seda_bardari')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='seda_Gozari_va_mix')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='akkas')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='jelvehaye_vije_meydani')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='jelvehaye_vije_basari')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='monshi_sahne')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='moshaver_film_name')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='moshaver_honari')))
-    avamel.append(list(Celebrity.objects.filter(agent__movie=movie, agent__role='moshaver')))
+    avamel.append(('kargardan',list(Celebrity.objects.filter(agent__movie=movie, agent__role='kargardan'))))
+    avamel.append(('nevisande',list(Celebrity.objects.filter(agent__movie=movie, agent__role='nevisande'))))
+    avamel.append(('tahiey_konande',list(Celebrity.objects.filter(agent__movie=movie, agent__role='tahiey_konande'))))
+    avamel.append(('modir_tolid',list(Celebrity.objects.filter(agent__movie=movie, agent__role='modir_tolid'))))
+    avamel.append(('mojri_tarh',list(Celebrity.objects.filter(agent__movie=movie, agent__role='mojri_tarh'))))
+    avamel.append(('dastyar_aval_kargardan',list(Celebrity.objects.filter(agent__movie=movie, agent__role='dastyar_aval_kargardan'))))
+    avamel.append(('barname_riz',list(Celebrity.objects.filter(agent__movie=movie, agent__role='barname_riz'))))
+    avamel.append(('modir_film_bardari',list(Celebrity.objects.filter(agent__movie=movie, agent__role='modir_film_bardari'))))
+    avamel.append(('tadvin',list(Celebrity.objects.filter(agent__movie=movie, agent__role='tadvin'))))
+    avamel.append(('tarrah_sahne_va_lebas',list(Celebrity.objects.filter(agent__movie=movie, agent__role='tarrah_sahne_va_lebas'))))
+    avamel.append(('tarrah_chehre_pardazi',list(Celebrity.objects.filter(agent__movie=movie, agent__role='tarrah_chehre_pardazi'))))
+    avamel.append(('ahangsaz',list(Celebrity.objects.filter(agent__movie=movie, agent__role='ahangsaz'))))
+    avamel.append(('seda_bardari',list(Celebrity.objects.filter(agent__movie=movie, agent__role='seda_bardari'))))
+    avamel.append(('seda_Gozari_va_mix',list(Celebrity.objects.filter(agent__movie=movie, agent__role='seda_Gozari_va_mix'))))
+    avamel.append(('akkas',list(Celebrity.objects.filter(agent__movie=movie, agent__role='akkas'))))
+    avamel.append(('jelvehaye_vije_meydani',list(Celebrity.objects.filter(agent__movie=movie, agent__role='jelvehaye_vije_meydani'))))
+    avamel.append(('jelvehaye_vije_basari',list(Celebrity.objects.filter(agent__movie=movie, agent__role='jelvehaye_vije_basari'))))
+    avamel.append(('monshi_sahne',list(Celebrity.objects.filter(agent__movie=movie, agent__role='monshi_sahne'))))
+    avamel.append(('moshaver_film_name',list(Celebrity.objects.filter(agent__movie=movie, agent__role='moshaver_film_name'))))
+    avamel.append(('moshaver_honari',list(Celebrity.objects.filter(agent__movie=movie, agent__role='moshaver_honari'))))
+    avamel.append(('moshaver',list(Celebrity.objects.filter(agent__movie=movie, agent__role='moshaver'))))
     acts = Act.objects.filter(movie=movie)
     context = {'movie':movie, 'avamel':avamel, 'acts':acts}
     return render(request, 'MovieManager/allCrew.html', context)

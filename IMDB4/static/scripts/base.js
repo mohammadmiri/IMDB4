@@ -7,6 +7,19 @@ $(document).ready(function(){
     var max_index;
     var mostVisited_ids=Array();
 
+
+
+    var array=$('#sideBar_mostVisited_names_hidden p');
+    for(var i=0;i<array.length;i++){
+        mostVisited_ids[i]=$(array[i]).attr('id');
+    }
+
+
+
+
+
+
+
     $('#base_main_search_box').keyup(function () {
         console.log('search box');
         var value=document.getElementById('base_main_search_box').value;
@@ -47,7 +60,6 @@ $(document).ready(function(){
                 movieDescription.className='searchSuggestion_description';
                 movieImage.className='searchSuggestion_image';
 
-                // movieLink.href='http://localhost:8000/all_crew/';
                 movieLink.href='http://localhost:8000/movie/show/'+movies_id[i]+'/';
                 movieName.innerHTML=movies_name[i]+' ('+movies_year[i]+')';
                 movieDescription.innerHTML=movies_director[i];
@@ -74,7 +86,6 @@ $(document).ready(function(){
                 celebDescription.className='searchSuggestion_description';
                 celebImage.className='searchSuggestion_image';
 
-                // celebLink.href='http://localhost:8000/all_crew/';
                 celebLink.href='http://localhost:8000/celebrity/show/'+celebrities_id[i]+'/';
                 celebName.innerHTML=celebrities_name[i];
                 console.log(celebrities_profession.length);
@@ -134,6 +145,7 @@ $(document).ready(function(){
         $('#sideBar_mostVisited_control div p').html(index);
         $('#sideBar_mostVisited_control a p').html(mostVisited_names[index-1]);
         $('#sideBar_mostVisited_control a').attr('href','http://localhost:8000/movie/show/'+mostVisited_ids[index-1]+'/');
+
     });
 
     $('#mostVisited_arrowLeft').click(function(){
@@ -154,7 +166,7 @@ $(document).ready(function(){
         $('#sideBar_mostVisited_control div p').html(index);
         $('#sideBar_mostVisited_control a p').html(mostVisited_names[index-1]);
         $('#sideBar_mostVisited_control a').attr('href','http://localhost:8000/movie/show/'+mostVisited_ids[index-1]+'/');
-        console.log('http://localhost:8000/movie/show/'+mostVisited_ids[index-1]+'/');
+
 
 
     });
@@ -167,18 +179,9 @@ $(document).ready(function(){
         var array=$('#sideBar_mostVisited_names_hidden p');
         for(var i=0;i<array.length;i++){
             mostVisited_names[i]=$(array[i]).html();
-            mostVisited_ids[i]=$(array[i]).attr('id');
         }
-
         index=1;
         max_index=array.length;
-        console.log(max_index);
-
-        // $.ajax({url:'http://localhost:8000/most_visited/',success:function(result){
-        //     console.log(result);
-        //     console.log('result');
-        //     mostVisited_names=result.mostVisited_names;
-        // }});
     });
 
 

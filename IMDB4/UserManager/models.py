@@ -37,7 +37,7 @@ class UserIMDB(models.Model):
             return self.picture.url
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 # this class map a big Integer number to each user existing in project for the following reasons:

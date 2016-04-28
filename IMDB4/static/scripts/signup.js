@@ -4,26 +4,50 @@
 
 $(document).ready(function(){
     
-    
+    console.log('start');
+
+
     $('.signup_searchType').keyup(function(event){
         var element=event.target;
         var value=element.value;
-        $.ajax({url:"http://localhost:8000/user/search_celebrities/"+value,success:function(result){
-            var id=element.id;
-            var parent=event.target.parentElement.parentElement;
-            var add=parent.getElementsByClassName('signup_suggestion')[0];
-            add.style.display='block';
-            var child=add.firstChild;
-            while(add.firstChild){
-                add.removeChild(add.firstChild);
-            }
-            for(var i=0;i<result.celebrities.length;i++){
-                var div=document.createElement('div');
-                div.innerHTML=result.celebrities[i].name;
-                div.className='signup_oneSuggestion';
-                add.appendChild(div);
-            }
-        }});
+        if(element.id=='signup_flavorMovie_inputText'){
+            $.ajax({url: "http://localhost:8000/user/search_movies/" + value+'/', success: function (result) {
+                    var id = element.id;
+                    var parent = event.target.parentElement.parentElement;
+                    var add = parent.getElementsByClassName('signup_suggestion')[0];
+                    add.style.display = 'block';
+                    var child = add.firstChild;
+                    while (add.firstChild) {
+                        add.removeChild(add.firstChild);
+                    }
+                    for (var i = 0; i < result.films.length; i++) {
+                        var div = document.createElement('div');
+                        div.innerHTML = result.films[i].name;
+                        div.className = 'signup_oneSuggestion';
+                        add.appendChild(div);
+                    }
+                }
+            });
+        }
+        else {
+            $.ajax({url: "http://localhost:8000/user/search_celebrities/" + value+'/', success: function (result) {
+                    var id = element.id;
+                    var parent = event.target.parentElement.parentElement;
+                    var add = parent.getElementsByClassName('signup_suggestion')[0];
+                    add.style.display = 'block';
+                    var child = add.firstChild;
+                    while (add.firstChild) {
+                        add.removeChild(add.firstChild);
+                    }
+                    for (var i = 0; i < result.celebrities.length; i++) {
+                        var div = document.createElement('div');
+                        div.innerHTML = result.celebrities[i].name;
+                        div.className = 'signup_oneSuggestion';
+                        add.appendChild(div);
+                    }
+                }
+            });
+        }
     });
     
     

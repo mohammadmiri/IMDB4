@@ -5,6 +5,7 @@ from CelebrityManager.models import Celebrity
 from django.contrib.auth.models import User
 from django import forms
 from django.db.models import Model
+from django.core.exceptions import ObjectDoesNotExist
 
 import datetime
 
@@ -75,6 +76,7 @@ class UserIMDBForms(forms.Form):
         self.splitter_adder_director(self.cleaned_data['favourite_directors'], user)
         user.aboutMe = self.cleaned_data['about_me']
         # saving
+        djangoUser.save()
         user.save()
 
 
@@ -95,7 +97,7 @@ class UserIMDBForms(forms.Form):
             try:
                 movie = Movie.objects.get(name=name)
                 user.favouriteMovie.add(movie)
-            except Model.DoesNotExist:
+            except ObjectDoesNotExist:
                 pass
             except Model.MultipleObjectsReturned:
                 pass
@@ -106,7 +108,7 @@ class UserIMDBForms(forms.Form):
             try:
                 celebrity = Celebrity.objects.get(name=name)
                 user.favouriteActor.add(celebrity)
-            except Model.DoesNotExist:
+            except ObjectDoesNotExist:
                 pass
             except Model.MultipleObjectsReturned:
                 pass

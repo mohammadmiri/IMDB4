@@ -22,28 +22,22 @@ def login_page(request):
             redirect(reversed("AdminManager/homepage"))
         else:
             errors="wrong username or password"
-    return render(request, "user/login.html", {'errors':errors})
+    return render(request, "UserManager/login.html", {'errors':errors})
 
 
 
 def signup_page(request):
     errors=""
-    print('before all')
     if request.method == "POST":
-        print('after post')
         form = UserIMDBForms(request.POST)
-        print('after form: '+form.__str__())
         if form.is_valid():
-            print('if valid'+str(request.POST))
             form.save()
-            print('after save')
         else:
-            print('errors: '+str(form.errors))
             errors = ''
     else:
         form = UserIMDBForms()
     context = {'form':form}
-    return render(request, "UserManager/signup.html", context)
+    return render(request, 'UserManager/signup.html', context)
 
 
 
@@ -60,6 +54,7 @@ def show_suggestion_search_celebrity(request, value):
 
 
 def view_profile(request, username):
+    print('view profile')
     user = User.objects.get(username=username)
     userIMDB = UserIMDB.objects.get(user=user)
     picture_url = userIMDB.get_picture()

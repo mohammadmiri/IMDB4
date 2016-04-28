@@ -1,6 +1,5 @@
 {% extends 'base/base.html' %}
-{#{% load acountTags %}#}
-{% load staticfiles %}
+{% load static %}
 {% load checkType %}
 
 <!DOCTYPE html>
@@ -18,7 +17,7 @@
 
     {% block content %}
 
-        <form method="POST" action="{% url 'UserManager_signup' %}" id="signup_form">
+        <form method="POST" action="" id="signup_form">
             {% csrf_token %}
 
             <div id="signup_topContent">
@@ -175,7 +174,7 @@
                         <input type="text" name="{{ form.favourite_movies.name }}" id="signup_flavorMovie_inputText"
                                class="signup_searchType">
                         <div class="signup_suggestion">
-{#                            <div class="signup_oneSuggestion">#}
+
                         </div>
                         <div class="signup_addSuggestion">
 
@@ -252,10 +251,6 @@
                                id="signup_formButtons_submit">
                     </div>
                 </div>
-
-
-
-
 
             </div>
 

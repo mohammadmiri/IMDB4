@@ -18,7 +18,7 @@
 
 {#    these css and js files must be loaded at the end.#}
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+{#    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>#}
 {#    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>#}
 {#    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">#}
 
@@ -368,47 +368,49 @@
 
 
             {% block sideBar_mostVisited %}
-                <div class="sideBar_divContainer">
-                    <div class="back_gray_dark font_white sideBar_header">
-                        <p>
-                            پربازدیدترین ها
-                        </p>
-                    </div>
-                    <div id="sideBar_mostVisited" class="sideBar_content back_gray_light">
-                        <div id="sideBar_mostVisited_control">
-                            <a href="{% url 'MovieManager_show_movie' top_rated_movies.0.id %}">
-                                <p>
-                                    {{ top_rated_movies.0 }}
-                                </p>
-                                <div id="sideBar_mostVisited_names_hidden" style="display: none;">
+                {% if top_rated_movies %}
+                    <div class="sideBar_divContainer">
+                        <div class="back_gray_dark font_white sideBar_header">
+                            <p>
+                                پربازدیدترین ها
+                            </p>
+                        </div>
+                        <div id="sideBar_mostVisited" class="sideBar_content back_gray_light">
+                            <div id="sideBar_mostVisited_control">
+                                <a href="{% url 'MovieManager_show_movie' top_rated_movies.0.id %}">
+                                    <p>
+                                        {{ top_rated_movies.0 }}
+                                    </p>
+                                    <div id="sideBar_mostVisited_names_hidden" style="display: none;">
+                                        {% for movie in top_rated_movies %}
+                                            <p id="{{ movie.id }}">
+                                                {{ movie.name }}
+                                            </p>
+                                        {% endfor %}
+                                    </div>
+                                </a>
+                                <div>
+                                    <p>
+                                        1
+                                    </p>
+                                </div>
+                                <button type="button" id="mostVisited_arrowRight">
+                                    <img src="{% static 'icons/base/arrowRight.png' %}" id="mostVisited_arrowRight">
+                                </button>
+                                <button type="button" id="mostVisited_arrowLeft">
+                                    <img src="{% static 'icons/base/arrowLeft.png' %}" id="mostVisited_arrowLeft">
+                                </button>
+                            </div>
+                            <div id="sideBar_mostVisited_images">
+                                <div>
                                     {% for movie in top_rated_movies %}
-                                        <p id="{{ movie.id }}">
-                                            {{ movie.name }}
-                                        </p>
+                                        <img src="{{ movie.poster.url }}">
                                     {% endfor %}
                                 </div>
-                            </a>
-                            <div>
-                                <p>
-                                    1
-                                </p>
-                            </div>
-                            <button type="button" id="mostVisited_arrowRight">
-                                <img src="{% static 'icons/base/arrowRight.png' %}" id="mostVisited_arrowRight">
-                            </button>
-                            <button type="button" id="mostVisited_arrowLeft">
-                                <img src="{% static 'icons/base/arrowLeft.png' %}" id="mostVisited_arrowLeft">
-                            </button>
-                        </div>
-                        <div id="sideBar_mostVisited_images">
-                            <div>
-                                {% for movie in top_rated_movies %}
-                                    <img src="{{ movie.poster.url }}">
-                                {% endfor %}
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
             {% endblock %}
 
 
