@@ -174,6 +174,10 @@ body {
     top: 1.1cm;
 }
 
+#base_main_header_sign>a{
+    color: #424242;
+}
+
 #base_main_search_box_div{
     position: absolute;
     left: 13.2cm;
@@ -634,6 +638,8 @@ body {
     border: solid;
     border-width: 0 0 0.05cm 0;
     border-color: #aaaaaa;
+    overflow: auto;
+    min-height: 10cm;
 }
 
 
@@ -644,6 +650,7 @@ body {
     border: solid;
     border-width: 0 0 0 0.05cm;
     border-left-color: #aaaaaa;
+    overflow: auto;
 }
 
 
