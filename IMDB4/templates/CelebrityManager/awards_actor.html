@@ -20,7 +20,7 @@
 
     <div class="padding_right padding_left padding_top">
         <div id="info">
-            <img src="{{ celebrity.picture.url }}">
+            <img src="{{ celebrity.get_picture }}">
             <div id="info_name">
                 <p>
                     <a href="{% url 'CelebrityManager_show_celebrity' celebrity.id %}">

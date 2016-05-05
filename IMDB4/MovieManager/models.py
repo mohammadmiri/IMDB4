@@ -72,6 +72,12 @@ class Movie(models.Model):
                     movie_actors[movie] = act
         return movie_actors
 
+    def get_picture(self):
+        if not self.poster:
+            return "{% static 'UserManager/img/avatar.jpg' %}"
+        else:
+            return self.poster.url
+
 
 class dialogue(models.Model):
     movie=models.ForeignKey(Movie, blank=True, verbose_name='فیلم', related_name='dialogues')

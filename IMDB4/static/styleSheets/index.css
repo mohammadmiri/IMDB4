@@ -3,7 +3,7 @@
     margin: 0.2cm 0.2cm 0.2cm 0;
     padding-bottom: 0.2cm;
     width: 16cm;
-    height: 7.5cm;
+    height: 8cm;
     overflow: hidden;
     float: right;
     background-color: #323232;
@@ -11,55 +11,25 @@
 
 #first_films>a{
     float: left;
-    position: relative;
-    top: 0.5cm;
-    left: -4cm;
+    margin-left:0.2cm;
+    /*position: relative;*/
+    /*top: 0.5cm;*/
+    /*left: -4cm;*/
 }
 
-#movies_movie_0{
-    position: relative;
-    left: -15px;
-    top: 10px;
-    width: 375px;
-    height: 120px;
-    float: right;
-    overflow: hidden;
-}
-
-#movies_movie_0>img{
+.teasers>img{
     width:100%;
-    height:auto;
-}
-
-#movies_movie_1{
-    position: relative;
-    left: -15px;
-    top: 20px;
-    width: 375px;
-    height: 120px;
-    float: right;
-    overflow: hidden;
-}
-
-#movies_movie_1>img{
-    width:100%;
-    height:auto;
-}
-
-#movies_movie_2{
-    position: relative;
-    left: 30px;
-    top: -110px;
-    width: 175px;
-    height: 250px;
-    float: left;
-    clear: left;
-    overflow: hidden;
-}
-
-#movies_movie_2>img{
-    width:auto;
     height:100%;
+}
+
+.teasers{
+    position: relative;
+    width: 5cm;
+    height: 7cm;
+    float: left;
+    overflow: hidden;
+    margin-top: 0.2cm;
+    margin-left: 0.25cm;
 }
 
 /*last news*/

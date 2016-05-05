@@ -13,6 +13,8 @@ register = template.Library()
 
 @register.filter()
 def convert_to_shamsi(value):
+    if value is None:
+        return None
     print('value type'+str(type(value)))
     miladi_date = {'year':value.year, 'month':value.month, 'day':value.day}
     shamsi_date = MiladiToShamsi.convert_miladi_to_shamsi(miladi_date)
@@ -23,6 +25,8 @@ def convert_to_shamsi(value):
 
 @register.filter()
 def convert_to_miladi(value):
+    if value is None:
+        return None
     shamsi_date = {'year':value.year, 'month':value.month, 'day':value.day}
     miladi_date = ShamsiToMiladi.convert_shamsi_to_miladi(shamsi_date)
     return miladi_date
@@ -30,19 +34,27 @@ def convert_to_miladi(value):
 
 @register.filter()
 def get_month(date):
+    if date is None:
+        return None
     return date['month']
 
 @register.filter()
 def get_year(date):
+    if date is None:
+        return None
     return date['year']
 
 @register.filter()
 def get_day(date):
+    if date is None:
+        return None
     return date['day']
 
 
 @register.filter()
-def get_diff_date(date:datetime.datetime):
+def get_diff_date(date):
+    if date is None:
+        return None
     diff_day = get_diff_day(datetime.datetime.now() , date)
     if diff_day == 0:
         diff_hour = datetime.datetime.now().hour - date.hour

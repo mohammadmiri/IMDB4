@@ -19,7 +19,7 @@ def login_page(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            redirect(reversed("AdminManager/homepage"))
+            redirect('http://127.0.0.1:8000/home')
         else:
             errors="wrong username or password"
     return render(request, "UserManager/login.html", {'errors':errors})
@@ -54,7 +54,6 @@ def show_suggestion_search_celebrity(request, value):
 
 
 def view_profile(request, username):
-    print('view profile')
     user = User.objects.get(username=username)
     userIMDB = UserIMDB.objects.get(user=user)
     picture_url = userIMDB.get_picture()

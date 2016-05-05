@@ -16,7 +16,7 @@
 {% block content %}
     <div class="wrapper float_right padding_right_large padding_top_large padding_left_large padding_bottom_large">
         <div class="float_right margin_bottom_large">
-            <img src="{{ movie.poster.url }}" class="float_right" id="info_image">
+            <img src="{{ movie.get_picture }}" class="float_right" id="info_image">
             <p id="info_name">
                 <a href="{% url 'MovieManager_show_movie' movie.id %}">
                     {{ movie.name }}

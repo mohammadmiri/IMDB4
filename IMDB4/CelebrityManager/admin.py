@@ -71,9 +71,10 @@ class CelebrityAdmin(admin.ModelAdmin):
     list_display_links = ('name',)
     list_display = ('id','name',)
     list_filter = (AgeFilter,)
-    ordering = ('name',)
+    ordering = ('id',)
     search_fields = ['name']
     inlines = [AwardInline, PostOFUserInline, VideoCelebrityInline,]
+    save_on_top = True
 
 
 

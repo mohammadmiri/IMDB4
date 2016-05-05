@@ -51,7 +51,7 @@ class DialogueInline(admin.TabularInline):
     extra = 1
 
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ('name','rate', 'year', )
+    list_display = ('name','rate', 'year', 'id')
     list_display_links = ('name',)
     # list_filter = (GenreFilter,)
     search_fields = ['name']

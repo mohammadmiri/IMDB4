@@ -9,6 +9,8 @@ register = template.Library()
 
 @register.filter
 def IntegerToPersian(number):
+    if number is None:
+        return None
     if number==0:
         return '۰'
     persian_number = ''
@@ -22,6 +24,8 @@ def IntegerToPersian(number):
 
 @register.filter
 def FloatToPersian(number):
+    if number is None:
+        return None
     if (type(number) is int):
         return IntegerToPersian(number)
     numbers = str(number).split('.')
@@ -32,6 +36,8 @@ def FloatToPersian(number):
 
 
 def toPersianDigit(digit):
+    if digit is None:
+        return None
     if digit==1:
         return '۱'
     if digit==2:
@@ -59,6 +65,8 @@ def toPersianDigit(digit):
 
 @register.filter()
 def roleToPersian(role):
+    if role is None:
+        return None
     if role == 'kargardan':
         return 'کارگردان'
     if role == 'nevisande':
@@ -104,7 +112,9 @@ def roleToPersian(role):
 
 
 
-def GenreToPersian(genre:str):
+def GenreToPersian(genre):
+    if genre is None:
+        return None
     if genre == 'action':
         return 'حادثه ای'
     if genre == 'animation':

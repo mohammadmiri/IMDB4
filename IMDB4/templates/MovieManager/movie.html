@@ -19,7 +19,7 @@
     {% block content %}
         <div id="info" class="border_bottom_div">
             <div id="info_mainPoster" class="img_wrapper">
-                <img src="{{ movie.poster.url }}" id="info_mainPoster">
+                <img src="{{ movie.get_picture }}" id="info_mainPoster">
             </div>
             <p id="info_name">
                 <dum id="info_name_1">
@@ -80,9 +80,11 @@
                         </a>
                         </br>
                         کارگردان:
-                        <a href="{% url 'CelebrityManager_show_celebrity' kargardan.0.id %}">
-                            {{ kargardan.0.name }}
-                        </a>
+                        {% if kargardan %}
+                            <a href="{% url 'CelebrityManager_show_celebrity' kargardan.0.id %}">
+                                {{ kargardan.0.name }}
+                            </a>
+                        {% endif %}
                     </p>
                 </div>
 

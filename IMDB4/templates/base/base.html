@@ -97,7 +97,7 @@
 
         <div id="base_main_header_buttons_div">
             <img src="{% static 'icons/base/line.png' %}" id="base_main_header_buttons_line_0">
-            <div id="base_main_header_buttons_button_0" class="base_main_header_buttons_buttons dropdown_menu">
+            <div id="base_main_header_buttons_button_0" class="dropdown_menu">
                 <p class="base_main_header_buttons_fonts">
                 فیلم ها
                 </p>
@@ -154,7 +154,7 @@
                 </div>
             </div>
             <img src="{% static 'icons/base/line.png' %}" id="base_main_header_buttons_line_1">
-            <div id="base_main_header_buttons_button_1" class="base_main_header_buttons_buttons dropdown_menu">
+            <div id="base_main_header_buttons_button_1" class="dropdown_menu">
                 <p class="base_main_header_buttons_fonts">
                 هنرمندان
                 </p>
@@ -190,7 +190,7 @@
                 </div>
             </div>
             <img src="{% static 'icons/base/line.png' %}" id="base_main_header_buttons_line_2">
-            <div id="base_main_header_buttons_button_2" class="base_main_header_buttons_buttons dropdown_menu">
+            <div id="base_main_header_buttons_button_2" class="dropdown_menu">
                 <p class="base_main_header_buttons_fonts dropdown_menu">
                 اخبار
                 </p>
@@ -416,7 +416,7 @@
                             <div id="sideBar_mostVisited_images">
                                 <div>
                                     {% for movie in top_rated_movies %}
-                                        <img src="{{ movie.poster.url }}">
+                                        <img src="{{ movie.get_picture }}">
                                     {% endfor %}
                                 </div>
                             </div>

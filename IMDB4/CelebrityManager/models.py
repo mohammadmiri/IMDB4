@@ -44,11 +44,17 @@ class Celebrity(models.Model):
     def get_born_today():
         celebrities = []
         for cele in Celebrity.objects.all():
-            if  cele.birthday.day == datetime.date.today().day and \
-                    cele.birthday.month == datetime.date.today().month:
-                celebrities.append(cele)
+            if cele.birthday is not None:
+                if  cele.birthday.day == datetime.date.today().day and \
+                        cele.birthday.month == datetime.date.today().month:
+                    celebrities.append(cele)
         return celebrities
 
+    def get_picture(self):
+        if not self.picture:
+            return "{% static 'UserManager/img/avatar.jpg' %}"
+        else:
+            return self.picture.url
 
 
 class Video_Celebrity(models.Model):

@@ -43,7 +43,6 @@ def get_search_result(request, value):
     # celebrity_serialize = serializers.serialize('json',Celebrity.objects.filter(name__startswith=value)[0:3])
     celebrities = list(Celebrity.objects.filter(name__startswith=value)[0:3])
     movies = list(Movie.objects.filter(name__startswith=value)[0:3])
-
     name_celebrity = []
     id_celebrity = []
     picture_celebrity = []
@@ -51,8 +50,11 @@ def get_search_result(request, value):
     for celebrity in celebrities:
         name_celebrity.append(celebrity.name)
         id_celebrity.append(celebrity.id)
-        picture_celebrity.append(celebrity.picture.url)
-        profession_celebrity.append(celebrity.workingFields)
+        try:
+            picture_celebrity.append(celebrity.picture.url)
+            profession_celebrity.append(celebrity.workingFields)
+        except:
+            pass
     name_movie = []
     id_movie = []
     poster_movie = []
@@ -61,12 +63,14 @@ def get_search_result(request, value):
     for movie in movies:
         name_movie.append(movie.name)
         id_movie.append(movie.id)
-        poster_movie.append(movie.poster.url)
-        year_movie.append(movie.year)
-        directors = list(Celebrity.objects.filter(agent__movie=movie, agent__role='kargardan'))
-        print('len: '+str(len(directors)))
-        for amel in directors:
-            director_movie.append(amel.name)
+        try:
+            poster_movie.append(movie.poster.url)
+            year_movie.append(movie.year)
+            directors = list(Celebrity.objects.filter(agent__movie=movie, agent__role='kargardan'))
+            for amel in directors:
+                director_movie.append(amel.name)
+        except:
+            pass
     return JsonResponse({'name_celebrity':name_celebrity,'id_celebrity':id_celebrity,'picture_celebrity':picture_celebrity,
                         'profession_celerity':profession_celebrity,
                          'name_movie':name_movie,'id_movie':id_movie,'poster_movie':poster_movie,'year_movie':year_movie,
