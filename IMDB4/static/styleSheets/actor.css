@@ -7,9 +7,14 @@
 
 .info_mainImage{
     float:right;
-    width: 6cm;
-    height: 8cm;
+    width: 7.2cm;
+    height: 9.6cm;
     margin-top: 0.12cm;
+}
+
+.info_mainImage>img{
+    width:100%;
+    height:100%;
 }
 
 #info_top{
@@ -48,10 +53,10 @@
 }
 
 #info_biography{
-    height: 3.3cm;
+    height: 4.95cm;
+    width: 10cm;
     padding-right: 0.1cm;
     float: right;
-    width: 10cm;
 }
 
 #info_biography>p{
@@ -79,12 +84,13 @@
 #info_images_div{
     position: relative;
     top: -0.1cm;
+    float: right;
 }
 
 .info_images{
     float: right;
-    width: 2.4cm;
-    height: 2.4cm;
+    width: 2.55cm;
+    height: 2.55cm;
     margin: 0 0.05cm 0.1cm 0.05cm;
 }
 
@@ -133,8 +139,8 @@
 .proposedWorks_images{
     float: right;
     margin: 0.1cm 0 0.1cm 0.1cm;
-    width: 3.9cm;
-    height: 5cm;
+    width: 4.35cm;
+    height: 5.5cm;
     position: relative;
     top: -0.1cm;
 }
@@ -267,7 +273,7 @@
 
 #changeInfo_button{
     background-color: #d1282d;
-    width: 3cm;
+    width: 2.5cm;
     height: 0.9cm;
     overflow: auto;
     border-radius: 0.1cm;

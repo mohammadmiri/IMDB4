@@ -153,8 +153,9 @@ body {
 }
 
 #base_main{
-    margin-left: 6cm;
-    width: 23.65cm;
+    margin-left: 5cm;
+    width: 25.65cm;
+    margin-right: 5cm;
     /*height: 50cm;*/
     background-color: #eeeeee;
 }
@@ -170,7 +171,7 @@ body {
 
 #base_main_header_sign{
     position: absolute;
-    left: 10.75cm;
+    left: 10cm;
     top: 1.1cm;
 }
 
@@ -178,18 +179,18 @@ body {
     color: #424242;
 }
 
-#base_main_search_box_div{
-    position: absolute;
-    left: 13.2cm;
-    top: 0.50cm;
-}
+/*#base_main_search_box_div{*/
+    /*position: absolute;*/
+    /*left: 13.2cm;*/
+    /*top: 0.50cm;*/
+/*}*/
 
 #base_main_search_box{
     position: absolute;
     top: 1.05cm;
-    left: 13.2cm;
+    left: 12.5cm;
     direction: rtl;
-    width: 9.2cm;
+    width: 10.3cm;
     height: 1cm;
     border:solid;
     border-width: 0;
@@ -200,7 +201,7 @@ body {
 #base_main_search_box_button{
     background-image: url("/static/icons/base/search.png");
     position: absolute;
-    left: 13.3cm;
+    left: 12.6cm;
     top: 1.1cm;
     width: 0.9cm;
     height: 0.9cm;
@@ -223,8 +224,8 @@ body {
 #main_searchSuggestion{
     position: absolute;
     background-color: #ffffff;
-    width: 8.15cm;
-    left: 14.25cm;
+    width: 9.3cm;
+    left: 13.5cm;
     top: 2cm;
     z-index: 3;
 }
@@ -283,87 +284,46 @@ body {
 
 #base_logo{
     position: absolute;
-    left: 23cm;
+    left: 24cm;
     top: 1cm;
     width: 6.65cm;
     height: 1.6cm;
 }
 
 
-#base_main_header_link_0{
-    position: absolute;
+.base_header_links{
+    position: relative;
     top: 2.5cm;
-    left: 6.1cm;
-    width: 1cm;
-    height: 1cm;
-}
+    width: 1.1cm;
+    height:1.1cm;
 
-#base_main_header_link_1{
-    position: absolute;
-    top: 2.5cm;
-    left: 7.2cm;
-    width: 1cm;
-    height: 1cm;
 }
-
-#base_main_header_link_2{
-    position: absolute;
-    top: 2.5cm;
-    left: 8.3cm;
-    width: 1cm;
-    height: 1cm;
-}
-
-#base_main_header_link_3{
-    position: absolute;
-    top: 2.5cm;
-    left: 9.4cm;
-    width: 1cm;
-    height: 1cm;
-}
-
-#base_main_header_link_4{
-    position: absolute;
-    top: 2.5cm;
-    left: 10.5cm;
-    width: 1cm;
-    height: 1cm;
-}
-
-#base_main_header_link_5{
-    position: absolute;
-    top: 2.5cm;
-    left: 11.6cm;
-    width: 1cm;
-    height: 1cm;
-}
-
 
 
 #base_main_header_buttons_line_0{
     position: absolute;
-    left: 13.2cm;
+    left: 12.5cm;
     top: 2.5cm;
     height: 1cm;
 }
 
 #base_main_header_buttons_line_1{
     position: absolute;
-    left: 16.4cm;
+    left: 16cm;
     top: 2.5cm;
     height: 1cm;
 }
 
 #base_main_header_buttons_line_2{
     position: absolute;
-    left: 19.6cm;
+    left: 19.5cm;
     top: 2.5cm;
     height: 1cm;
 }
 
 #base_main_header_buttons_line_3{
     position: absolute;
-    left: 22.4cm;
+    left: 22.7cm;
     top: 2.5cm;
     height: 1cm;
 }
@@ -376,7 +336,7 @@ body {
 
 #base_main_header_buttons_button_0{
     position: absolute;
-    left: 20.4cm;
+    left: 20.5cm;
     top: 2.65cm;
     width: 2cm;
 }
@@ -389,7 +349,7 @@ body {
 
 #base_main_header_buttons_button_2{
     position: absolute;
-    left: 14.4cm;
+    left: 13.8cm;
     top: 2.65cm;
 }
 
@@ -594,19 +554,19 @@ body {
 
 #base_main_footer_right{
     float: right;
-    /*background-color: tomato;*/
 }
 
 #base_main_footer_left{
-    float: right;
+    float: left;
     width: 11cm;
-    /*background-color: #67b168;*/
+    margin-left:0.2cm;
 }
 
 .base_main_footer_links_single{
     width: 4cm;
     color: #ffffff;
     display: inline-block;
+    margin-right:0.2cm;
 }
 
 .base_main_footer_links_single>a:hover{
@@ -629,7 +589,7 @@ body {
 
 
 #base_main_footer_long_line{
-    width: 23.65cm;
+    width: 25.65cm;
 }
 
 
@@ -648,7 +608,7 @@ body {
 
 
 #base_content{
-    width: 620px;
+    width: 18.15cm;
     float: right;
     border: solid;
     border-width: 0 0 0 0.05cm;
@@ -665,7 +625,12 @@ body {
     position: absolute;
 }
 
-
+#base_copy_right{
+    color: white;
+    margin-right: 0.2cm;
+    position: relative;
+    top:-0.2cm;
+}
 
 
 

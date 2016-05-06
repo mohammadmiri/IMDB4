@@ -1,12 +1,12 @@
 
 #info{
-    height: 8.7cm;
+    height: 10.5cm;
 }
 
 #info_mainPoster{
     float: right;
-    width: 6cm;
-    height: 8cm;
+    width: 7.2cm;
+    height: 9.6cm;
     margin: 0 0.2cm 0.2cm 0.2cm;
 }
 
@@ -71,15 +71,15 @@
 
 #info_description{
     float: right;
-    width: 9.5cm;
-    height: 2cm;
+    width: 10cm;
+    height: 3.35cm;
     overflow: visible;
 }
 
 
 .info_images_1{
-    width: 2.25cm;
-    height: 2.5cm;
+    width: 2.5cm;
+    height: 2.75cm;
     margin: 0.1cm 0.1cm 0 0;
     float: right;
     position: relative;
@@ -129,7 +129,7 @@
 }
 
 #mainActors{
-    height: 6.8cm;
+    height: 7.3cm;
 }
 
 #mainActors_title{
@@ -142,8 +142,8 @@
     left: -0.1cm;
     margin: 0.1cm 0.1cm 0.1cm 0.1cm;
     float: right;
-    width: 3.85cm;
-    height: 5.25cm;
+    width: 4.3cm;
+    height: 6cm;
     overflow: hidden;
 }
 
@@ -284,7 +284,7 @@
 #userReview_write{
     margin: 0.12cm 0.1cm 0.2cm 0.1cm;
     float: left;
-    width: 3cm;
+    width: 2.5cm;
     height: 0.8cm;
     border-radius: 0.1cm;
     background-color: #d1282d;
@@ -363,7 +363,7 @@
 #changeInfo_button{
     background-color: #d1282d;
     border-radius: 0.1cm;
-    width: 3cm;
+    width: 2.5cm;
     margin: 0.1cm 0.1cm 0.1cm 0.1cm;
 }
 

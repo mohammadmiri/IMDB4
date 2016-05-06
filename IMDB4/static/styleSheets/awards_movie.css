@@ -11,8 +11,6 @@
     margin-right: 0.2cm;
     float: right;
     width: 80%;
-    /*font-size: 25px;*/
-    /*background-color: #449d44;*/
 }
 
 #info_name a{
@@ -22,9 +20,8 @@
 #info_awards{
     float: right;
     font-size: 25px;
-    /*background-color: #31b0d5;*/
     margin-right: 0.2cm;
-    width: 80%;
+    width: 85%;
 }
 
 #info_awardsNumber{

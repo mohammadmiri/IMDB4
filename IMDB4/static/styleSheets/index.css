@@ -1,20 +1,16 @@
 
 #first_films{
-    margin: 0.2cm 0.2cm 0.2cm 0;
+    margin: 0.2cm 0.2cm 0.2cm 0.2cm;
     padding-bottom: 0.2cm;
-    width: 16cm;
-    height: 8cm;
+    width: 17.6cm;
+    height: 9cm;
     overflow: hidden;
-    float: right;
     background-color: #323232;
 }
 
 #first_films>a{
     float: left;
     margin-left:0.2cm;
-    /*position: relative;*/
-    /*top: 0.5cm;*/
-    /*left: -4cm;*/
 }
 
 .teasers>img{
@@ -24,11 +20,11 @@
 
 .teasers{
     position: relative;
-    width: 5cm;
-    height: 7cm;
+    width: 5.5cm;
+    height: 8cm;
     float: left;
     overflow: hidden;
-    margin-top: 0.2cm;
+    margin-top: 0.25cm;
     margin-left: 0.25cm;
 }
 
@@ -36,7 +32,7 @@
 #last_news{
     position: relative;
     padding: 10px 0px 0px 10px;
-    width: 16cm;
+    width: 17.9cm;
 }
 
 .last_news_div{
@@ -47,6 +43,7 @@
 
 #last_news_wrapper{
     float: right;
+
 }
 
 #last_title{
@@ -204,7 +201,8 @@
 }
 
 #last_images{
-    height: 7.5cm;
+    width: 100%;
+    height: 8.3cm;
     overflow: hidden;
 }
 
@@ -215,8 +213,8 @@
 }
 
 #last_images_0{
-    width: 5cm;
-    height: 6cm;
+    width: 5.4cm;
+    height: 6.7cm;
     margin-top: 0.1cm;
     clear: right;
 }
@@ -228,7 +226,7 @@
 
 #last_images_1{
     width: 100%;
-    height: 3.35cm;
+    height: 3.7cm;
 }
 
 #last_images_1>img{
@@ -238,7 +236,7 @@
 
 #last_images_2{
     width: 100%;
-    height: 3.35cm;
+    height: 3.7cm;
     margin-top: 0.2cm;
 }
 
@@ -248,8 +246,8 @@
 }
 
 #last_images_3{
-    width: 5cm;
-    height: 6.9cm;
+    width: 5.8cm;
+    height: 7.6cm;
     margin-right: 0.2cm;
     position: relative;
     top: -0.8cm;
@@ -262,8 +260,8 @@
 
 #last_images_1_2{
     float: right;
-    height: 7cm;
-    width: 5.5cm;
+    height: 8cm;
+    width: 6cm;
     margin-right: 0.2cm;
     position: relative;
     top: -0.8cm;
@@ -281,14 +279,14 @@
 
 .birthday_images{
     margin: 0 0 0 0.2cm;
-    width: 5cm;
-    height: 3cm;
+    width: 5.7cm;
+    height: 3.55cm;
 }
 
 
 .poll_images{
-    width: 3cm;
-    height: 4cm;
+    width: 3.4cm;
+    height: 4.44cm;
     margin: 0 0 0 0.1cm;
 }
 

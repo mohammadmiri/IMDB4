@@ -32,8 +32,8 @@ def show_movie(request, id):
 
     context = {'movie':movie, 'reviewer_review_count':reviewer_review_count, 'user_review_count':user_review_count,
                'award_simorgh_count':award_simorgh_count, 'total_award_count':total_award_count
-                ,'total_candidate_count':total_candidate_count, 'actors':actors, 'images':images,'kargardan':kargardan, 'nevisande':nevisande,
-               'user_review':user_review, 'posts':posts}
+                ,'total_candidate_count':total_candidate_count, 'actors':actors, 'images':images,'kargardan':kargardan,
+               'nevisande':nevisande,'user_review':user_review, 'posts':posts}
     return render(request, 'MovieManager/movie.html', context=context)
 
 

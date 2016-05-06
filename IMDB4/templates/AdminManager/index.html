@@ -23,7 +23,7 @@
 
 {% block content %}
 
-    <div class="border_bottom_div overflow_auto">
+    <div class="border_bottom_div">
         <div id="first_films">
             <div class="teasers movie_image_info_wrapper play_movie">
                 <img src="{{ Teasers.0.image.url }}">
@@ -475,7 +475,7 @@
             نظر سنجی
         </p>
         <p id="poll_description">
-            ازمیان فیلم های ایران کدامیک را بیشتر می پسندید؟
+            {{ Poll.text }}
             <a href="go_poll">
             رای دادن >>
             </a>

@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% load toPersian%}
+{% load DateFilters %}
 
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,7 @@
     {% block content %}
         <div id="info" class="border_bottom_div padding_top padding_right">
             <div class="info_mainImage img_wrapper">
-                <img src="{{ celebrity.get_picture }}" class="info_mainImage">
+                <img src="{{ celebrity.get_picture }}">
             </div>
             <div id="info_top" class="border_bottom_div padding_right">
                 <div id="info_top_name">
@@ -30,11 +31,6 @@
                         {{ celebrity.workingFields }}
                     </p>
                 </div>
-{#                <div id="info_top_point">#}
-{#                    <p>#}
-{#                        {{ actor.point }}#}
-{#                    </p>#}
-{#                </div>#}
             </div>
             <div id="info_biography" class="padding_right">
                 <p>
@@ -51,17 +47,16 @@
             <div id="info_birthday" class="padding_right">
                 <p>
                     تولد:
-                    {{ celebrity.birthday }}
+                    {{ celebrity.birthday|convert_to_shamsi|get_day|IntegerToPersian }}/
+                    {{ celebrity.birthday|convert_to_shamsi|get_month|IntegerToPersian }}/
+                    {{ celebrity.birthday|convert_to_shamsi|get_year|IntegerToPersian }}
                     .
                     {{ celebrity.birthPlace }}
                 </p>
             </div>
 
-            <a href="">
-                <img src="{% static 'icons/actor/arrow.png' %}" id="info_arrowButton">
-            </a>
 
-            <div id="actor_info_images_div">
+            <div id="info_images_div">
                 {% for item in images|slice:":3" %}
                     <div class="info_images img_wrapper">
                         <img src="{{ item.image.url }}" class="info_images">
@@ -126,18 +121,20 @@
                 </p>
                 <div>
                     {% for item in most_rated_product %}
-                        <div class="proposedWorks_images img_wrapper movie_image_info_wrapper">
-                            <a href="{% url 'MovieManager_show_movie' item.id %}">
-                                <img src="{{ item.poster.url }}" class="proposedWorks_images">
-                            </a>
-                            <div class="movie_image_info">
-                                <p>
-                                    {{ item.name }}
-                                    </br>
-                                    {{ item.year }}
-                                </p>
+                        {% if item.poster %}
+                            <div class="proposedWorks_images img_wrapper movie_image_info_wrapper">
+                                <a href="{% url 'MovieManager_show_movie' item.id %}">
+                                    <img src="{{ item.poster.url }}" class="proposedWorks_images">
+                                </a>
+                                <div class="movie_image_info">
+                                    <p>
+                                        {{ item.name }}
+                                        </br>
+                                        {{ item.year }}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>

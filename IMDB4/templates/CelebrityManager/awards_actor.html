@@ -46,15 +46,18 @@
             </p>
         </div>
 
-        <table class="content_tables content_tables_header">
-            <tr>
-                <td>
-                    <p>
-                        جشنواره فیلم فجر
-                    </p>
-                </td>
-            </tr>
-        </table>
+
+        {% if simorgh_awarded or simorgh_diploma or simorgh_candidate %}
+            <table class="content_tables content_tables_header">
+                <tr>
+                    <td>
+                        <p>
+                            جشنواره فیلم فجر
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        {% endif %}
 
 
         <table class="content_tables content_tables_content">
@@ -146,16 +149,17 @@
         </table>
 
 
-
-        <table class="content_tables content_tables_header">
-            <tr>
-                <td>
-                    <p>
-                        جشن خانه سینما
-                    </p>
-                </td>
-            </tr>
-        </table>
+        {% if cinemaHome_awarded or cinemaHome_diploma or cinemaHome_candidate %}
+            <table class="content_tables content_tables_header">
+                <tr>
+                    <td>
+                        <p>
+                            جشن خانه سینما
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        {% endif %}
 
 
         <table class="content_tables content_tables_content">

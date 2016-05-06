@@ -16,21 +16,14 @@
 
 
 
-{#    these css and js files must be loaded at the end.#}
+{#    this js file must be loaded at the end.#}
 
 {#    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>#}
-{#    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>#}
-{#    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">#}
 
 
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}" type="text/javascript" language="JavaScript"></script>
-
-
-
     <link href="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" rel="script">
-
-
     <script src="{% static "jquery/jquery.js" %}" type="text/javascript" language="javascript"></script>
     <link href="{% static "styleSheets/base.css" %}" rel="stylesheet" type="text/css">
     <script src="{% static "scripts/base.js" %}" type="text/javascript" language="JavaScript"></script>
@@ -43,8 +36,6 @@
     {% block load_files %}
 
     {% endblock %}
-
-
 </head>
 
 <body>
@@ -75,23 +66,23 @@
             </a>
         </div>
 
-        <a href="search_1234??">
-            <img src="{% static 'icons/base/0.png' %}" id="base_main_header_link_0">
+        <a href="">
+            <img src="{% static 'icons/base/0.png' %}" class="base_header_links">
         </a>
-        <a href="search_139???">
-            <img src="{% static 'icons/base/1.png' %}" id="base_main_header_link_1">
+        <a href="">
+            <img src="{% static 'icons/base/1.png' %}" class="base_header_links">
         </a>
-        <a href="search_139???">
-            <img src="{% static 'icons/base/2.png' %}" id="base_main_header_link_2">
+        <a href="">
+            <img src="{% static 'icons/base/2.png' %}" class="base_header_links">
         </a>
-        <a href="search_139???">
-            <img src="{% static 'icons/base/3.png' %}" id="base_main_header_link_3">
+        <a href="">
+            <img src="{% static 'icons/base/3.png' %}" class="base_header_links">
         </a>
-        <a href="search_139???">
-            <img src="{% static 'icons/base/4.png' %}" id="base_main_header_link_4">
+        <a href="">
+            <img src="{% static 'icons/base/4.png' %}" class="base_header_links">
         </a>
-        <a href="search_139???">
-            <img src="{% static 'icons/base/5.png' %}" id="base_main_header_link_5">
+        <a href="">
+            <img src="{% static 'icons/base/5.png' %}" class="base_header_links">
         </a>
 
 
@@ -577,8 +568,7 @@
 
             <a href="">
                 <img src="/static/icons/base/0.png" class="base_main_footer_followus_icons">
-            </a>
-            <a href="">
+            </a><a href="">
                 <img src="/static/icons/base/1.png" class="base_main_footer_followus_icons">
             </a><a href="">
                 <img src="/static/icons/base/2.png" class="base_main_footer_followus_icons">
@@ -594,7 +584,7 @@
 
         <img src="{{ BASE_URL }}/static/icons/base/FooterLongLine.png" id="base_main_footer_long_line">
 
-        <p>
+        <p id="base_copy_right">
             کلیه حقوق این سایت متعلق به موویکا می باشد.
         </p>
 

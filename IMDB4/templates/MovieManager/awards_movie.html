@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% load toPersian %}
+{% load DateFilters %}
 
 
 <!DOCTYPE html>
@@ -74,7 +75,7 @@
                                     <p>
                                         {{ award.category }}
                                         <a href="{% url 'CelebrityManager_show_celebrity' award.celebrity.id %}">
-                                            {{ award.celebrity }}
+                                            {{ award.celebrity.name }}
                                         </a>
                                     </p>
                                 </td>
@@ -101,7 +102,7 @@
                                     <p>
                                         {{ diploma.category }}
                                         <a href="{% url 'CelebrityManager_show_celebrity' diploma.celebrity.id %}">
-                                            {{ diploma.celebrity }}
+                                            {{ diploma.celebrity.name }}
                                         </a>
                                     </p>
                                 </td>
@@ -127,7 +128,7 @@
                                     <p>
                                         {{ candidate.category }}
                                         <a href="{% url 'CelebrityManager_show_celebrity' candidate.celebrity.id %}">
-                                            {{ candidate.celebrity }}
+                                            {{ candidate.celebrity.name }}
                                         </a>
                                     </p>
                                 </td>
@@ -173,7 +174,7 @@
                                     <p>
                                         {{ award.category }}
                                         <a href="{% url 'CelebrityManager_show_celebrity' award.celebrity.id %}">
-                                            {{ award.celebrity }}
+                                            {{ award.celebrity.name }}
                                         </a>
                                     </p>
                                 </td>
@@ -198,7 +199,7 @@
                                     <p>
                                         {{ diploma.category }}
                                         <a href="{% url 'CelebrityManager_show_celebrity' diploma.celebrity.id %}">
-                                            {{ diploma.celebrity }}
+                                            {{ diploma.celebrity.name }}
                                         </a>
                                     </p>
                                 </td>
@@ -225,7 +226,7 @@
                                     <p>
                                         {{ candidate.category }}
                                         <a href="{% url 'CelebrityManager_show_celebrity' candidate.celebrity.id %}">
-                                            {{ candidate.celebrity }}
+                                            {{ candidate.celebrity.name }}
                                         </a>
                                     </p>
                                 </td>
