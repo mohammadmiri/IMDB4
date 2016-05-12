@@ -93,15 +93,12 @@ def Polling(request, poll_id):
 
 def PollArchive(request):
     polls = list(Poll.objects.order_by('date'))
-    for poll in polls:
-        print('poll: '+poll.__str__())
     context = {'polls':polls}
     return render(request, 'AdminManager/pollArchive.html', context)
 
 
 @login_required()
 def Polling_result(request, pollOption_number, poll_id):
-    print('poll option id: '+str(pollOption_number))
     poll = Poll.objects.filter(id=poll_id)[0]
     user = request.user
     option_choose = poll_user_choose(user=user, poll=poll, number=pollOption_number)

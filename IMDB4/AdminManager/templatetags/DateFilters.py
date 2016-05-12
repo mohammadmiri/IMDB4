@@ -15,10 +15,8 @@ register = template.Library()
 def convert_to_shamsi(value):
     if value is None:
         return None
-    print('value type'+str(type(value)))
     miladi_date = {'year':value.year, 'month':value.month, 'day':value.day}
     shamsi_date = MiladiToShamsi.convert_miladi_to_shamsi(miladi_date)
-    print('shamsi date: '+str(shamsi_date))
     return shamsi_date
 
 
