@@ -5,8 +5,9 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
-
+    {% block title %}
+        festivals
+    {% endblock %}
     {% block load_files %}
         <link href="{% static 'styleSheets/festivals.css' %}" rel="stylesheet">
         <script src="{% static 'scripts/festivals.js' %}" language="JavaScript"></script>

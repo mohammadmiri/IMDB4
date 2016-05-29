@@ -8,7 +8,9 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    {% block title %}
+        sale_table
+    {% endblock %}
     {% block load_files %}
         <link href="{% static 'styleSheets/sale_table.css' %}" rel="stylesheet">
     {% endblock %}
@@ -43,7 +45,7 @@
 
             {% for movie in movies %}
                 <div class="movie">
-                    <img src="{{ movie.poster.url }}" class="movie_image">
+                    <img src="{{ movie.get_picture }}" class="movie_image">
                     <div class="movie_name">
                         <p>
                             <a href="{% url 'MovieManager_show_movie' movie.id %}">

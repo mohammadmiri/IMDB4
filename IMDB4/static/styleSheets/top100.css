@@ -65,6 +65,8 @@
     float:right;
     position: relative;
     left: -7cm;
+    width: 0.75cm;
+    height: 0.75cm;
 }
 
 .movies_commentNumber{

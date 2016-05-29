@@ -34,7 +34,6 @@
     height: 1.7cm;
 }
 
-
 #info_point_number>p{
     color: #ffffff;
 }
@@ -61,7 +60,6 @@
     height: 0.25cm;
 }
 
-
 #info_info2{
     font-size: 12px;
     float: right;
@@ -73,9 +71,15 @@
     float: right;
     width: 10cm;
     height: 3.35cm;
-    overflow: visible;
+    overflow: hidden;
 }
 
+#info_description>p>span{
+    display: inline-block;
+    overflow: hidden;
+    height: 2cm;
+    width: 100%;
+}
 
 .info_images_1{
     width: 2.5cm;
@@ -356,7 +360,7 @@
     margin: 0.1cm 0.2cm 0.1cm 0.1cm;
 }
 
-#changeInfo_title>dum{
+#changeInfo_title>span{
     font-size: 12px;
 }
 

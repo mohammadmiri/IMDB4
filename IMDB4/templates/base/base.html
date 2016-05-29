@@ -1,4 +1,3 @@
-{#{% load index %}#}
 {% load static %}
 {% load toPersian %}
 
@@ -55,7 +54,7 @@
                 </a>
             </div>
             <form>
-                <input type="text" name="query" autocomplete="off" id="base_main_search_box">
+                <input type="text" name="query" autocomplete="off" placeholder="فیلم و بازیگر" id="base_main_search_box">
                 <button type="button" value="" id="base_main_search_box_button"></button>
                 <div id="main_searchSuggestion">
 
@@ -66,23 +65,23 @@
             </a>
         </div>
 
-        <a href="">
-            <img src="{% static 'icons/base/0.png' %}" class="base_header_links">
+        <a href="" class="base_header_links">
+            <img src="{% static 'icons/base/0.png' %}">
         </a>
-        <a href="">
-            <img src="{% static 'icons/base/1.png' %}" class="base_header_links">
+        <a href="" class="base_header_links">
+            <img src="{% static 'icons/base/1.png' %}">
         </a>
-        <a href="">
-            <img src="{% static 'icons/base/2.png' %}" class="base_header_links">
+        <a href="" class="base_header_links">
+            <img src="{% static 'icons/base/2.png' %}">
         </a>
-        <a href="">
-            <img src="{% static 'icons/base/3.png' %}" class="base_header_links">
+        <a href="" class="base_header_links">
+            <img src="{% static 'icons/base/3.png' %}">
         </a>
-        <a href="">
-            <img src="{% static 'icons/base/4.png' %}" class="base_header_links">
+        <a href="" class="base_header_links">
+            <img src="{% static 'icons/base/4.png' %}">
         </a>
-        <a href="">
-            <img src="{% static 'icons/base/5.png' %}" class="base_header_links">
+        <a href="" class="base_header_links">
+            <img src="{% static 'icons/base/5.png' %}">
         </a>
 
 
@@ -270,216 +269,219 @@
             {% endblock %}
         </div>
 
-        <div id="base_side_bar" class="clearfix">
-
-            {% block sideBar_arbitrary %}
-
-            {% endblock %}
+        <div id="sideBar">
+            <div>
 
 
-            {% block sideBar_saleTable %}
-                {% if top_sale_movies %}
-                    <div class="sideBar_divContainer">
-                        <div class="back_gray_dark font_white sideBar_header">
-                            <p>
-                                فروش فیلم
-                            </p>
-                        </div>
-                        <div class="sideBar_content back_gray_light">
-                            {% for movie in top_sale_movies %}
-                                <div class="base_side_sale_movie_wrapper">
-                                    <div class="base_side_sale_movie_number">
-                                        <p>
-                                            {{ movie.rate|FloatToPersian }}
-                                        </p>
-                                    </div>
-                                    <a href="{% url 'MovieManager_show_movie' movie.id %}">
-                                        <p>
-                                        {{ movie.name }}
-                                        </p>
-                                    </a>
-                                    <div class="float_left">
-                                        <p>
-                                        {{ movie.sale|IntegerToPersian }}
-                                        تومان
-                                        </p>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                            <a href="{% url 'MovieManager_sale_table' %}">
-                                <p class="base_side_sale_movie_seeall float_left">
-                                    مشاهده جدول کامل >>
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endblock %}
+                {% block sideBar_arbitrary %}
+
+                {% endblock %}
 
 
-            {% block sideBar_commingSoon %}
-                {% if coming_soon %}
-                    <div class="sideBar_divContainer">
-                        <div class="back_gray_dark font_white sideBar_header">
-                            <p>
-                            به زودی
-                            </p>
-                        </div>
-                        <div class="sideBar_content back_gray_light">
-                            {% for item in coming_soon %}
+                {% block sideBar_saleTable %}
+                    {% if top_sale_movies %}
+                        <div class="sideBar_divContainer">
+                            <div class="back_gray_dark font_white sideBar_header">
                                 <p>
-                                    <img src="{% static 'icons/base/Play.png' %}" class="base_side_coming_soon_movies_play">
-                                    {{ item.name }}
-                                    <hay class="float_left">
-                                        {{ item.date }}
-                                    </hay>
+                                    فروش فیلم
                                 </p>
-                            {% endfor %}
-                            <a href="">
-                                <p id="base_side_coming_soon_side_seeall" class="float_left">
-                                    مشاهده فیلم های آینده >>
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endblock %}
-
-
-
-            {% block sideBar_review %}
-                {% if best_review %}
-                    <div class="sideBar_divContainer">
-                        <div class="back_gray_dark font_white sideBar_header">
-                            <p>
-                                نقد برگزیده
-                            </p>
-                        </div>
-                        <div class="back_gray_light sideBar_content">
-                            <img src="{{best_review}}" id="base_side_criticism_image">
-                            <p>
-                                {{ best_review_description }}
-                                <a href="" class="float_left">
-                                    ادامه مطلب
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endblock %}
-
-
-
-            {% block sideBar_mostVisited %}
-                {% if top_rated_movies %}
-                    <div class="sideBar_divContainer">
-                        <div class="back_gray_dark font_white sideBar_header">
-                            <p>
-                                پربازدیدترین ها
-                            </p>
-                        </div>
-                        <div id="sideBar_mostVisited" class="sideBar_content back_gray_light">
-                            <div id="sideBar_mostVisited_control">
-                                <a href="{% url 'MovieManager_show_movie' top_rated_movies.0.id %}">
-                                    <p>
-                                        {{ top_rated_movies.0 }}
-                                    </p>
-                                    <div id="sideBar_mostVisited_names_hidden" style="display: none;">
-                                        {% for movie in top_rated_movies %}
-                                            <p id="{{ movie.id }}">
-                                                {{ movie.name }}
+                            </div>
+                            <div class="sideBar_content back_gray_light">
+                                {% for movie in top_sale_movies %}
+                                    <div class="sideBar_sale_movie_wrapper">
+                                        <div class="sideBar_sale_movie_number">
+                                            <p>
+                                                {{ movie.rate|FloatToPersian }}
                                             </p>
+                                        </div>
+                                        <a href="{% url 'MovieManager_show_movie' movie.id %}">
+                                            <p>
+                                            {{ movie.name }}
+                                            </p>
+                                        </a>
+                                        <div class="float_left">
+                                            <p>
+                                            {{ movie.sale|IntegerToPersian }}
+                                            تومان
+                                            </p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <a href="{% url 'MovieManager_sale_table' %}">
+                                    <p class="float_left">
+                                        مشاهده جدول کامل >>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+
+
+                {% block sideBar_commingSoon %}
+                    {% if coming_soon %}
+                        <div class="sideBar_divContainer">
+                            <div class="back_gray_dark font_white sideBar_header">
+                                <p>
+                                به زودی
+                                </p>
+                            </div>
+                            <div class="sideBar_content back_gray_light">
+                                {% for item in coming_soon %}
+                                    <p>
+                                        <img src="{% static 'icons/base/Play.png' %}">
+                                        {{ item.name }}
+                                        <span class="float_left">
+                                            {{ item.date }}
+                                        </span>
+                                    </p>
+                                {% endfor %}
+                                <a href="">
+                                    <p class="float_left">
+                                        مشاهده فیلم های آینده >>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+
+
+
+                {% block sideBar_review %}
+                    {% if best_review %}
+                        <div class="sideBar_divContainer">
+                            <div class="back_gray_dark font_white sideBar_header">
+                                <p>
+                                    نقد برگزیده
+                                </p>
+                            </div>
+                            <div class="back_gray_light sideBar_content">
+                                <img src="{{best_review}}" id="sideBar_criticism_image">
+                                <p>
+                                    {{ best_review_description }}
+                                    <a href="" class="float_left">
+                                        ادامه مطلب
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+
+
+
+                {% block sideBar_mostVisited %}
+                    {% if top_rated_movies %}
+                        <div class="sideBar_divContainer">
+                            <div class="back_gray_dark font_white sideBar_header">
+                                <p>
+                                    پربازدیدترین ها
+                                </p>
+                            </div>
+                            <div id="sideBar_mostVisited" class="sideBar_content back_gray_light">
+                                <div id="sideBar_mostVisited_control">
+                                    <a href="{% url 'MovieManager_show_movie' top_rated_movies.0.id %}">
+                                        <p>
+                                            {{ top_rated_movies.0 }}
+                                        </p>
+                                        <div id="sideBar_mostVisited_names_hidden" style="display: none;">
+                                            {% for movie in top_rated_movies %}
+                                                <p id="{{ movie.id }}">
+                                                    {{ movie.name }}
+                                                </p>
+                                            {% endfor %}
+                                        </div>
+                                    </a>
+                                    <div>
+                                        <p>
+                                            1
+                                        </p>
+                                    </div>
+                                    <button type="button" id="mostVisited_arrowRight">
+                                        <img src="{% static 'icons/base/arrowRight.png' %}" id="mostVisited_arrowRight">
+                                    </button>
+                                    <button type="button" id="mostVisited_arrowLeft">
+                                        <img src="{% static 'icons/base/arrowLeft.png' %}" id="mostVisited_arrowLeft">
+                                    </button>
+                                </div>
+                                <div id="sideBar_mostVisited_images">
+                                    <div>
+                                        {% for movie in top_rated_movies %}
+                                            <img src="{{ movie.get_picture }}">
                                         {% endfor %}
                                     </div>
-                                </a>
-                                <div>
-                                    <p>
-                                        1
-                                    </p>
-                                </div>
-                                <button type="button" id="mostVisited_arrowRight">
-                                    <img src="{% static 'icons/base/arrowRight.png' %}" id="mostVisited_arrowRight">
-                                </button>
-                                <button type="button" id="mostVisited_arrowLeft">
-                                    <img src="{% static 'icons/base/arrowLeft.png' %}" id="mostVisited_arrowLeft">
-                                </button>
-                            </div>
-                            <div id="sideBar_mostVisited_images">
-                                <div>
-                                    {% for movie in top_rated_movies %}
-                                        <img src="{{ movie.get_picture }}">
-                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endif %}
-            {% endblock %}
+                    {% endif %}
+                {% endblock %}
 
 
-            {% block sideBar_relatedNews %}
-                {% if movieNews %}
-                    <div class="sideBar_divContainer">
-                        <div class="back_gray_dark font_white sideBar_header">
-                            <p>
-                                اخبار مربوط
-                            </p>
-                        </div>
-                        <div class="back_gray_light sideBar_content">
-                            {% for item in movieNews %}
-                                <div class="movieNews_div border_bottom_div">
-                                    <p>
-                                        <a href="">
-                                            {{ item.header }}
-                                        </a>
-                                        {{ item.time }}
-                                        قبل
-                                        /
-                                        {{ item.source }}
-                                    </p>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-            {% endblock %}
-
-
-            {% block sideBar_lastUserList %}
-                {% if userList %}
-                    <div class="sideBar_divContainer">
-                        <div class="back_gray_dark font_white sideBar_header">
-                            <p>
-                                آخرین لیست های کاربران
-                            </p>
-                        </div>
-                        <div class="back_gray_light sideBar_content">
-                            {% for item in userList %}
-                                <div class="border_bottom_div overflow_auto sideBar_userList_div">
-                                    <img src="{{ item.image }}">
-                                    <div>
-                                        <p class="sideBar_userList_header">
+                {% block sideBar_relatedNews %}
+                    {% if movieNews %}
+                        <div class="sideBar_divContainer">
+                            <div class="back_gray_dark font_white sideBar_header">
+                                <p>
+                                    اخبار مربوط
+                                </p>
+                            </div>
+                            <div class="back_gray_light sideBar_content">
+                                {% for item in movieNews %}
+                                    <div class="movieNews_div border_bottom_div">
+                                        <p>
                                             <a href="">
                                                 {{ item.header }}
                                             </a>
-                                        </p>
-                                        <p class="sideBar_userList_topicNumber">
-                                            {{ item.topicNumber }}
-                                            عنوان
-                                        </p>
-                                        <p class="sideBar_userList_writer">
-                                            ایجاد شده توسط
-                                            <a>
-                                                {{ item.writer }}
-                                            </a>
+                                            {{ item.time }}
+                                            قبل
+                                            /
+                                            {{ item.source }}
                                         </p>
                                     </div>
-                                </div>
-                            {% endfor %}
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
-                {% endif %}
-            {% endblock %}
+                    {% endif %}
+                {% endblock %}
+
+
+                {% block sideBar_lastUserList %}
+                    {% if userList %}
+                        <div class="sideBar_divContainer">
+                            <div class="back_gray_dark font_white sideBar_header">
+                                <p>
+                                    آخرین لیست های کاربران
+                                </p>
+                            </div>
+                            <div class="back_gray_light sideBar_content">
+                                {% for item in userList %}
+                                    <div class="border_bottom_div overflow_auto sideBar_userList_div">
+                                        <img src="{{ item.image }}">
+                                        <div>
+                                            <p class="sideBar_userList_header">
+                                                <a href="">
+                                                    {{ item.header }}
+                                                </a>
+                                            </p>
+                                            <p class="sideBar_userList_topicNumber">
+                                                {{ item.topicNumber }}
+                                                عنوان
+                                            </p>
+                                            <p class="sideBar_userList_writer">
+                                                ایجاد شده توسط
+                                                <a>
+                                                    {{ item.writer }}
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+            </div>
         </div>
     </div>
 
@@ -562,22 +564,26 @@
                 <p>
                     ما را دنبال کنید در:
                 </p>
-
             </div>
 
 
-            <a href="">
-                <img src="/static/icons/base/0.png" class="base_main_footer_followus_icons">
-            </a><a href="">
-                <img src="/static/icons/base/1.png" class="base_main_footer_followus_icons">
-            </a><a href="">
-                <img src="/static/icons/base/2.png" class="base_main_footer_followus_icons">
-            </a><a href="">
-                <img src="/static/icons/base/3.png" class="base_main_footer_followus_icons">
-            </a><a href="">
-                <img src="/static/icons/base/4.png" class="base_main_footer_followus_icons">
-            </a><a href="">
-                <img src="/static/icons/base/5.png" class="base_main_footer_followus_icons">
+            <a href="" class="base_main_footer_followus_icons">
+                <img src="/static/icons/base/0.png">
+            </a>
+            <a href="" class="base_main_footer_followus_icons">
+                <img src="/static/icons/base/1.png">
+            </a>
+            <a href="" class="base_main_footer_followus_icons">
+                <img src="/static/icons/base/2.png">
+            </a>
+            <a href="" class="base_main_footer_followus_icons">
+                <img src="/static/icons/base/3.png">
+            </a>
+            <a href="" class="base_main_footer_followus_icons">
+                <img src="/static/icons/base/4.png">
+            </a>
+            <a href="" class="base_main_footer_followus_icons">
+                <img src="/static/icons/base/5.png">
             </a>
 
         </div>

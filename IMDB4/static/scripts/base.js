@@ -123,7 +123,7 @@ $(document).ready(function(){
         var children=addSuggestion.children();
         setTimeout(function(){
             addSuggestion.html('');
-        },100);
+        },200);
     });
 
 

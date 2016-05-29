@@ -6,8 +6,9 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
-
+    {% block title %}
+        polling
+    {% endblock %}
     {% block load_files %}
 
         <link href="{% static 'AdminManager/css/polling_styleSheet.css' %}" type="text/css" rel="stylesheet" >

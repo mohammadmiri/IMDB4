@@ -33,22 +33,22 @@
 
         <div id="header">
             <p id="header_title">
-                <dum id="header_title_1" class="header_titles">
+                <span id="header_title_1" class="header_titles">
                     رتبه و نام فیلم
-                </dum>
-                <dum id="header_title_2" class="header_titles">
+                </span>
+                <span id="header_title_2" class="header_titles">
                     تعداد رای
-                </dum>
-                <dum id="header_title_3" class="header_titles">
+                </span>
+                <span id="header_title_3" class="header_titles">
                     امتیاز مووی کا
-                </dum>
+                </span>
             </p>
         </div>
 
         <div id="movies">
             {% for item in movies|slice:':100' %}
                 <div class="movies_items">
-                    <img src="{{ item.poster.url }}" class="movies_image">
+                    <img src="{{ item.get_picture }}" class="movies_image">
                     <p class="movies_name">
                         {{ forloop.counter|IntegerToPersian }}-
                         <a href="{% url 'MovieManager_show_movie' item.id %}">
@@ -59,9 +59,9 @@
                     <a href="">
                         <img src="{% static 'icons/100film/eye.png' %}" class="movies_eye">
                     </a>
-                    <dum class="movies_commentNumber">
+                    <span class="movies_commentNumber">
                         {{ item.numUserRated|IntegerToPersian }}
-                    </dum>
+                    </span>
                     <div class="movies_point">
                         <p>
                             {{ item.rate|FloatToPersian }}

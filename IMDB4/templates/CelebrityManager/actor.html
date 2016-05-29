@@ -7,7 +7,9 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    {% block title %}
+        actor
+    {% endblock %}
     {% block load_files %}
         <link href="{% static "styleSheets/actor.css" %}" rel="stylesheet">
         <script src="{% static "scripts/actor.js" %}" language="JavaScript"></script>
@@ -24,9 +26,9 @@
             <div id="info_top" class="border_bottom_div padding_right">
                 <div id="info_top_name">
                     <p>
-                        <dum>
+                        <span>
                             {{ celebrity.name }}
-                        </dum>
+                        </span>
                         <br/>
                         {{ celebrity.workingFields }}
                     </p>
@@ -34,7 +36,9 @@
             </div>
             <div id="info_biography" class="padding_right">
                 <p>
-                    {{ celebrity.biography }}
+                    <span>
+                        {{ celebrity.biography }}
+                    </span>
                     <br/>
                     <a href="" id="info_biography_seeAll">
                         <p>
@@ -83,11 +87,11 @@
                 <div>
                     <p>
                         {% if simorgh_award_count > 0 %}
-                        <dum>
+                        <span>
                             برنده
                             {{ simorgh_award_count|IntegerToPersian }}
                             سیمرغ بلورین
-                        </dum>
+                        </span>
                         {% endif %}
                         {% if award_count > 0 %}
                             {{ award_count|IntegerToPersian }}
@@ -171,13 +175,13 @@
                                 <a href="{% url 'MovieManager_show_movie' movie.id %}">
                                     {{ movie.name }}
                                 </a>
-                                <dum1>
+                                <span>
                                     {{ movie.year }}
-                                </dum1>
+                                </span>
                                 <br/>
-                                <dum2>
+                                <span>
                                     {{ movie.actorName }}
-                                </dum2>
+                                </span>
                             </p>
                         </div>
                     {% endfor %}
@@ -217,9 +221,9 @@
                                         {{ item.status.status }}
                                         )
                                     {% endif %}
-                                    <dum1>
+                                    <span>
                                         {{ item.year }}
-                                    </dum1>
+                                    </span>
                                 </p>
                             </div>
                         {% endfor %}
@@ -233,11 +237,11 @@
                 پست های کاربران
             </p>
 
-            <dum>
+            <span>
                 <p>
                     آخرین پست ها
                 </p>
-            </dum>
+            </span>
 
             {% for post in posts|slice:":3" %}
                 <div class="userPost_bodies">
@@ -246,14 +250,14 @@
                             {{ post.content }}
                         </p>
                     </div>
-                    <dum>
+                    <span>
                         <div>
                             <img src="{{ post.imageUrl }}">
                             <p>
                                 {{ post.user.name }}
                             </p>
                         </div>
-                    </dum>
+                    </span>
                 </div>
             {% endfor %}
 
@@ -265,14 +269,14 @@
                                 {{ post.text }}
                             </p>
                         </div>
-                        <dum>
+                        <span>
                             <div>
                                 <img src="{{ post.imageUrl }}">
                                 <p class="color_blue_light">
                                     {{ post.userName }}
                                 </p>
                             </div>
-                        </dum>
+                        </span>
                     </div>
                 {% endfor %}
             </div>
@@ -294,9 +298,9 @@
 
         <div id="changeInfo" class="border_bottom_div padding_right padding_left">
             <p>
-                <dum>
+                <span>
                     تغییر اطلاعات
-                </dum>
+                </span>
                 (مخصوص کاربران ویژه)
             </p>
 

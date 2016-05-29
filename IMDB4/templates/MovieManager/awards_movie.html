@@ -8,7 +8,9 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    {% block title %}
+        awards_movie
+    {% endblock %}
     {% block load_files %}
         <link href="{% static 'styleSheets/awards_movie.css' %}" rel="stylesheet">
     {% endblock %}

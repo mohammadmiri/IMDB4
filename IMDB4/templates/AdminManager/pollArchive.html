@@ -6,8 +6,9 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
-
+    {% block title %}
+        poll
+    {% endblock %}
     {% block load_files %}
         <link rel="stylesheet" type="text/css" href="{% static 'AdminManager/css/pollArchive_styleSheet.css' %}">
     {% endblock %}

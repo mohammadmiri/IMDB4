@@ -1,6 +1,6 @@
 
 #first_films{
-    margin: 0.2cm 0.2cm 0.2cm 0.2cm;
+    margin: 0.2cm 0.2cm 0.2cm 0.5cm;
     padding-bottom: 0.2cm;
     width: 17.6cm;
     height: 9cm;
@@ -10,7 +10,8 @@
 
 #first_films>a{
     float: left;
-    margin-left:0.2cm;
+    margin-top: 0.1cm;
+    margin-left:0.25cm;
 }
 
 .teasers>img{
@@ -145,13 +146,31 @@
     margin-right: 0.1cm;
 }
 
+/*test*/
+.nav_main_news a{
+    margin-right:0.2cm;
+}
+
+
 .nav_main_news_title{
     font-size: 15px;
 }
 
-.nav_main_news_title>dum{
+.nav_main_news_title>span{
     font-size: 10px;
     color: #aaaaaa;
+}
+
+.nav_main_news_content>span{
+    height: 1.6cm;
+    overflow: hidden;
+    direction: rtl;
+    margin-right:0.2cm;
+    display: inline-block;
+}
+
+.nav_main_news a{
+    float: right;
 }
 
 .nav_images{
@@ -182,7 +201,6 @@
     width: 300px;
     height: 20px;
     clear: right;
-    /*background: #2aabd2;*/
 }
 
 .nav_title_1{
@@ -191,7 +209,6 @@
     height: 20px;
     clear: left;
     margin-top: 0.1cm;
-    /*background: #ffff00;*/
 }
 
 /*last images******************************/
@@ -208,7 +225,6 @@
 
 .last_images_class{
     float: right;
-    background: #ffff00;
     overflow: hidden;
 }
 
@@ -287,11 +303,12 @@
 .poll_images{
     width: 3.4cm;
     height: 4.44cm;
-    margin: 0 0 0 0.1cm;
+    margin: 0 0.1cm 0 0;
+    float: right;
 }
 
 #poll_description{
-    margin: 0.5cm 0.5cm 0.5cm 0;
+    margin: 0.5cm 0.1cm 0.5cm 0;
 }
 
 #frame_movie_background_dark{

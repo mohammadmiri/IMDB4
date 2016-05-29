@@ -54,25 +54,5 @@ $(document).ready(function(){
             temp[0].innerHTML='';
         }
     });
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 });

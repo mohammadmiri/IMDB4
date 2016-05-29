@@ -6,7 +6,9 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    {% block title %}
+        all_crew
+    {% endblock %}
     {% block load_files %}
         <link href="{% static 'styleSheets/allCrew.css' %}" rel="stylesheet">
     {% endblock %}
@@ -53,7 +55,7 @@
             </div>
             {% for act in acts %}
                 <div class="table_item">
-                    <img src="{{ act.celebrity.picture.url }}">
+                    <img src="{{ act.celebrity.get_picture }}">
                     <div>
                         <p>
                             <a href="">

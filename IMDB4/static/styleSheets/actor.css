@@ -43,7 +43,7 @@
     top: 0.25cm;
 }
 
-#info_top_name>p>dum{
+#info_top_name>p>span{
     font-size: 20px;
     font-weight: 600;
 }
@@ -57,10 +57,17 @@
     width: 10cm;
     padding-right: 0.1cm;
     float: right;
+    direction: rtl;
 }
 
 #info_biography>p{
     font-size: 12px;
+}
+
+#info_biography>p>span{
+    display: inline-block;
+    overflow: hidden;
+    height: 3.48cm;
 }
 
 #info_biography_seeAll{
@@ -116,7 +123,7 @@
     margin: 0.05cm 0.1cm 0.05cm 0.1cm;
 }
 
-#prizes>div>p>dum{
+#prizes>div>p>span{
     font-size: 16px;
     font-weight: bold;
 }
@@ -203,7 +210,7 @@
 }
 
 
-.filmography_bodies>p>dum1{
+.filmography_bodies>p>span{
     float:left;
 }
 
@@ -224,17 +231,17 @@
     margin: 0.2cm 0.2cm 0.2cm 0.2cm;
 }
 
-.userPost_bodies>dum>div{
+.userPost_bodies>span>div{
     height: 1cm;
     overflow: auto;
 }
 
-.userPost_bodies>dum>div>img{
+.userPost_bodies>span>div>img{
     float: right;
     margin: 0.25cm 0 0 0;
 }
 
-.userPost_bodies>dum>div>p{
+.userPost_bodies>span>div>p{
     margin: 0.25cm 0 0 0;
 }
 
@@ -262,7 +269,7 @@
     font-size: 10px;
 }
 
-#changeInfo>p>dum{
+#changeInfo>p>span{
     font-size: 20px;
 }
 
