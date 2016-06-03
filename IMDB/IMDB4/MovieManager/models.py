@@ -35,6 +35,7 @@ class Movie(models.Model):
     sale = models.IntegerField( null=True, blank=True, verbose_name='فروش', )
     genre = models.ManyToManyField(Genre, blank=True, verbose_name='ژانر', )
     keywords = models.ManyToManyField(KeyWord,blank=True, verbose_name='کلمات کلیدی', )
+    is_top_profit = models.BooleanField(default=False, verbose_name='پر فروش هست',)
 
     avamel = models.ManyToManyField(Celebrity, through="Avamel", related_name="movie_avamel", verbose_name='عوامل', )
     actors = models.ManyToManyField(Celebrity, through="Act", related_name="movie_actors", verbose_name='بازیگران', )

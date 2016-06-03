@@ -29,7 +29,7 @@ def HomePage(request):
         gallery2 = list(Movie_Celebrity_Image.objects.filter(galleryNumber=2, in_homePage=True)[:5])
         gallery3 = list(Movie_Celebrity_Image.objects.filter(galleryNumber=3, in_homePage=True)[:5])
         gallery4 = list(Movie_Celebrity_Image.objects.filter(galleryNumber=4, in_homePage=True)[:5])
-        top_sale_movies = list(Movie.objects.order_by('-sale')[0:5])
+        top_sale_movies = list(Movie.objects.filter(is_top_profit=True).order_by('-sale')[0:5])
         top_rated_movies = list(Movie.objects.order_by('-rate')[0:5])
         context = {'Teasers':teasers, 'gallery1':gallery1, 'gallery2':gallery2, 'gallery3':gallery3, 'gallery4':gallery4,
                    'Poll':poll, 'PollOptions':polloptions, 'Celebrity':celebrities, 'News_Iran_Cinema':news_iran_cinema
