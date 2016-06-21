@@ -1,0 +1,183 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load toPersian %}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    {% block title %}
+        top100
+    {% endblock %}
+
+    {% block load_files %}
+        <link href="{% static "styleSheets/top100.css" %}" rel="stylesheet" type="text/css">
+        <script src="{% static "scripts/top100.js" %}" type="text/javascript" language="JavaScript"></script>
+    {% endblock %}
+
+</head>
+<body>
+
+{% block content %}
+
+    <div id="content">
+
+        <div id="title">
+            <p id="title_1">
+                ۱۰۰فیلم برتر
+            </p>
+            <p id="title_2">
+                به انتخاب کاربران مووی کا
+            </p>
+        </div>
+
+        <div id="header">
+            <p id="header_title">
+                <span id="header_title_1" class="header_titles">
+                    رتبه و نام فیلم
+                </span>
+                <span id="header_title_2" class="header_titles">
+                    تعداد رای
+                </span>
+                <span id="header_title_3" class="header_titles">
+                    امتیاز مووی کا
+                </span>
+            </p>
+        </div>
+
+        <div id="movies">
+            {% for item in movies|slice:':100' %}
+                <div class="movies_items">
+                    <img src="{{ item.get_picture }}" class="movies_image">
+                    <p class="movies_name">
+                        {{ forloop.counter|IntegerToPersian }}-
+                        <a href="{% url 'MovieManager_show_movie' item.id %}">
+                            {{ item.name }}
+                        </a>
+                        ({{ item.year }})
+                    </p>
+                    <a href="">
+                        <img src="{% static 'icons/100film/eye.png' %}" class="movies_eye">
+                    </a>
+                    <span class="movies_commentNumber">
+                        {{ item.numUserRated|IntegerToPersian }}
+                    </span>
+                    <div class="movies_point">
+                        <p>
+                            {{ item.rate|FloatToPersian }}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block sideBar_arbitrary %}
+
+    <div class="sideBar_divContainer">
+        <div class="back_gray_dark font_white sideBar_header">
+            <p>
+                بالاترین امتیازها در ژانرهای مختلف
+            </p>
+        </div>
+
+        <div class="back_gray_light sideBar_content">
+            {% for item in sideBar_mostPoints %}
+                <div class="sideBar_mostRate_item">
+                    <p>
+                        <a href="">
+                            {{ item.name }}
+                        </a>
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="sideBar_divContainer">
+        <div class="back_gray_dark font_white sideBar_header">
+            <p>
+                بالاترین امتیازها در سال های مختلف
+            </p>
+        </div>
+
+        <div class="back_gray_light sideBar_content" id="sideBar_mostRate_selectYear">
+            <div id="sideBar_selectYear">
+                <div id="sideBar_selectYear_button">
+                    <button type="button">
+                        <img src="/static/icons/100film/arrow_button.png">
+                    </button>
+                </div>
+                <div id="sideBar_selectedYear">
+                    <p>
+                        1394
+                    </p>
+                </div>
+                <div id="sideBar_allYears_hide">
+                    <button type="button" class="sideBar_year_item">
+                        <p>
+                            1394
+                        </p>
+                    </button>
+                    <button type="button" class="sideBar_year_item">
+                        <p>
+                            1393
+                        </p>
+                    </button>
+                    <button type="button" class="sideBar_year_item">
+                        <p>
+                            1392
+                        </p>
+                    </button>
+                    <button type="button" class="sideBar_year_item">
+                        <p>
+                            1391
+                        </p>
+                    </button>
+                    <button type="button" class="sideBar_year_item">
+                        <p>
+                            1390
+                        </p>
+                    </button>
+                    <button type="button" class="sideBar_year_item">
+                        <p>
+                            1389
+                        </p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block sideBar_commingSoon %}
+
+{% endblock %}
+
+{% block sideBar_mostVisited %}
+
+{% endblock %}
+
+{% block sideBar_review %}
+
+{% endblock %}
+
+{% block sideBar_saleTable %}
+
+{% endblock %}
+
+
+
+
+
+</body>
+</html>

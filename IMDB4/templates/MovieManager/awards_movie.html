@@ -1,0 +1,255 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load toPersian %}
+{% load DateFilters %}
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    {% block title %}
+        awards_movie
+    {% endblock %}
+    {% block load_files %}
+        <link href="{% static 'styleSheets/awards_movie.css' %}" rel="stylesheet">
+    {% endblock %}
+</head>
+<body>
+
+{% block content %}
+
+    <div class="padding_left padding_right padding_top">
+        <div id="info">
+            <img src="{{ movie.poster.url }}">
+            <p id="info_name">
+                <a href="{% url 'MovieManager_show_movie' movie.id %}">
+                    {{ movie.name }}
+                </a>
+                ({{ movie.year }})
+            </p>
+            <p id="info_awards">
+                جوایز
+            </p>
+            <p id="info_awardsNumber">
+                {% if awarded %}
+                    {{ awarded|IntegerToPersian }}
+                    جایزه
+                {% endif %}
+                {% if awarded and candidates %}
+                    و
+                {% endif %}
+                {% if candidates %}
+                    {{ candidates|IntegerToPersian }}
+                    نامزدی
+                {% endif %}
+            </p>
+        </div>
+
+        <div id="content">
+{#            film fajr#}
+            {% if simorgh_awarded or simorgh_diploma or simorgh_candidate %}
+                <table id="content_filmFajr"
+                       class="content_tables content_tables_header">
+                    <tr>
+                        <td class="content_header_year">
+                            <p>
+                                <a href="">
+                                    {{ simorgh_date|IntegerToPersian }}
+                                </a>
+                            </p>
+                        </td>
+                        <td class="content_header_name">
+                            <p>
+                                جشنواره فیلم فجر
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+
+{#                film fajr awarded#}
+                {% if simorgh_awarded|length > 0 %}
+                    <table class="content_tables content_tables_content">
+                        {% for award in simorgh_awarded %}
+                            <tr>
+                                <td class="content_cellContent">
+                                    <p>
+                                        {{ award.category }}
+                                        <a href="{% url 'CelebrityManager_show_celebrity' award.celebrity.id %}">
+                                            {{ award.celebrity.name }}
+                                        </a>
+                                    </p>
+                                </td>
+                                {% if forloop.counter0 == 0 %}
+                                    <td class="content_cellHeader" rowspan="{{ simorgh_awarded|length }}">
+                                        <p>
+                                            برنده سیمرغ بلورین
+                                        </p>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                {% endif %}
+
+
+{#               film fajr diploma#}
+                {% if simorgh_diploma|length > 0 %}
+                    <table class="content_tables content_tables_content">
+                        {% for diploma in simorgh_diploma %}
+                            <tr>
+                                <td class="content_cellContent">
+                                    <p>
+                                        {{ diploma.category }}
+                                        <a href="{% url 'CelebrityManager_show_celebrity' diploma.celebrity.id %}">
+                                            {{ diploma.celebrity.name }}
+                                        </a>
+                                    </p>
+                                </td>
+                                {% if forloop.counter0 == 0 %}
+                                    <td class="content_cellHeader" rowspan="{{ simorgh_diploma|length }}">
+                                        <p>
+                                            دیپلم افتخار
+                                        </p>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+
+
+{#                film fajr nominated#}
+                {% if simorgh_candidate|length > 0 %}
+                    <table class="content_tables content_tables_content">
+                        {% for candidate in simorgh_candidate %}
+                            <tr>
+                                <td class="content_cellContent">
+                                    <p>
+                                        {{ candidate.category }}
+                                        <a href="{% url 'CelebrityManager_show_celebrity' candidate.celebrity.id %}">
+                                            {{ candidate.celebrity.name }}
+                                        </a>
+                                    </p>
+                                </td>
+                                {% if forloop.counter0 == 0 %}
+                                    <td class="content_cellHeader" rowspan="{{ simorgh_candidate|length }}">
+                                        <p>
+                                            نامزد
+                                        </p>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            {% endif %}
+
+
+            {% if cinemaHome_awarded or cinemaHome_diploma or cinemaHome_candidate %}
+                <table class="content_tables content_tables_header">
+                    <tr>
+                        <td class="content_header_year">
+                            <p>
+                                <a href="">
+                                    {{ cinemaHome_date|IntegerToPersian }}
+                                </a>
+                            </p>
+                        </td>
+                        <td class="content_header_name">
+                            <p>
+                                جشن خانه سینما
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+
+{#                khane cinema awarded#}
+                {% if cinemaHome_awarded|length > 0 %}
+                    <table class="content_tables content_tables_content">
+                        {% for award in cinemaHome_awarded %}
+                            <tr>
+                                <td class="content_cellContent">
+                                    <p>
+                                        {{ award.category }}
+                                        <a href="{% url 'CelebrityManager_show_celebrity' award.celebrity.id %}">
+                                            {{ award.celebrity.name }}
+                                        </a>
+                                    </p>
+                                </td>
+                                {% if forloop.counter0 == 0 %}
+                                    <td class="content_cellHeader" rowspan="{{ cinemaHome_awarded|length }}">
+                                        <p>
+                                            برنده تندیس جشن خانه سینما
+                                        </p>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+
+{#                khane cinema diploma#}
+                {% if cinemaHome_diploma|length > 0 %}
+                    <table class="content_tables content_tables_content">
+                        {% for diploma in cinemaHome_diploma %}
+                            <tr>
+                                <td class="content_cellContent">
+                                    <p>
+                                        {{ diploma.category }}
+                                        <a href="{% url 'CelebrityManager_show_celebrity' diploma.celebrity.id %}">
+                                            {{ diploma.celebrity.name }}
+                                        </a>
+                                    </p>
+                                </td>
+                                {% if forloop.counter0 == 0 %}
+                                    <td class="content_cellHeader" rowspan="{{ cinemaHome_diploma|length }}">
+                                        <p>
+                                            دیپلم افتخار
+                                        </p>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+
+
+
+{#                khane cinema nominated#}
+                {% if cinemaHome_candidate|length > 0 %}
+                    <table class="content_tables content_tables_content">
+                        {% for candidate in cinemaHome_candidate %}
+                            <tr>
+                                <td class="content_cellContent">
+                                    <p>
+                                        {{ candidate.category }}
+                                        <a href="{% url 'CelebrityManager_show_celebrity' candidate.celebrity.id %}">
+                                            {{ candidate.celebrity.name }}
+                                        </a>
+                                    </p>
+                                </td>
+                                {% if forloop.counter0 == 0 %}
+                                    <td class="content_cellHeader" rowspan="{{ cinemaHome_candidate|length }}">
+                                        <p>
+                                            نامزد
+                                        </p>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}
+
+</body>
+</html>

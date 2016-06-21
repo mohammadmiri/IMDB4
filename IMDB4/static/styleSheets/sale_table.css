@@ -1,0 +1,111 @@
+
+
+#mainTitle{
+    font-size: 30px;
+    font-weight: 700;
+}
+
+#header{
+    background-color: #444444;
+    width: 100%;
+    height: 1cm;
+    float: right;
+}
+
+#header p{
+    color: #ffffff;
+    font-size: 17px;
+}
+
+#header div{
+    float: right;
+}
+
+#header_movieName{
+    width: 3cm;
+    margin: 0.15cm 1.75cm 0.15cm 0;
+}
+
+#header_showTime{
+    width: 3cm;
+    margin: 0.15cm 3cm 0.15cm 0;
+}
+
+#header_saleAmount{
+    width: 3cm;
+    margin: 0.15cm 2cm 0.15cm 0;
+}
+
+.movie{
+    float: right;
+    background-color: #eeeeee;
+    margin: 0.1cm 0 0.1cm 0;
+    width: 100%;
+    overflow: auto;
+}
+
+.movie div{
+    float: right;
+}
+
+.movie_image{
+    float: right;
+    height: 2cm;
+    width: 1.5cm;
+    margin: 0.1cm 0.1cm 0.1cm 0;
+}
+
+.movie_name{
+    width: 5cm;
+    margin: 0.75cm 0.2cm 0 0;
+}
+
+.movie_point{
+    float: right;
+    background-color: #ac2925;
+    width: 0.75cm;
+    height: 0.75cm;
+    position: relative;
+    top: 1.35cm;
+    left: 5.95cm;
+}
+
+.movie_point p{
+    color: #ffffff;
+    text-align: center;
+    position: relative;
+    font-size:16px;
+}
+
+.movie_showTime{
+    margin: 0.75cm 0 0 0;
+    position: relative;
+    left: -0.6cm;
+}
+
+.movie_saleAmount{
+    margin: 0.75cm 0 0 0;
+    position: relative;
+    left: -3.2cm;
+}
+
+#otherSaleTables{
+    height: 3cm;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

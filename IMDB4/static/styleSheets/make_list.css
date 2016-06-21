@@ -1,0 +1,110 @@
+
+.list_title{
+    display: inline-block;
+    width: 6cm;
+    margin-top: 1cm;
+}
+
+.radio_span{
+    display: inline-block;
+    width: 2cm;
+}
+
+.radio_button{
+    display: inline-block;
+    margin-right: 0.1cm;
+}
+
+.input_type{
+    border: 1px #aaaaaa solid;
+    width: 5cm;
+    height: 0.7cm;
+    padding-right: 0.2cm;
+    font-size: 15px;
+    background: #eeeeee;
+}
+
+#search_button{
+    background-image: url("/static/icons/search.png");
+    width: 0.6cm;
+    height: 0.6cm;
+    background-size:100%;
+}
+
+
+#add_item{
+    width: 6cm;
+    float: right;
+    margin-right: 6cm;
+    overflow: hidden;
+}
+
+#add_item_input{
+    float: right;
+}
+
+#add_item>p>button{
+    float: right;
+    margin-right: 0.2cm;
+    margin-top: 0.05cm;
+}
+
+
+#add_item>div>p{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+.close_button>div>img{
+    width: 0.4cm;
+    height: 0.4cm;
+    position: relative;
+    top:-0.05cm;
+}
+
+.close_button>div{
+    width:0.6cm;
+    height:0.6cm;
+    border-radius: 0.6cm;
+    background: #b92c28;
+}
+
+.close_button{
+    width: 0.6cm;
+    height: 0.6cm;
+}
+
+
+.search_item{
+    background: #eeeeee;
+    width: 5cm;
+    float: right;
+}
+
+.search_item:hover{
+    background: #aaaaaa;
+}
+
+.search_item:hover>p{
+    color: white;
+}
+
+#submit_button{
+    background: #b92c28;
+    color: white;
+    float: right;
+    clear: both;
+    margin-right: 12cm;
+    margin-top:1cm;
+    border-radius: 0.1cm;
+    padding-top: 0.1cm;
+    padding-right: 0.3cm;
+    padding-left:0.3cm;
+}
+
+#submit_button:hover{
+    background: #ac2925;
+}
+
+

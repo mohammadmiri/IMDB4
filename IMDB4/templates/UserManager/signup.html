@@ -1,0 +1,285 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load checkType %}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    {% block load_files %}
+        <script src="{% static 'scripts/signup.js' %}" language="JavaScript"></script>
+        <script src="{% static 'scripts/signup_birthday.js' %}" language="JavaScript"></script>
+        <link href="{% static 'styleSheets/signup.css' %}" rel="stylesheet">
+    {% endblock %}
+</head>
+<body>
+
+    {% block content %}
+
+        <form method="POST" action="" id="signup_form">
+            {% csrf_token %}
+
+            <div id="signup_topContent">
+                <div class="signup_content_1">
+                    <div class="signup_fieldName">
+                        <p>
+                            {{ form.username.label }}
+                        </p>
+                    </div>
+                    <div class="signup_text signup_input">
+                        <input type="text" name="{{ form.username.name }}">
+                    </div>
+                </div>
+
+                <div class="signup_content_1">
+                    <div class="signup_fieldName">
+                        <p>
+                            {{ form.password.label }}
+                        </p>
+                    </div>
+                    <div class="signup_password signup_input">
+                        <input type="password" name="{{ form.password.name }}">
+                    </div>
+                </div>
+
+                <div class="signup_content_1">
+                    <div class="signup_fieldName">
+                        <p>
+                            {{ form.re_password.label }}
+                        </p>
+                    </div>
+                    <div class="signup_password signup_input">
+                        <input type="password" name="{{ form.re_password.name }}">
+                    </div>
+                </div>
+
+                <div class="signup_content_1">
+                    <div class="signup_fieldName">
+                        <p>
+                            {{ form.email.label }}
+                        </p>
+                    </div>
+                    <div class="signup_text signup_input">
+                        <input type="text" name="{{ form.email.name }}">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div id="signup_bottomContent">
+                <div class="signup_content_2">
+                    <div class="signup_fieldName">
+                        <p>
+                            {{ form.first_name.label }}
+                        </p>
+                    </div>
+                    <div class="signup_text signup_input">
+                        <input type="text" name="{{ form.first_name.name }}">
+                    </div>
+                </div>
+
+                <div class="signup_content_2">
+                    <div class="signup_fieldName">
+                        <p>
+                            {{ form.last_name.label }}
+                        </p>
+                    </div>
+                    <div class="signup_text signup_input">
+                        <input type="text" name="{{ form.last_name.name }}">
+                    </div>
+                </div>
+
+                <div class="signup_content_2" id="signup_changeDate_id">
+                    <div class="signup_fieldName">
+                        <p>
+                            تاریخ تولد
+                        </p>
+                    </div>
+                    <div class="signup_input2">
+                        <input type="text" name="{{ form.birthday_day.name }}" readonly="readonly" id="signup_birthday_day"
+                                class="signup_changeDate_text">
+                        <input type="text" name="{{ form.birthday_month.name }}" readonly="readonly" id="signup_birthday_month"
+                                class="signup_changeDate_text">
+                        <input type="text" name="{{ form.birthday_year.name }}" readonly="readonly" id="signup_birthday_year"
+                                class="signup_changeDate_text">
+                        <button type="button" onclick="change_date()" id="signup_changeDate_button">
+                            <img src="/static/icons/signup/changeData.jpg">
+                        </button>
+                    </div>
+
+                    <div id="signup_changeDate">
+                        <div id="signup_changeDate_buttons">
+                            <button type="button" onclick="month_right()" id="signup_changeDate_right">
+                                <img src="/static/icons/signup/right.png">
+                            </button>
+                            <div id="signup_changeDate_month">
+                                <p id="hi">
+                                    فروردین
+                                </p>
+                            </div>
+                            <button type="button" onclick="month_left()" id="signup_changeDate_left">
+                                <img src="/static/icons/signup/left.png">
+                            </button>
+                        </div>
+                        <div id="signup_changeDate_days">
+
+                        </div>
+                        <input type="text" value="سال"
+                               id="signup_changeDate_year" dir="rtl" class="signup_changeDate_text">
+
+                    </div>
+                </div>
+
+
+                <div class="signup_content_2">
+                    <div class="signup_fieldName">
+                        <p>
+                            حرفه
+                        </p>
+                    </div>
+                    <div class="signup_text signup_input">
+                        <input type="text" name="{{ userInfo.job.name }}">
+                    </div>
+                </div>
+
+                <div class="signup_content_2">
+                    <div class="signup_fieldName">
+                        <p>
+                            ژانر مورد علاقه
+                        </p>
+                    </div>
+                    <div class="signup_text signup_input" id="signup_booleanTypes">
+                        {% for item in form %}
+                            {% if item.field.widget|klass%}
+                                <div class="signup_booleanTypes_div">
+                                    <p>
+                                        <input type="checkbox" name="{{ item.name }}">
+                                        {{ item.label }}
+                                    </p>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="signup_content_3">
+                    <div class="signup_fieldName">
+                        <p>
+                            فیلم مورد علاقه
+                        </p>
+                    </div>
+                    <div class="signup_text signup_input signup_search_parent" id="signup_flavorMovie">
+                        <input type="text" name="{{ form.favourite_movies.name }}" id="signup_flavorMovie_inputText"
+                               class="signup_searchType">
+                        <div class="signup_suggestion">
+
+                        </div>
+                        <div class="signup_addSuggestion">
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="signup_content_3">
+                    <div class="signup_fieldName">
+                        <p>
+                            بازیگر مورد علاقه
+                        </p>
+                    </div>
+                    <div class="signup_text signup_input signup_search_parent" id="signup_flavorActor">
+                        <input name="{{ form.favourite_actors.name }}" type="text" class="signup_searchType">
+                        <div class="signup_suggestion">
+
+                        </div>
+                        <div class="signup_addSuggestion">
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="signup_content_3">
+                    <div class="signup_fieldName">
+                        <p>
+                            کارگردان مورد علاقه
+                        </p>
+                    </div>
+                    <div class="signup_text signup_input signup_search_parent" id="signup_flavorDirector">
+                        <input name="{{ form.favourite_directors.name }}" type="text" class="signup_searchType">
+                        <div class="signup_suggestion">
+
+                        </div>
+                        <div class="signup_addSuggestion">
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="signup_content_2">
+                    <div class="signup_fieldName">
+                        <p>
+                            درباره من
+                        </p>
+                    </div>
+                    <div class="signup_text signup_input signup_search_parent">
+                        <textarea name="{{ form.about_me.name }}" id="signup_aboutMe" dir="rtl"></textarea>
+                    </div>
+                </div>
+
+
+                <div class="signup_content_2">
+                    <div class="signup_fieldName">
+                        <p>
+
+                        </p>
+                    </div>
+                    <div class="signup_text signup_input" id="signup_formButtons">
+                        <input type="reset" value="انصراف"
+                               id="signup_formButtons_cancel">
+                        <input type="button" value="ثبت"
+                               id="signup_formButtons_submit">
+                    </div>
+                </div>
+
+            </div>
+
+
+            {{ form.errors }}
+        </form>
+
+    {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+

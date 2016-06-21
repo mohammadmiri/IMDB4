@@ -1,0 +1,60 @@
+
+#username_label{
+    width: 3cm;
+    float: right;
+    margin: 1cm 6cm 0 0;
+    font-size:20px;
+}
+
+#password_label{
+    width: 3cm;
+    float: right;
+    clear: right;
+    margin: 0.2cm 6cm 0 0;
+    font-size:20px;
+}
+
+#username_input{
+    margin: 1cm 0 0 4.5cm;
+    height: 1cm;
+}
+
+
+#password_input{
+    margin: 0.2cm 0 0 4.5cm;
+    height:1cm;
+}
+
+#submit{
+    background: #444444;
+    color: white;
+    font-size:20px;
+    width: 2.25cm;
+}
+
+#reset{
+    background: #cc1111;
+    color: white;
+    font-size: 20px;
+    width:2.25cm;
+}
+
+#buttons{
+    margin: 0.5cm 0 0 4.5cm;
+}
+
+#errors{
+    background: #ffff00;
+    width: 5cm;
+    font-size: 15px;
+    color: #cc1111;
+    margin: 0.2cm 0 0 4.5cm;
+}
+
+#errors>p{
+    float: left;
+}
+
+
+
+

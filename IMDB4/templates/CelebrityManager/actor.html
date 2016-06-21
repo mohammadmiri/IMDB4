@@ -1,0 +1,455 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load toPersian%}
+{% load DateFilters %}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    {% block title %}
+        actor
+    {% endblock %}
+    {% block load_files %}
+        <link href="{% static "styleSheets/actor.css" %}" rel="stylesheet">
+        <script src="{% static "scripts/actor.js" %}" language="JavaScript"></script>
+    {% endblock %}
+
+</head>
+<body>
+
+    {% block content %}
+        <div id="info" class="border_bottom_div padding_top padding_right">
+            <div class="info_mainImage img_wrapper">
+                <img src="{{ celebrity.get_picture }}">
+            </div>
+            <div id="info_top" class="border_bottom_div padding_right">
+                <div id="info_top_name">
+                    <p>
+                        <span>
+                            {{ celebrity.name }}
+                        </span>
+                        <br/>
+                        {{ celebrity.workingFields }}
+                    </p>
+                </div>
+            </div>
+            <div id="info_biography" class="padding_right">
+                <p>
+                    <span>
+                        {{ celebrity.biography }}
+                    </span>
+                    <br/>
+                    <a href="" id="info_biography_seeAll">
+                        <p>
+                            بیوگرافی کامل>>
+                        </p>
+                    </a>
+                </p>
+            </div>
+
+            <div id="info_birthday" class="padding_right">
+                <p>
+                    تولد:
+                    {{ celebrity.birthday|convert_to_shamsi|get_day|IntegerToPersian }}/
+                    {{ celebrity.birthday|convert_to_shamsi|get_month|IntegerToPersian }}/
+                    {{ celebrity.birthday|convert_to_shamsi|get_year|IntegerToPersian }}
+                    .
+                    {{ celebrity.birthPlace }}
+                </p>
+            </div>
+
+
+            <div id="info_images_div">
+                {% for item in images|slice:":3" %}
+                    <div class="info_images img_wrapper">
+                        <img src="{{ item.image.url }}" class="info_images">
+                    </div>
+                {% endfor %}
+                <div class="info_images img_wrapper play_movie">
+                    <img src="{{ videos.0.image.url }}" class="info_images">
+                    <button type="button">
+                        <img src="{% static 'icons/play.png' %}">
+                    </button>
+                </div>
+                {% if images|length > 3 %}
+                    <a id="info_images_seeAll">
+                        <p>
+                            همه عکس ها و ویدیوها>>
+                        </p>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if simorgh_award_count or award_count or candidate_count %}
+            <div id="prizes" class="border_bottom_div padding_right padding_left">
+                <div>
+                    <p>
+                        {% if simorgh_award_count > 0 %}
+                        <span>
+                            برنده
+                            {{ simorgh_award_count|IntegerToPersian }}
+                            سیمرغ بلورین
+                        </span>
+                        {% endif %}
+                        {% if award_count > 0 %}
+                            {{ award_count|IntegerToPersian }}
+                            جایزه
+                        {% endif %}
+                        {% if award_count > 0 and candidate_count > 0 %}
+                             و
+                        {% endif %}
+                        {% if candidate_count > 0 %}
+                            {{ candidate_count|IntegerToPersian }}
+                            نامزدی
+                        {% endif %}
+                        {% if award_count > 0 or candidate_count > 0 %}
+                            دیگر
+                        {% endif %}
+
+
+                        <a href="{% url 'CelebrityManager_show_celebrity_awards'  celebrity.id  %}">
+                            مشاهده همه جوایز>>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        {% endif %}
+
+
+        <div id="proposedWorks" class="border_bottom_div padding_top padding_right">
+            <div>
+                <p>
+                    آثار مطرح
+                </p>
+                <div>
+                    {% for item in most_rated_product %}
+                        {% if item.poster %}
+                            <div class="proposedWorks_images img_wrapper movie_image_info_wrapper">
+                                <a href="{% url 'MovieManager_show_movie' item.id %}">
+                                    <img src="{{ item.poster.url }}" class="proposedWorks_images">
+                                </a>
+                                <div class="movie_image_info">
+                                    <p>
+                                        {{ item.name }}
+                                        </br>
+                                        {{ item.year }}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="filmography" class="border_bottom_div padding_top padding_right padding_left">
+
+            <p id="filmography_title">
+                فیلموگرافی
+            </p>
+
+
+            {% if movie_actor %}
+                <div class="filmography_headers">
+                    <div class="filmography_headers_1">
+                        <p>
+                            بازیگر
+                        </p>
+                    </div>
+                    <div class="filmography_headers_2">
+                        <a id="filmography_actor" class="dropDown">
+                            <div>
+                                <img src="{% static 'icons/actor/triangle_down.png' %}" class="filmography_buttons">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div id="filmography_actor_div" class="dropDown_div">
+                    {% for movie in movie_actor %}
+                        <div class="filmography_bodies">
+                            <p>
+                                <a href="{% url 'MovieManager_show_movie' movie.id %}">
+                                    {{ movie.name }}
+                                </a>
+                                <span>
+                                    {{ movie.year }}
+                                </span>
+                                <br/>
+                                <span>
+                                    {{ movie.actorName }}
+                                </span>
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for role,movies in avamels.items %}
+                {% if movies|length > 0 %}
+                    <div class="filmography_headers">
+                        <div class="filmography_headers_1">
+                            <p>
+                                {{ role|roleToPersian}}
+                            </p>
+                        </div>
+                        <div class="filmography_headers_2">
+                            <a id="filmography_button_{{ forloop.counter0 }}" class="dropDown">
+                                <div>
+                                    <img src="{% static 'icons/actor/triangle_down.png' %}" class="filmography_buttons">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="filmography_button_{{ forloop.counter0 }}_div" class="dropDown_div">
+                        {% for item in movies %}
+                            <div class="filmography_bodies">
+                                <p>
+                                    <a href="{% url 'MovieManager_show_movie' item.id %}">
+                                        {{ item.name }}
+                                    </a>
+                                    {% if item.type.type %}
+                                        (
+                                        {{ item.type.type }}
+                                        )
+                                    {% endif %}
+                                    {% if item.status.status %}
+                                        (
+                                        {{ item.status.status }}
+                                        )
+                                    {% endif %}
+                                    <span>
+                                        {{ item.year }}
+                                    </span>
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div id="userPost" class="border_bottom_div padding_right padding_left">
+            <p>
+                پست های کاربران
+            </p>
+
+            <span>
+                <p>
+                    آخرین پست ها
+                </p>
+            </span>
+
+            {% for post in posts|slice:":3" %}
+                <div class="userPost_bodies">
+                    <div>
+                        <p>
+                            {{ post.content }}
+                        </p>
+                    </div>
+                    <span>
+                        <div>
+                            <img src="{{ post.imageUrl }}">
+                            <p>
+                                {{ post.user.name }}
+                            </p>
+                        </div>
+                    </span>
+                </div>
+            {% endfor %}
+
+            <div id="userPost_all">
+                {% for post in actor.posts|slice:"3:" %}
+                    <div class="userPost_bodies">
+                        <div>
+                            <p class="color_blue_light">
+                                {{ post.text }}
+                            </p>
+                        </div>
+                        <span>
+                            <div>
+                                <img src="{{ post.imageUrl }}">
+                                <p class="color_blue_light">
+                                    {{ post.userName }}
+                                </p>
+                            </div>
+                        </span>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <a id="userPost_seeAll">
+                <p>
+                    همه پست ها>>
+                </p>
+            </a>
+
+            <a id="userPost_hideAll">
+                <p>
+                    کمتر>>
+                </p>
+            </a>
+        </div>
+
+
+
+        <div id="changeInfo" class="border_bottom_div padding_right padding_left">
+            <p>
+                <span>
+                    تغییر اطلاعات
+                </span>
+                (مخصوص کاربران ویژه)
+            </p>
+
+            <button id="changeInfo_button">
+                <p>
+                    ایجاد تغییرات
+                </p>
+            </button>
+        </div>
+
+    {% endblock %}
+
+    {% block sideBar_arbitrary %}
+        <div class="sideBar_divContainer">
+            <div class="back_gray_dark font_white sideBar_header">
+                <p>
+                    دستیابی سریع
+                </p>
+            </div>
+            <div class="sideBar_content back_gray_light">
+                <div class="sideBar_fastAccess_div">
+                    <p>
+                        <a href="#info">
+                            بیوگرافی
+                        </a>
+                    </p>
+                </div>
+                <div class="sideBar_fastAccess_div">
+                    <p>
+                        <a href="#info">
+                            عکس ها و ویدیو ها
+                        </a>
+                    </p>
+                </div>
+                <div class="sideBar_fastAccess_div">
+                    <p>
+                        <a href="#filmography">
+                            فیلموگرافی
+                        </a>
+                    </p>
+                </div>
+                <div class="sideBar_fastAccess_div">
+                    <p>
+                        <a href="#userPost">
+                            پست های کاربران
+                        </a>
+                    </p>
+                </div>
+                <div class="sideBar_fastAccess_div">
+                    <p>
+                        <a href="#prizes">
+                            جوایز
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+
+    {% block sideBar_saleTable %}
+    {% endblock %}
+
+    {% block sideBar_commingSoon %}
+    {% endblock %}
+
+    {% block sideBar_mostVisited %}
+    {% endblock %}
+
+
+{#    slider#}
+    {% block over_content %}
+
+        <div id="frame_movie_background_dark">
+        </div>
+        <div id="play_movie_frame" class="frame_movie_wrapper">
+            <button type="button" class="exit_play_movie">
+                <img src="{% static 'icons/index/closeSliderButton.png' %}">
+            </button>
+            <div>
+                {{ videos.0.link|safe }}
+            </div>
+        </div>
+
+
+
+
+        <div id="slider_background_dark">
+        </div>
+
+        <div id="slider_background">
+            <div id="slider_div">
+                <button type="button" class="slider_close">
+                    <img src="{% static 'icons/actor/closeSliderButton.png' %}">
+                </button>
+
+
+                <button id="slider_arrowUp" class="slider_arrowButtons ">
+                    <img src="{% static 'icons/actor/arrowUp.png' %}">
+                </button>
+
+
+                <div id="slider_images">
+                    <ul>
+                        {% for image in images %}
+                                <li>
+                                    <button type="button" class="slider_images_button">
+                                        <img src="{{ image.image.url }}" class="slider_images_image"
+                                             id="{{ forloop.counter0 }}">
+                                    </button>
+                                </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <button id="slider_arrowDown" class="slider_arrowButtons">
+                    <img src="{% static 'icons/actor/arrowDown.png' %}">
+                </button>
+
+                <div id="slider_mainImage">
+                    <div>
+                        <img id="slider_mainImage_image">
+                    </div>
+                    <p class="slider_mainImage_topText"></p>
+                    <p class="slider_mainImage_downText"></p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div style="display: none;">
+            {% for image in images %}
+                <div class="images_url_hidden">
+                    {{ image.image.url }}
+                </div>
+                <div class="images_description_hidden">
+                    {{ image.description }}
+                </div>
+                <div class="images_name_hidden">
+                    {{ image.name }}
+                </div>
+            {% endfor %}
+        </div>
+
+    {% endblock %}
+
+
+
+
+</body>
+</html>
