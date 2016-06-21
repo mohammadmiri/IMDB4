@@ -1,0 +1,109 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    {% block load_files %}
+        <link rel="stylesheet" type="text/css" href="{% static 'UserManager/css/myProfile_styleSheet.css' %}">
+        <script rel="script" src="{% static 'UserManager/js/myProfile_JS.js' %}" language="JavaScript"></script>
+    {% endblock %}
+</head>
+<body>
+
+{% block content %}
+
+    <div id="user_information" class="">
+        <div class="test">
+            <img src="{{ picture_url }}">
+        </div>
+        <div class="">
+            <p id="user_information_username">
+                {{ user.name }}
+            </p>
+            <p id="user_information_details">
+                {% if user.hasProAccount  %}
+                    کاربر ویژه
+                {% else %}
+                    کاربر معمولی
+                {% endif %}
+            </p>
+        </div>
+        <div class="">
+            <p id="user_information_fillInformation">
+                <a href="#">تکمیل اطلاعات</a>
+            </p>
+            <p id="user_information_accountPro">
+                <a href="#">کاربری ویژه</a>
+            </p>
+        </div>
+    </div>
+
+    <p class="test black_line_underline title">
+امتیاز های داده شده
+    </p>
+    <div id="rated" class="slideBar_wrapper black_line_underline">
+        <div class="right_arrow">
+            <img src="{% static 'UserManager/img/right_arrow.jpg' %}">
+        </div>
+
+        <div id="slideBar_rated_content_wrapper">
+            {% for movie in rated_movie %}
+                <div class="testClass">
+                    <img src={{ movie.movie.poster.url }}>
+                    <div class="red_background_rate">
+                        {{ user.movie.rate }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="left_arrow">
+            <img src="{% static 'UserManager/img/left_arrow.jpg' %}">
+        </div>
+    </div>
+
+    <p class="test black_line_underline title">
+تماشا شده ها
+    </p>
+    <div id="visited" class="slideBar_wrapper black_line_underline">
+        <div class="right_arrow">
+            <img src="{% static 'UserManager/img/right_arrow.jpg' %}">  
+        </div>
+        <div class="left_arrow">
+            <img src="{% static 'UserManager/img/left_arrow.jpg' %}">
+        </div>
+        
+    </div>
+    <p class="test black_line_underline title">
+آخرین لیست های ایجاد شده
+    </p>
+    <div id="last_lists_created" class="slideBar_wrapper test black_line_underline">
+        <div class="right_arrow">
+            <img src="{% static 'UserManager/img/right_arrow.jpg' %}">
+        </div>
+        <div class="left_arrow">
+            <img src="{% static 'UserManager/img/left_arrow.jpg' %}">
+        </div>
+    </div>
+    <p class="test black_line_underline title">
+آخرین پست ها
+    </p>
+    <div id="last_posts" class="test black_line_underline">
+
+    </div>
+    <p class="test black_line_underline title">
+
+    </p>
+    <div id="last_reviews" class="test black_line_underline">
+
+    </div>
+
+
+
+{% endblock %}
+
+</body>
+</html>

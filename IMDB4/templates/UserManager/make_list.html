@@ -1,0 +1,96 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load toPersian %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+        make list
+    {% endblock %}
+
+    {% block css_js %}
+        <link href="{% static 'styleSheets/make_list.css' %}" rel="stylesheet">
+        <script src="{% static 'scripts/make_list.js' %}" language="JavaScript"></script>
+    {% endblock %}
+
+</head>
+<body>
+
+{% block content %}
+    <div class="padding_top padding_right_large">
+        <p class="section_title">
+            ایجاد لیست جدید
+        </p>
+
+        <form action="" method="post">
+            <div>
+                <p>
+                    <span class="list_title subsection_title">
+                نوع لیست
+                    </span>
+                    <span class="radio_span">
+                        <input type="radio" name="list_type" value="artist" id="type_artist">
+                        <span class="radio_button">
+                            هنرمند
+                        </span>
+                    </span>
+                    <span class="radio_span">
+                        <input type="radio" name="list_type" value="movie" id="type_movie">
+                        <span class="radio_button">
+                            فیلم
+                        </span>
+                    </span>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <span class="list_title subsection_title">
+                        نام لیست
+                    </span>
+                    <input type="text" name="list_name" value="{{ list_name }}" class="input_type">
+                </p>
+            </div>
+            <div>
+                <p>
+                    <span class="list_title subsection_title">
+                        اضافه کردن نام به لیست
+                    </span>
+                </p>
+                <div id="add_item">
+                    <div>
+                        {% for item in list %}
+                            <p>
+                                {{ item }}
+                                <button type="button" class="close_button">
+                                    <div>
+                                        <img src="{% static 'icons/close.png' %}">
+                                    </div>
+                                </button>
+                            </p>
+                        {% endfor %}
+                    </div>
+                    <p>
+                        <input type="text" name="list_items" id="add_item_input" class="input_type">
+                        <button type="button" id="search_button"></button>
+                        <div id="search_suggestion">
+
+                        </div>
+                    </p>
+                </div>
+            </div>
+
+            <button type="submit" id="submit_button">
+                <p>
+                انتشار لیست
+                </p>
+            </button>
+        </form>
+
+
+    </div>
+{% endblock %}
+
+</body>
+</html>
