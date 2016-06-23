@@ -116,41 +116,44 @@ def show_gallery(request, numOfGallery):
     pass
 
 
-
+# this function should be called when the first time user clicks on News button
 def show_News_list(request, category):
     news = list(News.objects.filter(category=category).order_by('dateUpload')[0:5])
-    context = {'news':news, 'category':category, 'page_number':1}
+    count_news = News.objects.filter(category=category).count()
+    count_page = int(count_news/5)+1
+    top_sale_movies = list(Movie.objects.filter(is_top_profit=True).order_by('-sale')[0:5])
+    top_rated_movies = list(Movie.objects.order_by('-rate')[0:5])
+    context = {'news':news, 'category':category, 'page_number':1, "count_page":range(count_page), "top_sale_movies":top_sale_movies,
+               "top_rated_movies":top_rated_movies}
     return render(request, 'AdminManager/news.html', context)
 
 
 
-def show_news_ajax(request, category, page):
-    news_number = (page-1)*5
-    news = News.objects.filter(category=category).order_by('dateUpload')[news_number:news_number+5]
-    return JsonResponse({'news':news})
+# this function should be called when user clicks on each page number in news_list_page
+def show_news_list_page(request, page, category):
+    index_news = (int(page)-1)*5
+    news = list(News.objects.filter(category=category).order_by('dateUpload')[index_news:index_news+5])
+    count_news = News.objects.filter(category=category).count()
+    count_page = int(count_news / 5) + 1
+    top_sale_movies = list(Movie.objects.filter(is_top_profit=True).order_by('-sale')[0:5])
+    top_rated_movies = list(Movie.objects.order_by('-rate')[0:5])
+    context = {'news': news, 'category': category, 'page_number': int(page), "count_page": range(count_page),
+               "top_sale_movies": top_sale_movies,
+               "top_rated_movies": top_rated_movies}
+    return render(request, 'AdminManager/news.html', context)
 
 
 
-def show_News(request, id):
-    news = News.objects.filter(id=id)
-    context = {'news':news}
-    pass
+# this function is used when a news with its conplete text should be showed
+def show_news_text(request, news_id):
+    news = News.objects.get(id=news_id)
+    top_sale_movies = list(Movie.objects.filter(is_top_profit=True).order_by('-sale')[0:5])
+    top_rated_movies = list(Movie.objects.order_by('-rate')[0:5])
+    context = {'news':news, "top_rated_movies":top_rated_movies, "top_sale_movies":top_sale_movies}
+    return render(request, 'AdminManager/newsText.html', context)
 
 
 
-
-# this funtion is just used to test some filter and should be remove later
-def test_filter(request):
-    context = {'date':datetime.date.today()}
-    return render(request, 'test.html', context)
-
-
-
-#test function.
-def test(request):
-    celebrity=Celebrity.objects.get(id=2)
-    context={'celebrity':celebrity}
-    return render(request,'Test/test.html',context)
 
 
 

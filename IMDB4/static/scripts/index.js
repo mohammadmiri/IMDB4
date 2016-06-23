@@ -9,14 +9,13 @@ $(document).ready(function(){
     var ids=Array();
     var movie_innerHTML=Array();
     
+    
     $('.play_movie').click(function(event){
         $('#frame_movie_background_dark').css({'display':'block'});
         var element=event.target;
         if(element.className!='play_movie'){
             element=element.parentElement;
         }
-        console.log("element class name: "+element.className);
-        console.log("element id: "+element.id);
         var id=element.id;
         id=id+'_div';
         var index=0;
@@ -27,6 +26,7 @@ $(document).ready(function(){
         }
         $('#'+id+' div').html(movie_innerHTML[index]);
         $('#'+id).css({'display':'block'});
+        
     });
 
 

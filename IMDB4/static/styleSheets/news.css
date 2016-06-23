@@ -46,6 +46,9 @@
     font-size: 12px;
 }
 
-
+#page_number_container{
+    overflow: auto;
+    min-height: 1.5cm
+}
 
 

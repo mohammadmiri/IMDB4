@@ -53,8 +53,18 @@ class PostForCelebrity(models.Model):
     content = models.TextField(null=True, blank=True)
     date = models.DateField(null=True, blank=True)
 
+# this class is a list of movie which created by a user
+class ListMovie(models.Model):
+    title = models.TextField(null=True, blank=True, verbose_name='عنوان',)
+    movie = models.ManyToManyField("MovieManager.Movie", blank=True, related_name="in_list_user", verbose_name='فیلم ها',)
+    user = models.ForeignKey(UserIMDB, blank=True, related_name="movieList", verbose_name='کاربران',)
+    date = models.DateField(blank=True, null=True, verbose_name="تاریخ",)
 
-class WatchList(models.Model):
-    title = models.TextField(null=True, blank=True, max_length=200, verbose_name='عنوان',)
-    movie = models.ManyToManyField("MovieManager.Movie", blank=True, related_name="in_Watchlist", verbose_name='فیلم ها',)
-    user = models.ForeignKey(UserIMDB, blank=True, related_name="watchlist", verbose_name='کاربران',)
+# this class is a list of celebrity which created by a user
+class ListCelebrity(models.Model):
+    title = models.TextField(null=True, blank=True, verbose_name='عنوان', )
+    celebrity = models.ManyToManyField("CelebrityManager.Celebrity", blank=True, related_name="in_list_user", verbose_name='هنرمندان',)
+    user = models.ForeignKey(UserIMDB, blank=True, related_name="celebrityList", verbose_name='کاربران',)
+    date = models.DateField(blank=True, null=True, verbose_name='تاریخ',)
+
+

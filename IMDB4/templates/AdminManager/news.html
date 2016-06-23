@@ -2,6 +2,7 @@
 {% load DateFilters %}
 {% load toPersian %}
 {% load static %}
+{#{% load  %}#}
 
 <!DOCTYPE html>
 <html>
@@ -18,9 +19,10 @@
 
 {% block content %}
 
+
     <div id="title" class="padding_left padding_right padding_top">
         <p>
-            {{ category }}
+            {{ category|NewsCategoryToPersian }}
         </p>
     </div>
 
@@ -37,30 +39,32 @@
             </p>
             <p class="content">
                 {{ item.subText }}
-                <a href="">
+                <a href="{% url 'AdminManager_show_news_text' item.id %}">
                     ادامه مطلب»
                 </a>
             </p>
         </div>
     {% endfor %}
 
-
-    {% for number in pageNumbers %}
-        {% if forloop.counter0 == pageIndex  %}
-            <button class="pageNumbers pageIndex">
-                <p>
-                    {{ forloop.counter|IntegerToPersian }}
-                </p>
-            </button>
-        {% else %}
-            <button class="pageNumbers">
-                <p>
-                    {{ forloop.counter|IntegerToPersian }}
-                </p>
-            </button>
-        {% endif %}
-    {% endfor %}
-
+    <div id=page_number_container >
+        {% for number in count_page %}
+            {% if forloop.counter == page_number  %}
+                <button class="pageNumbers pageIndex">
+                    <p>
+                        {{ forloop.counter|IntegerToPersian }}
+                    </p>
+                </button>
+            {% else %}
+                <a href="{% url 'AdminManager_show_news_list_page' page=forloop.counter category=category %}">
+                    <button class="pageNumbers">
+                        <p>
+                            {{ forloop.counter|IntegerToPersian }}
+                        </p>
+                    </button>
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}
 
 {% block sideBar_lastUserList %}

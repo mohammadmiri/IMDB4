@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% extends 'base/base.html' %}
+{% load toPersian %}
+{% load DateFilters %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+        news text
+    {% endblock %}
+    {% block load_files %}
+        <link href="{% static 'AdminManager/css/newsTextcss.css' %}" rel="stylesheet">
+    {% endblock %}
+</head>
+<body>
+
+{% block content %}
+    <div id="news_container">
+        <div id="news_image_container">
+            <img src={{ news.image.url }}>
+        </div>
+        <div id="news_title">
+            <p>
+            {{ news.title }}
+                <span class="info">
+                    {{ news.dateUpload|get_diff_date }}
+                 قبل/
+                    {{ news.source }}
+                </span>
+            </p>
+        </div>
+        <div id="news_text">
+            {{ news.text|safe }}
+        </div>
+        <div id="link_news">
+            <a href="http://farsnews.ir">
+                 << لینک خبر
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block sideBar_lastUserList %}
+{% endblock %}
+
+{% block sideBar_relatedNews %}
+{% endblock %}
+
+</body>
+</html>

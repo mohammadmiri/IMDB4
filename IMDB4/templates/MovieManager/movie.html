@@ -168,11 +168,7 @@
 
             {% for actor, actName in actors.items|slice:":3" %}
                 <div class="mainActors_images img_wrapper movie_image_info_wrapper">
-                    {% if actor.picture %}
-                        <img src="{{ actor.picture.url }}">
-                    {% else %}
-                        <img src="">
-                    {% endif %}
+                    <img src="{{ actor.get_picture }}">
                     <div class="movie_image_info">
                         <p>
                             {{ actor.name }}
@@ -195,11 +191,7 @@
             {% for actor, actName in actors.items %}
                 <div class="fActors_fullList">
                     <div class="fActors_fullList_image border_radius">
-                        {% if actor.picture %}
-                            <img src="{{ actor.picture.url }}" class="fActors_fullList_image">
-                        {% else %}
-                            <img src="" class="fActors_fullList_image">
-                        {% endif %}
+                        <img src="{{ actor.get_picture }}" class="fActors_fullList_image">
                     </div>
                     <div class="fActors_fullList_name">
                         <p>

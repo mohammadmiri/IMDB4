@@ -59,7 +59,7 @@ $(document).ready(function(){
         var close=document.createElement("div");
         close.className="signup_element_close";
         close.innerHTML='<button class="signup_element_close_btn" type="button">' +
-        '<img src="/static/icons/close.png" class="signup_element_close_btn_img"></button>';
+        '<img src="/static/icons/signup/close.png" class="signup_element_close_btn_img"></button>';
         div.appendChild(close);
         var parent=event.target.parentElement.parentElement;
         var add=parent.getElementsByClassName('signup_addSuggestion')[0];

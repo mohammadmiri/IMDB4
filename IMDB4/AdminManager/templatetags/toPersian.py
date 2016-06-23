@@ -149,3 +149,14 @@ def GenreToPersian(genre):
         return 'جنگی'
     if genre == 'social':
         return 'اجتماعی'
+
+@register.filter
+def NewsCategoryToPersian(category):
+    if category == "TV":
+        return "تلویزیون"
+    if category == "iran_cinema":
+        return "سینمای ایران"
+    if category == "world_cinema":
+        return "سینمای جهان"
+    if category == "honarmandan":
+        return "هنرمندان"

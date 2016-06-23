@@ -1,4 +1,4 @@
-from .models import UserIMDB
+from .models import UserIMDB, ListCelebrity, ListMovie
 from MovieManager.models import Genre, Movie
 from CelebrityManager.models import Celebrity
 
@@ -40,17 +40,17 @@ class UserIMDBForms(forms.Form):
     military = forms.BooleanField(label='جنگی',  initial=False, required=False)
     social = forms.BooleanField(label='اجتماعی', initial=False, required=False)
     # end of favourite genres
-    favourite_movies = forms.CharField(max_length=200, required=False)
-    favourite_actors = forms.CharField(max_length=200, required=False)
-    favourite_directors = forms.CharField(max_length=200, required=False)
-    about_me = forms.CharField(max_length=200, required=False)
+    favourite_movies = forms.CharField( required=False,)
+    favourite_actors = forms.CharField( required=False,)
+    favourite_directors = forms.CharField( required=False,)
+    about_me = forms.CharField( required=False, )
 
     def save(self):
-        djangoUser = User()
         user = UserIMDB.objects.create()
-        djangoUser.username = self.cleaned_data['username']
-        djangoUser.password = self.cleaned_data['password']
-        djangoUser.email = self.cleaned_data['email']
+        username = self.cleaned_data['username']
+        password = self.cleaned_data['password']
+        email = self.cleaned_data['email']
+        djangoUser = User.objects.create_user(username=username, password=password, email=email)
         user.user = djangoUser
         user.birthday = datetime.date(year=self.cleaned_data['birthday_year'], month=self.cleaned_data['birthday_month'], day=self.cleaned_data['birthday_day'])
         user.profession = self.cleaned_data['profession']
@@ -71,6 +71,7 @@ class UserIMDBForms(forms.Form):
         self.add_favourite_genre(self.cleaned_data['dram'], 'dram', user)
         self.add_favourite_genre(self.cleaned_data['military'], 'military', user)
         self.add_favourite_genre(self.cleaned_data['social'], 'social', user)
+        print("type: "+str(type(self.cleaned_data)))
         self.splitter_adder_movie(self.cleaned_data['favourite_movies'], user)
         self.splitter_adder_actor(self.cleaned_data['favourite_actors'], user)
         self.splitter_adder_director(self.cleaned_data['favourite_directors'], user)
@@ -82,7 +83,6 @@ class UserIMDBForms(forms.Form):
 
 
     def add_favourite_genre(self, genre:bool, name:str, user:UserIMDB):
-        print('genre:'+str(genre))
         if genre is True:
             try:
                 genre = Genre.objects.get(name = name)
@@ -91,39 +91,71 @@ class UserIMDBForms(forms.Form):
                 pass
 
     def splitter_adder_movie(self,string, user:UserIMDB):
-        print('movies: '+str(string))
         movie_names = string.split('-')
         for name in movie_names:
-            try:
-                movie = Movie.objects.get(name=name)
+            movie = Movie.objects.filter(name=name).first()
+            if movie is not None:
                 user.favouriteMovie.add(movie)
-            except ObjectDoesNotExist:
-                pass
-            except Model.MultipleObjectsReturned:
-                pass
 
     def splitter_adder_actor(self, string:str, user:UserIMDB):
         celebrity_names = string.split('-')
         for name in celebrity_names:
-            try:
-                celebrity = Celebrity.objects.get(name=name)
+            celebrity = Celebrity.objects.filter(name=name).first()
+            if celebrity is not None:
                 user.favouriteActor.add(celebrity)
-            except ObjectDoesNotExist:
-                pass
-            except Model.MultipleObjectsReturned:
-                pass
 
     def splitter_adder_director(self, string:str, user:UserIMDB):
         celebrity_names = string.split('-')
         for name in celebrity_names:
-            try:
-                celebrity = Celebrity.objects.get(name=name)
+            celebrity = Celebrity.objects.filter(name=name).first()
+            if celebrity is not None:
                 user.favouriteDirector.add(celebrity)
-            except Model.DoesNotExist:
-                pass
-            except Model.MultipleObjectsReturned:
-                pass
 
 
+
+# this is a custom form which is created to save list
+class MakingListForm():
+
+    cleaned_data={}
+
+    def is_valid(self, data:dict):
+        error=''
+        if data['listName'] is not None:
+            error='list name is null'
+            return error
+        elif data['type'] is not None:
+            error='type of list is null'
+            return error
+        elif data['names'] is not None:
+            error='names field is null'
+            return error
+        self.cleaned_data=data
+        return 'True'
+
+    def save(self, user):
+        userIMDB = UserIMDB.objects.filter(user=user).first()
+        newList = None
+        if self.cleaned_data['type']=='movie':
+            newList=ListMovie.objects.create()
+        else:
+            pass
+        newList.date=datetime.date.today()
+        newList.title=self.cleaned_data['listName']
+        newList.user=userIMDB
+        newList.save()
+
+    def splitter_adder_celebrity(self, string:str, list:ListCelebrity):
+        celebrity_names=string.split('-')
+        for name in celebrity_names:
+            celebrity=Celebrity.objects.filter(name=name).first()
+            if celebrity is not None:
+                list.celebrity.add(celebrity)
+
+    def splitter_adder_movies(self, string:str, list:ListMovie):
+        movies_names=string.split('-')
+        for name in movies_names:
+            movie=Movie.objects.filter(name=name).first()
+            if movie is not None:
+                list.movie.add(movie)
 
 

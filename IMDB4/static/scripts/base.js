@@ -17,6 +17,9 @@ $(document).ready(function(){
 
 
 
+
+
+
     $('#base_main_search_box').keyup(function () {
         console.log('search box');
         var value=document.getElementById('base_main_search_box').value;

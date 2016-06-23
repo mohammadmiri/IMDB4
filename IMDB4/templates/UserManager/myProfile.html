@@ -7,24 +7,24 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    {% block load_files %}
-        <link rel="stylesheet" type="text/css" href="{% static 'UserManager/css/myProfile_styleSheet.css' %}">
-        <script rel="script" src="{% static 'UserManager/js/myProfile_JS.js' %}" language="JavaScript"></script>
+    {% block css_js %}
+        <link rel="stylesheet" type="text/css" href="{% static 'styleSheets/myProfile.css' %}">
+        <script rel="script" src="{% static 'scripts/myProfile.js' %}" language="JavaScript"></script>
     {% endblock %}
 </head>
 <body>
 
 {% block content %}
 
-    <div id="user_information" class="">
-        <div class="test">
+    <div id="info">
+        <div id="my_picture_wrapper">
             <img src="{{ picture_url }}">
         </div>
-        <div class="">
-            <p id="user_information_username">
-                {{ user.name }}
+        <div>
+            <p id="info_username">
+                {{ user.user }}
             </p>
-            <p id="user_information_details">
+            <p id="info_details">
                 {% if user.hasProAccount  %}
                     کاربر ویژه
                 {% else %}
@@ -32,11 +32,11 @@
                 {% endif %}
             </p>
         </div>
-        <div class="">
-            <p id="user_information_fillInformation">
+        <div>
+            <p id="info_fillInformation">
                 <a href="#">تکمیل اطلاعات</a>
             </p>
-            <p id="user_information_accountPro">
+            <p id="info_accountPro">
                 <a href="#">کاربری ویژه</a>
             </p>
         </div>

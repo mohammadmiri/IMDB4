@@ -13,6 +13,8 @@ class PollAdmin(admin.ModelAdmin):
     list_display_links = ['text']
     inlines = [PollOption,]
 
+
+
 admin.site.register(News)
 admin.site.register(Poll, PollAdmin)
 admin.site.register(Gallery)

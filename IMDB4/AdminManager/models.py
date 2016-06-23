@@ -4,6 +4,7 @@ from MovieManager.models import Movie, Reviewer_Review
 from UserManager.models import User
 
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 
@@ -12,7 +13,7 @@ from django.db import models
 class News(models.Model):
     title = models.TextField(null=True, blank=True, verbose_name='عنوان', )
     subText = models.TextField(null=True, blank=True, verbose_name='خلاصه خبر', )
-    text = models.TextField(null=True, blank=True, verbose_name='متن کامل خبر', )
+    text = RichTextField(null=True, blank=True, verbose_name='متن کامل خبر', )
     source = models.TextField(null=True, blank=True, verbose_name='منبع', )
     dateUpload = models.DateTimeField(null=True, blank=True, verbose_name='زمان آپلود', )
     image = models.ImageField(upload_to='admin/News/',null=True, blank=True, verbose_name='عکس خبر', )
@@ -24,6 +25,7 @@ class News(models.Model):
     )
     category = models.CharField(max_length=80, null=True, blank=True, choices=CategoryChoise, verbose_name='نوع خبر', )
     relate_news = models.ManyToManyField('self', through='tag', symmetrical=False)
+    link = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.title[:50]
